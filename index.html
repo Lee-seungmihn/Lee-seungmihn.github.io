@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko" class="full-page-active">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lee-seungmihn | Full Page Portfolio</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/font.css">
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/util.css">
+    <!-- FontAwesome & Swiper CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    
+    <!-- Mobile nav toggle button -->
+    <i class="fas fa-bars mobile-nav-toggle"></i>
+
+    <!-- Sidebar -->
+    <header id="sidebar">
+        <div class="d-flex flex-column">
+            <div class="profile">
+                <img src="./assets/images/vertical-shot-light-brown-meerkat-daytime.jpg" alt="" class="img-fluid rounded-circle" style="width: 180px; height: 180px; object-fit: cover; object-position: top;">
+                <h1 class="text-light"><a href="index.html">Lee-seungmihn</a></h1>
+                <div class="social-links mt-3 text-center">
+                    <a href="#" class="github"><i class="fab fa-github"></i></a>
+                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-indicator"></div> <!-- Floating Indicator -->
+                <ul>
+                    <li><a href="#hero" class="active"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> <span>About</span></a></li>
+                    <li><a href="#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
+                    <li><a href="#materials"><i class="fas fa-book"></i> <span>Materials</span></a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-container">
+                <h1>Lee-seungmihn</h1>
+                <p>I'm <span class="typed" data-typed-items="Publisher, Java Backend Developer, Full Stack Learner"></span><span class="typed-cursor"></span></p>
+            </div>
+            <a href="#about" class="scroll-down">
+                <div class="mouse"></div>
+                <span>SCROLL</span>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About</h2>
+                    <p>3년차 퍼블리셔의 섬세함과 Java/Spring의 탄탄한 기술력을 지향하는 개발자입니다.</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 pt-4 pt-lg-0 content">
+                        <h3>UI/UX Publisher & Backend Developer.</h3>
+                        <p class="font-italic">웹의 겉과 속을 모두 아우르는 전문가를 꿈꿉니다.</p>
+                    </div>
+                </div>
+            </div>
+            <a href="#resume" class="scroll-down">
+                <div class="mouse"></div>
+                <span>RESUME</span>
+            </a>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="resume section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Resume</h2>
+                </div>
+                <div class="resume-grid">
+                    <!-- Left Column: Experience -->
+                    <div class="resume-col">
+                        <h3 class="resume-title">Experience</h3>
+                        <div class="resume-item">
+                            <h4>Senior Web Publisher</h4>
+                            <h5>2021 - 2024</h5>
+                            <p><em>OOO 테크놀로지</em></p>
+                            <ul>
+                                <li>엔터프라이즈 UI 마크업 및 접근성 준수</li>
+                                <li>반응형 웹 최적화 주도</li>
+                            </ul>
+                        </div>
+                        <div class="resume-item">
+                            <h4>Web Publisher</h4>
+                            <h5>2020 - 2021</h5>
+                            <p><em>XXX 에이전시</em></p>
+                            <ul>
+                                <li>브랜드 랜딩 페이지 제작</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Right Column: Education -->
+                    <div class="resume-col">
+                        <h3 class="resume-title">Education</h3>
+                        <div class="resume-item">
+                            <h4>Java/Spring Boot Course</h4>
+                            <h5>2024 - Present</h5>
+                            <p><em>국비 과정 수료 중</em></p>
+                        </div>
+                        <div class="resume-item">
+                            <h4>High School Full-stack Prep</h4>
+                            <h5>2017 - 2020</h5>
+                            <p><em>기능경기대회 준비반 (PHP, MySQL)</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#materials" class="scroll-down">
+                <div class="mouse"></div>
+                <span>WORKS</span>
+            </a>
+        </section>
+
+        <!-- Materials Section (복구: Swiper 구조) -->
+        <section id="materials" class="materials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Materials</h2>
+                </div>
+                <div class="swiper materials-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="material-card">
+                                <div class="card-icon"><i class="fab fa-java"></i></div>
+                                <h4>Java 기초</h4>
+                                <p>OOP 기본 개념 정리</p>
+                                <a href="pages/materials.html" class="view-more">VIEW</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="material-card">
+                                <div class="card-icon"><i class="fas fa-leaf"></i></div>
+                                <h4>Spring Boot</h4>
+                                <p>MVC 구조 및 환경 설정</p>
+                                <a href="pages/materials.html" class="view-more">VIEW</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="material-card">
+                                <div class="card-icon"><i class="fas fa-database"></i></div>
+                                <h4>MySQL</h4>
+                                <p>DB 설계 및 쿼리 최적화</p>
+                                <a href="pages/materials.html" class="view-more">VIEW</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="pages/materials.html" class="material-card see-more-card" style="text-decoration: none;">
+                                <div class="card-icon"><i class="fas fa-arrow-right"></i></div>
+                                <h4>전체 보기</h4>
+                                <p>모든 학습 자료 확인</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#contact" class="scroll-down">
+                <div class="mouse"></div>
+                <span>CONTACT</span>
+            </a>
+        </section>
+
+        <!-- Contact Section (복구: 전용 폼 구조) -->
+        <section id="contact" class="contact section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact</h2>
+                    <p>협업 제안이나 궁금한 점이 있으시면 언제든 메시지를 남겨주세요.</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="#" method="post" class="contact-form">
+                            <div class="form-row d-grid gap-3 mb-3" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                                <div class="input-group">
+                                    <label>NAME</label>
+                                    <input type="text" name="name" class="custom-input" placeholder="Your Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>EMAIL</label>
+                                    <input type="email" name="email" class="custom-input" placeholder="example@email.com" required>
+                                </div>
+                            </div>
+                            <div class="input-group mb-4">
+                                <label>MESSAGE</label>
+                                <textarea name="message" class="custom-input" rows="6" placeholder="How can I help you?" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="submit-btn">
+                                    <span>SEND MESSAGE</span>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="container text-center">
+                <div class="copyright">
+                    &copy; Copyright 2024 <strong><span>Lee-seungmihn</span></strong>. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/service.js"></script>
+    <script src="assets/js/event.js"></script>
+</body>
+</html>
