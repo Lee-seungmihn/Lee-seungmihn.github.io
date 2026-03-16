@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko" class="custom-scrollbar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Intro | Lee-seungmihn</title>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/font.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/util.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <header id="sidebar">
+        <div class="d-flex flex-column">
+            <div class="profile">
+                <img src="../assets/images/vertical-shot-light-brown-meerkat-daytime.jpg" alt="" class="img-fluid rounded-circle" style="width: 180px; height: 180px; object-fit: cover; object-position: top;">
+                <h1 class="text-light"><a href="../index.html">Lee-seungmihn</a></h1>
+                <div class="social-links mt-3 text-center">
+                    <a href="#" class="github"><i class="fab fa-github"></i></a>
+                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-indicator"></div>
+                <ul>
+                    <li><a href="../index.html#hero"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                    <li><a href="../index.html#about"><i class="fas fa-user"></i> <span>About</span></a></li>
+                    <li><a href="../index.html#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
+                    <li><a href="materials.html" class="active"><i class="fas fa-book"></i> <span>Materials</span></a></li>
+                    <li><a href="../index.html#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="study-content section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>CSS 기초 (Cascading Style Sheets)</h2>
+                    <p>CSS의 기본 개념과 문법, 선택자, 그리고 우선순위 규칙에 대한 학습 정리입니다.</p>
+                </div>
+
+                <article class="study-article">
+                    <h3>1. CSS란 무엇인가?</h3>
+                    <p><strong>CSS</strong>는 <em>Cascading Style Sheets</em>의 약자입니다.</p>
+                    <ul>
+                        <li>HTML 태그들이 각종 미디어에서 어떻게 보일지를 정의할 때 사용합니다.</li>
+                        <li>스타일을 HTML 문서로부터 분리하는 것이 가능해집니다.</li>
+                    </ul>
+
+                    <h3>2. CSS를 사용하는 이유</h3>
+                    <p>HTML만으로 웹 페이지를 제작할 경우 다음과 같은 문제점이 발생합니다:</p>
+                    <ul>
+                        <li>세부 스타일을 일일이 따로 지정해야 해서 시간이 많이 소요됩니다.</li>
+                        <li>완성 후에도 스타일 변경 및 유지보수가 어렵습니다.</li>
+                    </ul>
+                    <p><strong>CSS의 장점:</strong></p>
+                    <ul>
+                        <li>W3C에서 만든 스타일 시트 언어 표준입니다.</li>
+                        <li>웹 페이지의 스타일을 별도의 파일로 저장하여 사이트 전체 스타일을 손쉽게 제어할 수 있습니다.</li>
+                        <li>웹 사이트의 스타일을 일관성 있게 유지하고, 유지보수가 쉬워집니다.</li>
+                    </ul>
+
+                    <h3>3. CSS 문법</h3>
+                    <div class="code-block">
+<pre>
+선택자 {
+    /* 선언부 */
+    속성명: 속성값;
+}
+
+/* 예시 */
+p {
+    text-align: center;
+    color: blue;
+}
+</pre>
+                    </div>
+
+                    <h3>4. CSS 선택자</h3>
+                    <div class="sub-section">
+                        <h4>(1) 전체 선택자 (*)</h4>
+                        <p>스타일을 모든 태그에 적용할 때 사용합니다. Asterisk(*) 기호를 사용합니다.</p>
+                    </div>
+                    <div class="sub-section">
+                        <h4>(2) 태그 선택자 (태그명)</h4>
+                        <p>특정 태그가 쓰인 모든 요소에 스타일을 적용합니다.</p>
+                    </div>
+                    <div class="sub-section">
+                        <h4>(3) 클래스 선택자 (.클래스명)</h4>
+                        <p>특정 집단의 여러 요소를 한 번에 선택할 때 사용합니다. 같은 <code>class=""</code>를 가지는 요소들을 모두 선택합니다.</p>
+                    </div>
+                    <div class="sub-section">
+                        <h4>(4) 아이디 선택자 (#아이디명)</h4>
+                        <p>특정 요소를 선택할 때 사용합니다. 하나의 문서에 중복된 이름의 아이디가 있어서는 안 됩니다.</p>
+                    </div>
+                    <div class="sub-section">
+                        <h4>(5) 그룹 선택자 (쉼표 구분)</h4>
+                        <p>여러 선택자에 같은 스타일을 적용할 경우 쉼표(,)로 구분해서 나열합니다.</p>
+                    </div>
+
+                    <h3>5. 캐스케이딩 (Cascading)</h3>
+                    <p>하나의 요소는 하나 이상의 CSS 선언에 영향을 받을 수 있으며, 충돌을 피하기 위해 우선순위가 필요합니다.</p>
+
+                    <h4>(1) 중요도 (Source Order)</h4>
+                    <ol>
+                        <li><strong>인라인 스타일:</strong> HTML 태그 안에 style 속성</li>
+                        <li><strong>내부 스타일 시트:</strong> HTML 문서 안에 style 태그</li>
+                        <li><strong>외부 스타일 시트:</strong> 별도 CSS 파일</li>
+                        <li><strong>웹 브라우저 기본 스타일</strong></li>
+                    </ol>
+
+                    <h4>(2) 명시도 (Specificity)</h4>
+                    <p>선택자를 구체적으로 사용할수록 우선순위가 높아집니다.</p>
+                    <ol>
+                        <li>!important</li>
+                        <li>아이디 선택자 (#id)</li>
+                        <li>클래스 선택자 (.class)</li>
+                        <li>태그 선택자 (tag)</li>
+                        <li>전체 선택자 (*)</li>
+                        <li>상속받은 속성 (Inherited)</li>
+                    </ol>
+
+                    <h4>(3) 선언 순서</h4>
+                    <p>나중에 선언된 스타일이 우선 적용됩니다.</p>
+                </article>
+
+                <div class="mt-5 text-center">
+                    <a href="materials.html" class="btn-back">목록으로 돌아가기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright 2024 <strong><span>Lee-seungmihn</span></strong>. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/layout.js"></script>
+    <script src="../assets/js/service.js"></script>
+    <script src="../assets/js/event.js"></script>
+</body>
+</html>

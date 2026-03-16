@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Guide | Lee Seung-min Blog</title>
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/font.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/util.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            padding: 80px 0;
+        }
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .guide-header {
+            margin-bottom: 80px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+        }
+        .guide-header h1 {
+            font-size: 48px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        .guide-section {
+            margin-bottom: 100px;
+        }
+        .guide-section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .guide-section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* Color Grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .color-item {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .color-preview {
+            height: 100px;
+        }
+        .color-info {
+            padding: 15px;
+        }
+        .color-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+        .color-hex {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        /* Typography */
+        .typo-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+        }
+        .typo-label {
+            font-size: 12px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Component Grid */
+        .comp-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .comp-item {
+            flex: 1;
+            min-width: 300px;
+        }
+        .comp-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Code Preview */
+        .code-preview {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #dcdcdc;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-container">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        
+        <header class="guide-header">
+            <h1>Design System</h1>
+            <p>Lee Seung-min Blog & Portfolio Style Guide</p>
+        </header>
+
+        <!-- 1. Colors -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-item">
+                    <div class="color-preview" style="background-color: #232323;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Primary BG</div>
+                        <div class="color-hex">#232323</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-preview" style="background-color: #ffefc0;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Color</div>
+                        <div class="color-hex">#ffefc0</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-preview" style="background-color: #2d2d2d;"></div>
+                    <div class="color-info">
+                        <div class="color-name">BG Light</div>
+                        <div class="color-hex">#2d2d2d</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-preview" style="background-color: #e0e0e0;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Text Main</div>
+                        <div class="color-hex">#e0e0e0</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-preview" style="background-color: #a0a0a0;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Text Muted</div>
+                        <div class="color-hex">#a0a0a0</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-preview" style="background-color: #3d3d3d;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Border Color</div>
+                        <div class="color-hex">#3d3d3d</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">Typography</h2>
+            <div class="typo-item">
+                <span class="typo-label">Heading 1 (Hero Title) - 80px / Bold</span>
+                <h1 style="font-size: 80px; font-weight: 700; color: var(--accent-color); margin: 0;">Hello World</h1>
+            </div>
+            <div class="typo-item">
+                <span class="typo-label">Heading 2 (Section Title) - 32px / Bold</span>
+                <h2 style="font-size: 32px; font-weight: bold; color: var(--accent-color); margin: 0; position: relative; padding-bottom: 10px;">
+                    Section Title
+                    <span style="position: absolute; bottom: 0; left: 0; width: 50px; height: 3px; background: var(--accent-color);"></span>
+                </h2>
+            </div>
+            <div class="typo-item">
+                <span class="typo-label">Heading 3 (Card Title) - 22px / 700</span>
+                <h3 style="font-size: 22px; font-weight: 700; color: var(--accent-color); margin: 0;">Component Title</h3>
+            </div>
+            <div class="typo-item">
+                <span class="typo-label">Body Text - 15px / 1.6 Line Height</span>
+                <p style="font-size: 15px; line-height: 1.6; margin: 0;">
+                    이 문장은 본문 텍스트의 예시입니다. Pretendard 서체를 사용하여 가독성이 높으며, 
+                    한글과 영문 모두 깔끔하게 표현됩니다. 다크 모드 환경에서 눈의 피로도를 줄이기 위해 
+                    적절한 명암비의 회색(#e0e0e0)을 사용합니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Buttons -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">Buttons</h2>
+            <div class="comp-grid">
+                <div class="comp-item">
+                    <span class="comp-label">Standard View More</span>
+                    <a href="#" class="view-more">VIEW MORE</a>
+                </div>
+                <div class="comp-item">
+                    <span class="comp-label">Form Submit Button</span>
+                    <button type="button" class="submit-btn">
+                        <span>SEND MESSAGE</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Cards -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">Cards</h2>
+            <div class="comp-grid">
+                <div class="comp-item" style="max-width: 300px;">
+                    <span class="comp-label">Material Card</span>
+                    <div class="material-card" style="height: auto;">
+                        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                        <h4>Web Dev</h4>
+                        <p>Modern web technologies and frameworks.</p>
+                        <a href="#" class="view-more">VIEW MORE</a>
+                    </div>
+                </div>
+                <div class="comp-item" style="max-width: 200px;">
+                    <span class="comp-label">See More Card (Portal)</span>
+                    <a href="#" class="material-card see-more-card" style="text-decoration: none; height: 360px;">
+                        <div class="card-icon"><i class="fa-solid fa-plus"></i></div>
+                        <h4>See More</h4>
+                        <p>Total Materials</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">Form Elements</h2>
+            <div style="max-width: 600px;">
+                <div class="input-group mb-4">
+                    <label>YOUR NAME</label>
+                    <input type="text" class="custom-input" placeholder="Enter your name">
+                </div>
+                <div class="input-group">
+                    <label>YOUR MESSAGE</label>
+                    <textarea class="custom-input" rows="4" placeholder="Enter your message"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Special Elements -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">UI Elements</h2>
+            <div class="comp-grid">
+                <div class="comp-item">
+                    <span class="comp-label">Scroll Indicator (Hero)</span>
+                    <div style="position: relative; height: 80px; width: 100px;">
+                        <div class="scroll-down" style="position: static; transform: none;">
+                            <div class="mouse"></div>
+                            <span>SCROLL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comp-item">
+                    <span class="comp-label">Nav Indicator Style</span>
+                    <div style="width: 200px; height: 50px; background: rgba(255, 239, 192, 0.1); border-right: 4px solid var(--accent-color); display: flex; align-items: center; padding-left: 15px;">
+                        <span style="color: var(--accent-color); font-size: 14px;">ACTIVE MENU ITEM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
