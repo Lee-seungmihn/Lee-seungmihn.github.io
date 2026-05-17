@@ -1,0 +1,77 @@
+{
+  "html": {
+    "title": "HTML",
+    "icon": "fab fa-html5",
+    "color": "#e34f26",
+    "type": "single",
+    "file": "html/html.txt"
+  },
+  "css": {
+    "title": "CSS",
+    "icon": "fab fa-css3-alt",
+    "color": "#1572b6",
+    "type": "single",
+    "file": "css/css.txt"
+  },
+  "js": {
+    "title": "JavaScript",
+    "icon": "fab fa-js",
+    "color": "#f7df1e",
+    "type": "single",
+    "file": "js/js.txt"
+  },
+  "java": {
+    "title": "Java",
+    "icon": "fab fa-java",
+    "color": "#f89820",
+    "type": "multi",
+    "topics": [
+      { "id": "a_intro",              "title": "Java 소개" },
+      { "id": "b_print",              "title": "출력 (print)" },
+      { "id": "c_variable",           "title": "변수 (variable)" },
+      { "id": "d_casting",            "title": "형변환 (casting)" },
+      { "id": "e_constant",           "title": "상수 (constant)" },
+      { "id": "f_input",              "title": "입력 (input)" },
+      { "id": "g_oper",               "title": "연산자 (operator)" },
+      { "id": "h_control_statement",  "title": "제어문" },
+      { "id": "i_array",              "title": "배열 (array)" },
+      { "id": "j_method",             "title": "메서드 (method)" },
+      { "id": "k_class",              "title": "클래스 (class)" },
+      { "id": "l_inheritance",        "title": "상속 (inheritance)" },
+      { "id": "m_casting",            "title": "객체 형변환" },
+      { "id": "n_abstract",           "title": "추상 클래스" },
+      { "id": "o_interface",          "title": "인터페이스" },
+      { "id": "p_anonymous",          "title": "익명 객체" },
+      { "id": "q_lambda",             "title": "람다식" },
+      { "id": "r_exception",          "title": "예외처리" },
+      { "id": "s_api",                "title": "API" },
+      { "id": "t_object",             "title": "Object 클래스" },
+      { "id": "u_collection_framework","title": "컬렉션 프레임워크" },
+      { "id": "v_thread",             "title": "쓰레드" },
+      { "id": "w_string",             "title": "String 클래스" },
+      { "id": "x_file",               "title": "파일 I/O" },
+      { "id": "y_jdbc",               "title": "JDBC" }
+    ]
+  },
+  "jsp": {
+    "title": "JSP",
+    "icon": "fas fa-server",
+    "color": "#ff6c37",
+    "type": "single",
+    "file": "jsp/jsp.txt"
+  },
+  "mysql": {
+    "title": "MySQL",
+    "icon": "fas fa-database",
+    "color": "#4479a1",
+    "type": "single",
+    "file": "mysql/mysql.txt"
+  },
+  "git": {
+    "title": "Git",
+    "icon": "fab fa-git-alt",
+    "color": "#f05032",
+    "type": "single",
+    "file": "git/git.txt"
+  }
+}
