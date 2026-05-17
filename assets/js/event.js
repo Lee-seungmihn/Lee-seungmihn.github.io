@@ -45,15 +45,33 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const swiper = new Swiper('.materials-swiper', {
         loop: false,
-        centeredSlides: false, // 왼쪽부터 시작
-        slidesPerView: 'auto', 
-        spaceBetween: 20, 
-        grabCursor: true, // 손바닥 커서 활성화
-        mousewheel: {
-            forceToAxis: true, // 마우스 휠 지원
-        },
-        freeMode: true, // 자유로운 드래그 모드
+        centeredSlides: false,
+        slidesPerView: 'auto',
+        spaceBetween: 20,
+        grabCursor: true,
+        freeMode: true,
     });
+
+    /**
+     * Contact Form
+     */
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('.submit-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>SENT!</span> <i class="fas fa-check"></i>';
+            btn.style.background = 'var(--accent-color)';
+            btn.style.color = 'var(--primary-bg)';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+                btn.style.color = '';
+                contactForm.reset();
+            }, 3000);
+        });
+    }
 
     /**
      * Materials Search Filter

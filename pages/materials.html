@@ -20,6 +20,9 @@
 </head>
 <body>
 
+    <!-- Mobile nav toggle button -->
+    <i class="fas fa-bars mobile-nav-toggle"></i>
+
     <!-- Sidebar -->
     <header id="sidebar">
         <div class="d-flex flex-column">
@@ -27,7 +30,7 @@
                 <img src="../assets/images/vertical-shot-light-brown-meerkat-daytime.jpg" alt="" class="img-fluid rounded-circle" style="width: 180px; height: 180px; object-fit: cover; object-position: top;">
                 <h1 class="text-light"><a href="../index.html">Lee-seungmihn</a></h1>
                 <div class="social-links mt-3 text-center">
-                    <a href="#" class="github"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/Lee-seungmihn" target="_blank" class="github"><i class="fab fa-github"></i></a>
                     <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
                 </div>
@@ -56,16 +59,52 @@
 
                 <div class="materials-grid">
                     <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                        <span class="card-date" style="color: var(--accent-color); font-weight: bold;">2026.03.16</span>
-                        <h4 style="margin: 10px 0; font-size: 1.25rem; color: var(--accent-color);">CSS 기초 정리</h4>
-                        <p style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 15px;">CSS의 기본 개념, 문법, 선택자 및 캐스케이딩 규칙 학습.</p>
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fab fa-html5"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">HTML</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">마크업 구조, 시맨틱 태그, 폼 요소 학습.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+                    </div>
+                    <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fab fa-css3-alt"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">CSS</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">선택자·캐스케이딩·레이아웃·애니메이션.</p>
                         <a href="css-intro.html" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">Read More</a>
                     </div>
                     <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                        <span class="card-date" style="color: var(--accent-color); font-weight: bold;">2024.03.12</span>
-                        <h4 style="margin: 10px 0; font-size: 1.25rem; color: var(--accent-color);">Java Collection Framework</h4>
-                        <p style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 15px;">List, Set, Map 인터페이스의 특징과 주요 구현 클래스 정리.</p>
-                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">Read More</a>
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fab fa-js"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">JavaScript</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">DOM 조작, 비동기 처리, ES6+ 문법 정리.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+                    </div>
+                    <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fab fa-java"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">Java</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">OOP 개념, 컬렉션, 람다·스트림 API.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+                    </div>
+                    <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fas fa-server"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">JSP</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">서블릿·JSTL·MVC 패턴 및 EL 표현식.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+                    </div>
+                    <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fas fa-database"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">MySQL</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">DB 설계, DDL·DML·DCL, JOIN·서브쿼리.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+                    </div>
+                    <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fas fa-leaf"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">Spring / Controller</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Spring MVC 구조, 어노테이션, RESTful API.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+                    </div>
+                    <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
+                        <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fab fa-git-alt"></i></div>
+                        <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">Git</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">버전 관리, 브랜치 전략, 협업 워크플로우.</p>
+                        <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
                     </div>
                 </div>
             </div>

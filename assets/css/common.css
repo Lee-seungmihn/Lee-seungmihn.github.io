@@ -57,9 +57,10 @@ body {
 .nav-indicator {
     position: absolute;
     left: 0; width: 100%;
+    display: none;
     background: rgba(255, 239, 192, 0.1);
     border-right: 4px solid var(--accent-color);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
     pointer-events: none;
 }
@@ -203,4 +204,14 @@ footer {
     .resume-grid { grid-template-columns: 1fr; gap: 30px; }
     .container { padding: 0 30px; }
     #hero h1 { font-size: 40px; }
+}
+
+@media (max-width: 768px) {
+    #hero h1 { font-size: 28px; }
+    #hero p { font-size: 20px; }
+    .section-title h2 { font-size: 24px; }
+    .container { padding: 0 20px; }
+    .swiper-slide { width: 260px !important; }
+    section { padding: 40px 0; }
+    footer { height: auto; padding: 30px 0; }
 }

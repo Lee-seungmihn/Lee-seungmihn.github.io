@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = select('.nav-menu a', true);
     const indicator = select('.nav-indicator');
     
+    const backToTop = select('.back-to-top');
     let currentIdx = 0;
     let isScrolling = false;
     let isFooterVisible = false;
@@ -48,6 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.style.transform = `translateY(-${targetSection.offsetTop}px)`;
             isFooterVisible = false;
             updateActiveMenu();
+        }
+
+        if (backToTop) {
+            if (currentIdx > 0 || toFooter) backToTop.classList.add('active');
+            else backToTop.classList.remove('active');
         }
 
         if (!immediate) {
