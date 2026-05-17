@@ -101,58 +101,151 @@
             color: var(--accent-color);
         }
 
-        /* Rendered note content */
-        .note-body { line-height: 1.8; font-size: 15px; }
-        .note-body .note-section { margin-bottom: 36px; }
-        .note-body .note-section + .note-section { border-top: 1px solid var(--border-color); padding-top: 28px; }
+        /* ── Note Content ── */
+        .note-body {
+            line-height: 1.9;
+            font-size: 15px;
+            max-width: 860px;
+        }
 
+        /* Section divider */
+        .note-body .n-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 32px 0;
+        }
+
+        /* Headings */
         .note-body h3 {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
             color: var(--accent-color);
-            margin: 20px 0 8px;
+            margin: 32px 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,239,192,0.15);
         }
+        .note-body h3:first-child { margin-top: 0; }
         .note-body h4 {
             font-size: 15px;
             font-weight: 600;
-            color: #c8c8c8;
-            margin: 14px 0 6px;
+            color: #d0d0d0;
+            margin: 18px 0 6px;
         }
+
+        /* Body paragraph */
         .note-body p {
-            color: var(--text-main);
-            margin: 4px 0;
-            padding-left: 12px;
+            color: #c8c8c8;
+            margin: 5px 0;
+            padding-left: 4px;
         }
-        .note-body pre {
-            background: #1a1a1a;
-            border: 1px solid var(--border-color);
-            border-left: 3px solid var(--accent-color);
-            border-radius: 6px;
-            padding: 16px 20px;
-            margin: 12px 0;
+
+        /* ── Code Block ── */
+        .code-wrap {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin: 14px 0 20px;
+            overflow: hidden;
+        }
+        .code-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 6px 14px;
+        }
+        .code-bar .code-dots {
+            display: flex; gap: 6px;
+        }
+        .code-dots span {
+            width: 11px; height: 11px;
+            border-radius: 50%;
+        }
+        .code-dots span:nth-child(1) { background: #ff5f57; }
+        .code-dots span:nth-child(2) { background: #febc2e; }
+        .code-dots span:nth-child(3) { background: #28c840; }
+        .code-bar .copy-btn {
+            background: none;
+            border: 1px solid #30363d;
+            color: #8b949e;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .code-bar .copy-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .code-wrap pre {
+            margin: 0;
+            padding: 18px 20px;
             overflow-x: auto;
-            font-family: 'Consolas', 'D2Coding', monospace;
-            font-size: 13px;
-            color: #d4d4d4;
-            line-height: 1.6;
+            font-family: 'Consolas', 'D2Coding', 'Fira Code', monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #e6edf3;
+            background: none;
+            border: none;
         }
-        .note-body .note-callout {
-            background: rgba(255,239,192,0.06);
-            border: 1px solid rgba(255,239,192,0.15);
-            border-radius: 6px;
-            padding: 12px 16px;
+
+        /* ── Callouts ── */
+        .note-body .n-callout {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: rgba(255,239,192,0.05);
+            border: 1px solid rgba(255,239,192,0.18);
+            border-radius: 7px;
+            padding: 11px 15px;
+            margin: 12px 0;
+            color: #d6c88a;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .note-body .n-callout .icon { font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+        .note-body .n-sub-callout {
+            background: rgba(255,239,192,0.03);
+            border-left: 2px solid rgba(255,239,192,0.25);
+            padding: 6px 12px;
+            margin: 6px 0 6px 16px;
+            color: #b8a870;
+            font-size: 14px;
+        }
+        .note-body .n-tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: rgba(82,154,213,0.07);
+            border-left: 3px solid #4d90c8;
+            border-radius: 0 6px 6px 0;
+            padding: 10px 14px;
             margin: 10px 0;
-            color: #c8c0a0;
+            color: #88b8d8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .note-body .n-tip .icon { flex-shrink: 0; margin-top: 2px; }
+        .note-body .n-practice {
+            background: rgba(100,200,130,0.05);
+            border: 1px solid rgba(100,200,130,0.2);
+            border-radius: 7px;
+            padding: 12px 16px;
+            margin: 14px 0;
+            color: #90d8a8;
             font-size: 14px;
         }
-        .note-body .note-tip {
-            background: rgba(100,180,255,0.06);
-            border-left: 3px solid #5599cc;
-            padding: 8px 14px;
-            margin: 8px 0;
-            color: #99c0e0;
-            font-size: 14px;
-            border-radius: 0 4px 4px 0;
+        .note-body .n-practice::before {
+            content: "🧪 실습";
+            display: block;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #6ec68a;
         }
 
         /* Loading / Empty state */
@@ -392,43 +485,58 @@
             let html = '';
             let codeLines = [];
             let inCode = false;
+            let codeId = 0;
 
             const flushCode = () => {
-                if (codeLines.length) {
-                    html += `<pre>${escHtml(codeLines.join('\n'))}</pre>`;
-                    codeLines = [];
-                }
+                if (!codeLines.length) return;
+                // trim trailing blank lines inside block
+                while (codeLines.length && !codeLines[codeLines.length - 1].trim()) codeLines.pop();
+                const id = 'cb' + (++codeId);
+                const content = escHtml(codeLines.join('\n'));
+                html += `
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="code-dots"><span></span><span></span><span></span></div>
+    <button class="copy-btn" onclick="copyCode('${id}')"><i class="fas fa-copy"></i> 복사</button>
+  </div>
+  <pre id="${id}">${content}</pre>
+</div>`;
+                codeLines = [];
                 inCode = false;
             };
 
-            for (let i = 0; i < lines.length; i++) {
-                const raw = lines[i];
+            const indentOf = raw => {
+                const tabs = (raw.match(/^\t+/) || [''])[0].length;
+                const sps  = (raw.match(/^ +/)  || [''])[0].length;
+                return tabs || Math.floor(sps / 3);
+            };
+
+            const isCode = (raw, trimmed) => {
+                if (/^[-=─]{5,}\s*$/.test(trimmed)) return false;
+                // Explicit code signals
+                return /[{};]$/.test(trimmed)
+                    || /[{}]/.test(trimmed) && indentOf(raw) >= 1
+                    || /^\s*(public|private|protected|static|class |void |int |long |double |float |char |boolean |String |return |if\s*\(|else|for\s*\(|while\s*\(|do\s*\{|switch\s*\(|case |import |package |new |try\s*\{|catch\s*\(|finally\s*\{|@Override|@FunctionalInterface|System\.|\/\/|\/\*|\*)/.test(raw)
+                    || /^\s*<[a-zA-Z!\?\/]/.test(raw) && /[>]/.test(raw)  // HTML tags
+                    || /^\s*[a-zA-Z.\[\]<>]+ [a-zA-Z_$][a-zA-Z0-9_$]* *[=;(]/.test(trimmed) && indentOf(raw) >= 2
+                    || (inCode && indentOf(raw) >= 1 && trimmed !== '');    // stay in code if indented
+            };
+
+            for (const raw of lines) {
                 const trimmed = raw.trim();
 
-                // separator line
-                if (/^[-=]{5,}\s*$/.test(trimmed)) {
+                if (/^[-=─]{5,}\s*$/.test(trimmed)) {
                     flushCode();
+                    html += '<hr class="n-divider">';
                     continue;
                 }
 
-                // empty line
                 if (!trimmed) {
-                    flushCode();
-                    html += '';
+                    if (inCode) codeLines.push('');
                     continue;
                 }
 
-                // Detect indent level
-                const leadingTabs  = (raw.match(/^\t+/) || [''])[0].length;
-                const leadingSpaces= (raw.match(/^ +/)  || [''])[0].length;
-                const indent = leadingTabs || Math.floor(leadingSpaces / 3);
-
-                // Code detection heuristic
-                const isCodeLine = /[{};]$/.test(trimmed)
-                    || /^\s*(public|private|protected|class|void|int|String|return|if|else|for|while|import|package|new |System\.|\/\/|\*|@)/.test(raw)
-                    || /[{}();]/.test(trimmed) && indent >= 2;
-
-                if (isCodeLine) {
+                if (isCode(raw, trimmed)) {
                     inCode = true;
                     codeLines.push(raw.replace(/\t/g, '    '));
                     continue;
@@ -436,26 +544,40 @@
 
                 flushCode();
 
-                // ▶ callout
+                const indent = indentOf(raw);
+
+                // [실습] practice block
+                if (/^\[.{1,10}\]/.test(trimmed)) {
+                    html += `<div class="n-practice">${escHtml(trimmed)}</div>`;
+                    continue;
+                }
+
+                // ▶ main callout (section marker)
                 if (trimmed.startsWith('▶')) {
-                    html += `<div class="note-callout"><strong>${escHtml(trimmed)}</strong></div>`;
+                    html += `<div class="n-callout"><span class="icon">▶</span><span>${escHtml(trimmed.slice(1).trim())}</span></div>`;
                     continue;
                 }
 
-                // ※ tip
+                // ▷ sub-callout
+                if (trimmed.startsWith('▷')) {
+                    html += `<div class="n-sub-callout">${escHtml(trimmed.slice(1).trim())}</div>`;
+                    continue;
+                }
+
+                // ※ tip / note
                 if (trimmed.startsWith('※')) {
-                    html += `<div class="note-tip">${escHtml(trimmed)}</div>`;
+                    html += `<div class="n-tip"><span class="icon">💡</span><span>${escHtml(trimmed.slice(1).trim())}</span></div>`;
                     continue;
                 }
 
-                // Heading: no indent, not too long, doesn't look like a sentence
-                if (indent === 0 && trimmed.length < 60 && !trimmed.endsWith('.')) {
+                // Heading: no indent, short enough
+                if (indent === 0 && trimmed.length < 70) {
                     html += `<h3>${escHtml(trimmed)}</h3>`;
                     continue;
                 }
 
-                // Sub-heading: indent 1, short
-                if (indent === 1 && trimmed.length < 50 && /^\d+\./.test(trimmed)) {
+                // Sub-heading: numbered list item at shallow indent
+                if (/^\d+[\.\)]/.test(trimmed) && indent <= 1 && trimmed.length < 60) {
                     html += `<h4>${escHtml(trimmed)}</h4>`;
                     continue;
                 }
@@ -465,7 +587,8 @@
             }
 
             flushCode();
-            document.getElementById('noteBody').innerHTML = html || '<p style="color:var(--text-muted)">내용이 없습니다.</p>';
+            document.getElementById('noteBody').innerHTML =
+                html || '<p style="color:var(--text-muted)">내용이 없습니다.</p>';
             document.getElementById('contentPanel').scrollTop = 0;
         }
 
@@ -502,6 +625,19 @@
         function escHtml(str) {
             return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
+
+        // Copy code to clipboard
+        window.copyCode = (id) => {
+            const pre = document.getElementById(id);
+            if (!pre) return;
+            navigator.clipboard.writeText(pre.textContent).then(() => {
+                const btn = pre.closest('.code-wrap').querySelector('.copy-btn');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> 복사됨';
+                btn.style.color = 'var(--accent-color)';
+                setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1800);
+            });
+        };
 
         // Mobile topic panel toggle
         const toggleBtn = document.getElementById('topicToggle');
