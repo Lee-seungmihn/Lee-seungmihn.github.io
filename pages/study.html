@@ -128,8 +128,10 @@
         .note-body h4 {
             font-size: 15px;
             font-weight: 600;
-            color: #d0d0d0;
-            margin: 18px 0 6px;
+            color: #c0c0c0;
+            margin: 20px 0 6px;
+            padding-left: 10px;
+            border-left: 2px solid rgba(255,239,192,0.25);
         }
 
         /* Body paragraph */
@@ -246,6 +248,88 @@
             font-weight: 700;
             margin-bottom: 6px;
             color: #6ec68a;
+        }
+
+        /* ── Section Labels (구조화 마커용) ── */
+        .sec-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin: 28px 0 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .sec-label .sec-icon { font-size: 14px; }
+
+        /* 출력 블록 — 터미널 스타일 */
+        .output-wrap {
+            background: #0a0a0a;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            margin: 0 0 20px;
+            overflow: hidden;
+        }
+        .output-bar {
+            background: #111;
+            border-bottom: 1px solid #252525;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: #555;
+            font-family: monospace;
+        }
+        .output-wrap pre {
+            margin: 0;
+            padding: 16px 20px;
+            font-family: 'Consolas', 'D2Coding', monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #4ec94e;
+            background: none;
+        }
+
+        /* 코드설명 블록 */
+        .explanation-wrap {
+            background: rgba(255,239,192,0.03);
+            border-left: 3px solid rgba(255,239,192,0.3);
+            border-radius: 0 6px 6px 0;
+            padding: 14px 18px;
+            margin: 0 0 20px;
+        }
+        .explanation-wrap p {
+            padding-left: 0 !important;
+            margin: 4px 0;
+        }
+
+        /* topic-list 구분선 + 메모 항목 */
+        .topic-list .topic-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 10px 0;
+        }
+        .topic-list .memo-link {
+            color: #666 !important;
+            font-size: 13px;
+        }
+        .topic-list .memo-link:hover { color: #aaa !important; }
+        .topic-list .memo-link.active { color: var(--text-muted) !important; border-left-color: #666 !important; }
+
+        /* 메모 모드 - raw 노트 스타일 */
+        .memo-raw {
+            font-family: 'Consolas', 'D2Coding', monospace;
+            font-size: 13px;
+            line-height: 1.85;
+            color: #888;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #1a1a1a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px 28px;
         }
 
         /* Loading / Empty state */
@@ -409,6 +493,8 @@
         // Multi-file: one file per topic
         function buildMultiTopics() {
             const ul = document.getElementById('topicList');
+            let currentId = null;
+
             catMeta.topics.forEach((topic, idx) => {
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="#" data-id="${topic.id}" data-title="${topic.title}">
@@ -417,25 +503,54 @@
                 ul.appendChild(li);
             });
 
+            // ── 메모 구분선 + 항목
+            addMemoSeparator(ul);
+            const memoLi = document.createElement('li');
+            memoLi.innerHTML = `<a href="#" class="memo-link" data-memo="multi">
+                <span class="topic-num">📋</span>메모 노트
+            </a>`;
+            ul.appendChild(memoLi);
+
             ul.addEventListener('click', e => {
-                const a = e.target.closest('a[data-id]');
+                const a = e.target.closest('a');
                 if (!a) return;
                 e.preventDefault();
                 setActive(a);
-                loadMultiFile(a.dataset.id, a.dataset.title);
+
+                if (a.dataset.memo === 'multi') {
+                    // 현재 선택된 파일의 메모 보기
+                    if (currentId) {
+                        document.getElementById('contentTitle').textContent = '메모 노트';
+                        showLoading();
+                        fetch(`${BASE}${cat}/${currentId}.txt`)
+                            .then(r => r.text())
+                            .then(txt => renderMemo(txt))
+                            .catch(() => showError('파일을 불러올 수 없습니다.'));
+                    } else {
+                        document.getElementById('noteBody').innerHTML =
+                            '<div class="state-msg"><i class="fas fa-hand-point-left"></i>먼저 토픽을 선택해주세요.</div>';
+                    }
+                } else if (a.dataset.id) {
+                    currentId = a.dataset.id;
+                    loadMultiFile(a.dataset.id, a.dataset.title);
+                }
             });
 
-            // Auto-select first or URL param
+            // Auto-select first
             const firstTarget = topicId
                 ? ul.querySelector(`a[data-id="${topicId}"]`)
-                : ul.querySelector('a');
-            if (firstTarget) { setActive(firstTarget); loadMultiFile(firstTarget.dataset.id, firstTarget.dataset.title); }
+                : ul.querySelector('a[data-id]');
+            if (firstTarget) {
+                currentId = firstTarget.dataset.id;
+                setActive(firstTarget);
+                loadMultiFile(firstTarget.dataset.id, firstTarget.dataset.title);
+            }
         }
 
         function loadMultiFile(id, title) {
             document.getElementById('contentTitle').textContent = title;
             showLoading();
-            fetch(`${BASE}java/${id}.txt`)
+            fetch(`${BASE}${cat}/${id}.txt`)
                 .then(r => r.text())
                 .then(txt => renderNote(txt))
                 .catch(() => showError('파일을 불러올 수 없습니다.'));
@@ -446,8 +561,8 @@
             showLoading();
             fetch(BASE + catMeta.file)
                 .then(r => r.text())
-                .then(txt => {
-                    const sections = splitSections(txt);
+                .then(fullTxt => {
+                    const sections = splitSections(fullTxt);
                     const ul = document.getElementById('topicList');
 
                     sections.forEach((sec, idx) => {
@@ -459,17 +574,31 @@
                         ul.appendChild(li);
                     });
 
+                    // ── 메모 구분선 + 항목
+                    addMemoSeparator(ul);
+                    const memoLi = document.createElement('li');
+                    memoLi.innerHTML = `<a href="#" class="memo-link" data-memo="single">
+                        <span class="topic-num">📋</span>메모 전체
+                    </a>`;
+                    ul.appendChild(memoLi);
+
                     ul.addEventListener('click', e => {
-                        const a = e.target.closest('a[data-idx]');
+                        const a = e.target.closest('a');
                         if (!a) return;
                         e.preventDefault();
                         setActive(a);
-                        document.getElementById('contentTitle').textContent = a.dataset.title;
-                        renderNote(sections[+a.dataset.idx]);
+
+                        if (a.dataset.memo === 'single') {
+                            document.getElementById('contentTitle').textContent = '메모 전체';
+                            renderMemo(fullTxt);
+                        } else if (a.dataset.idx !== undefined) {
+                            document.getElementById('contentTitle').textContent = a.dataset.title;
+                            renderNote(sections[+a.dataset.idx]);
+                        }
                     });
 
                     // Auto-select first
-                    const first = ul.querySelector('a');
+                    const first = ul.querySelector('a[data-idx]');
                     if (first) {
                         setActive(first);
                         document.getElementById('contentTitle').textContent = first.dataset.title;
@@ -479,110 +608,144 @@
                 .catch(() => showError('파일을 불러올 수 없습니다.'));
         }
 
+        function addMemoSeparator(ul) {
+            const div = document.createElement('li');
+            div.innerHTML = '<div class="topic-divider"></div>';
+            ul.appendChild(div);
+        }
+
         // ── 3. txt → HTML renderer ────────────────────────────────
+
+        // 메모 노트: raw 텍스트 그대로 보여주기
+        function renderMemo(txt) {
+            document.getElementById('noteBody').innerHTML =
+                `<div class="memo-raw">${escHtml(txt)}</div>`;
+            document.getElementById('contentPanel').scrollTop = 0;
+        }
+
+        let _codeId = 0;
+
         function renderNote(rawText) {
             const lines = rawText.split(/\r?\n/);
             let html = '';
             let codeLines = [];
             let inCode = false;
-            let codeId = 0;
+            // 섹션(구분선) 이후 첫 번째 비들여쓰기 줄만 h3, 이후는 h4
+            let sectionTitleUsed = false;
+
+            // ── helpers ──────────────────────────────────────────────
+            const indentOf = raw => {
+                const t = (raw.match(/^\t+/) || [''])[0].length;
+                const s = (raw.match(/^ +/)  || [''])[0].length;
+                return t || Math.floor(s / 4);
+            };
+
+            // 한국어(완성형) 포함 여부
+            const hasKorean = str => /[가-힯]/.test(str);
+
+            // 특수 마커 줄인지 (▶▷※ 등은 절대 코드 아님)
+            const isMarker = t =>
+                t.startsWith('▶') || t.startsWith('▷') || t.startsWith('※') ||
+                t.startsWith('★') || /^\[.{1,10}\]$/.test(t);
+
+            const isCodeLine = (raw, trimmed) => {
+                if (!trimmed) return false;
+                if (/^[-=─]{5,}/.test(trimmed)) return false;
+                if (isMarker(trimmed)) return false;         // 마커는 무조건 코드 아님
+                if (hasKorean(trimmed)) return false;        // 한국어 포함 줄은 코드 아님
+
+                const ind = indentOf(raw);
+                return (
+                    /[{};]$/.test(trimmed) ||                // 코드 종료 문자
+                    /[{}]/.test(trimmed) && ind >= 1 ||      // 중괄호 포함 + 들여쓰기
+                    /^(public|private|protected|static |abstract |final |class |interface |enum |void |int |long |short |double |float |char |boolean |String |byte |return |if\s*\(|else\s*[\{$]|else if|for\s*\(|while\s*\(|do\s*\{|switch\s*\(|case |default\s*:|import |package |new |try\s*[\{$]|catch\s*\(|finally\s*[\{$]|@Override|@FunctionalInterface|@Getter|@Setter|@Service|@Repository|@Controller|@RestController|@Entity|@Table|@Column|@Id|System\.|\/\/|\/\*|\* )/.test(trimmed) ||
+                    // 순수 HTML 태그 (한국어 없음은 위에서 확인)
+                    /^<[a-zA-Z!/?]/.test(trimmed) && />/.test(trimmed) && ind >= 1 ||
+                    // 변수/메서드 선언 패턴 (한국어 없음 보장됨)
+                    /^[A-Za-z$_][\w$<>\[\]., ]*\s+[a-z$_][\w$]*\s*[=;(]/.test(trimmed) && ind >= 1
+                );
+            };
 
             const flushCode = () => {
-                if (!codeLines.length) return;
-                // trim trailing blank lines inside block
+                if (!codeLines.length) { inCode = false; return; }
                 while (codeLines.length && !codeLines[codeLines.length - 1].trim()) codeLines.pop();
-                const id = 'cb' + (++codeId);
-                const content = escHtml(codeLines.join('\n'));
-                html += `
-<div class="code-wrap">
-  <div class="code-bar">
-    <div class="code-dots"><span></span><span></span><span></span></div>
-    <button class="copy-btn" onclick="copyCode('${id}')"><i class="fas fa-copy"></i> 복사</button>
-  </div>
-  <pre id="${id}">${content}</pre>
-</div>`;
+                if (!codeLines.length) { inCode = false; return; }
+                const id = 'cb' + (++_codeId);
+                html += `<div class="code-wrap"><div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><button class="copy-btn" onclick="copyCode('${id}')"><i class="fas fa-copy"></i> 복사</button></div><pre id="${id}">${escHtml(codeLines.join('\n'))}</pre></div>`;
                 codeLines = [];
                 inCode = false;
             };
 
-            const indentOf = raw => {
-                const tabs = (raw.match(/^\t+/) || [''])[0].length;
-                const sps  = (raw.match(/^ +/)  || [''])[0].length;
-                return tabs || Math.floor(sps / 3);
-            };
-
-            const isCode = (raw, trimmed) => {
-                if (/^[-=─]{5,}\s*$/.test(trimmed)) return false;
-                // Explicit code signals
-                return /[{};]$/.test(trimmed)
-                    || /[{}]/.test(trimmed) && indentOf(raw) >= 1
-                    || /^\s*(public|private|protected|static|class |void |int |long |double |float |char |boolean |String |return |if\s*\(|else|for\s*\(|while\s*\(|do\s*\{|switch\s*\(|case |import |package |new |try\s*\{|catch\s*\(|finally\s*\{|@Override|@FunctionalInterface|System\.|\/\/|\/\*|\*)/.test(raw)
-                    || /^\s*<[a-zA-Z!\?\/]/.test(raw) && /[>]/.test(raw)  // HTML tags
-                    || /^\s*[a-zA-Z.\[\]<>]+ [a-zA-Z_$][a-zA-Z0-9_$]* *[=;(]/.test(trimmed) && indentOf(raw) >= 2
-                    || (inCode && indentOf(raw) >= 1 && trimmed !== '');    // stay in code if indented
-            };
-
+            // ── main loop ────────────────────────────────────────────
             for (const raw of lines) {
                 const trimmed = raw.trim();
 
+                // 구분선 → 섹션 리셋
                 if (/^[-=─]{5,}\s*$/.test(trimmed)) {
                     flushCode();
                     html += '<hr class="n-divider">';
+                    sectionTitleUsed = false;
                     continue;
                 }
 
+                // 빈 줄: 코드 중이면 블록에 포함
                 if (!trimmed) {
                     if (inCode) codeLines.push('');
                     continue;
                 }
 
-                if (isCode(raw, trimmed)) {
+                // 코드 줄 감지
+                if (isCodeLine(raw, trimmed)) {
                     inCode = true;
                     codeLines.push(raw.replace(/\t/g, '    '));
                     continue;
                 }
 
+                // 여기까지 왔으면 반드시 코드 아님 → flush
                 flushCode();
 
                 const indent = indentOf(raw);
 
-                // [실습] practice block
+                // ▶ 큰 마커
+                if (trimmed.startsWith('▶')) {
+                    html += `<div class="n-callout"><span class="icon">▶</span><span>${escHtml(trimmed.slice(1).trim())}</span></div>`;
+                    continue;
+                }
+                // ▷ 작은 마커
+                if (trimmed.startsWith('▷')) {
+                    html += `<div class="n-sub-callout">${escHtml(trimmed.slice(1).trim())}</div>`;
+                    continue;
+                }
+                // ※ 참고
+                if (trimmed.startsWith('※')) {
+                    html += `<div class="n-tip"><span class="icon">💡</span><span>${escHtml(trimmed.slice(1).trim())}</span></div>`;
+                    continue;
+                }
+                // [실습] 등 대괄호 마커
                 if (/^\[.{1,10}\]/.test(trimmed)) {
                     html += `<div class="n-practice">${escHtml(trimmed)}</div>`;
                     continue;
                 }
 
-                // ▶ main callout (section marker)
-                if (trimmed.startsWith('▶')) {
-                    html += `<div class="n-callout"><span class="icon">▶</span><span>${escHtml(trimmed.slice(1).trim())}</span></div>`;
-                    continue;
-                }
-
-                // ▷ sub-callout
-                if (trimmed.startsWith('▷')) {
-                    html += `<div class="n-sub-callout">${escHtml(trimmed.slice(1).trim())}</div>`;
-                    continue;
-                }
-
-                // ※ tip / note
-                if (trimmed.startsWith('※')) {
-                    html += `<div class="n-tip"><span class="icon">💡</span><span>${escHtml(trimmed.slice(1).trim())}</span></div>`;
-                    continue;
-                }
-
-                // Heading: no indent, short enough
+                // 제목 계층:
+                //   - 들여쓰기 없고 짧으면 → 섹션 내 첫 번째만 h3, 이후는 h4
+                //   - 들여쓰기 1단 + 숫자 목록 → h4
                 if (indent === 0 && trimmed.length < 70) {
-                    html += `<h3>${escHtml(trimmed)}</h3>`;
+                    if (!sectionTitleUsed) {
+                        html += `<h3>${escHtml(trimmed)}</h3>`;
+                        sectionTitleUsed = true;
+                    } else {
+                        html += `<h4>${escHtml(trimmed)}</h4>`;
+                    }
                     continue;
                 }
 
-                // Sub-heading: numbered list item at shallow indent
-                if (/^\d+[\.\)]/.test(trimmed) && indent <= 1 && trimmed.length < 60) {
+                if (/^\d+[\.\)]/.test(trimmed) && indent <= 1 && trimmed.length < 80) {
                     html += `<h4>${escHtml(trimmed)}</h4>`;
                     continue;
                 }
 
-                // Body paragraph
+                // 일반 단락
                 html += `<p>${escHtml(trimmed)}</p>`;
             }
 
