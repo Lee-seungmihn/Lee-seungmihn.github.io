@@ -16,8 +16,7 @@
         .study-wrap {
             display: flex;
             height: 100vh;
-            margin-left: var(--sidebar-width);
-            transition: margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            margin-left: 0;
         }
 
         /* Left panel – topic list */
@@ -342,9 +341,6 @@
         .state-msg i { font-size: 40px; display: block; margin-bottom: 16px; opacity: 0.4; }
 
         /* Mobile */
-        @media (max-width: 1199px) {
-            .study-wrap { margin-left: 0; }
-        }
         @media (max-width: 768px) {
             .topic-panel { width: 200px; min-width: 200px; }
             .content-panel { padding: 24px 20px; }
@@ -386,34 +382,6 @@
 </head>
 <body>
 
-    <!-- Mobile nav toggle (global sidebar) -->
-    <i class="fas fa-bars mobile-nav-toggle"></i>
-
-    <!-- Global Sidebar -->
-    <header id="sidebar">
-        <div class="d-flex flex-column">
-            <div class="profile">
-                <img src="../assets/images/vertical-shot-light-brown-meerkat-daytime.jpg" alt="" class="img-fluid rounded-circle" style="width: 180px; height: 180px; object-fit: cover; object-position: top;">
-                <h1 class="text-light"><a href="../index.html">Lee-seungmihn</a></h1>
-                <div class="social-links mt-3 text-center">
-                    <a href="https://github.com/Lee-seungmihn" target="_blank" class="github"><i class="fab fa-github"></i></a>
-                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <nav class="nav-menu">
-                <div class="nav-indicator"></div>
-                <ul>
-                    <li><a href="../index.html#hero"><i class="fas fa-home"></i> <span>Home</span></a></li>
-                    <li><a href="../index.html#about"><i class="fas fa-user"></i> <span>About</span></a></li>
-                    <li><a href="../index.html#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
-                    <li><a href="materials.html" class="active"><i class="fas fa-book"></i> <span>Materials</span></a></li>
-                    <li><a href="../index.html#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <!-- Study 2-panel layout -->
     <div class="study-wrap">
 
@@ -452,9 +420,6 @@
         <i class="fas fa-list"></i>
     </button>
 
-    <script src="../assets/js/layout.js"></script>
-    <script src="../assets/js/service.js"></script>
-    <script src="../assets/js/event.js"></script>
     <script>
     (() => {
         const params   = new URLSearchParams(location.search);
@@ -658,7 +623,7 @@
                 return (
                     /[{};]$/.test(trimmed) ||                // 코드 종료 문자
                     /[{}]/.test(trimmed) && ind >= 1 ||      // 중괄호 포함 + 들여쓰기
-                    /^(public|private|protected|static |abstract |final |class |interface |enum |void |int |long |short |double |float |char |boolean |String |byte |return |if\s*\(|else\s*[\{$]|else if|for\s*\(|while\s*\(|do\s*\{|switch\s*\(|case |default\s*:|import |package |new |try\s*[\{$]|catch\s*\(|finally\s*[\{$]|@Override|@FunctionalInterface|@Getter|@Setter|@Service|@Repository|@Controller|@RestController|@Entity|@Table|@Column|@Id|System\.|\/\/|\/\*|\* )/.test(trimmed) ||
+                    /^(public|private|protected|static |abstract |final |class |interface |enum |void |int |long |short |double |float |char |boolean |String |byte |return |if\s*\(|else\s*[\{$]|else if|for\s*\(|while\s*\(|do\s*\{|switch\s*\(|case |default\s*:|import |package |new |try\s*[\{$]|catch\s*\(|finally\s*[\{$]|@Override|@FunctionalInterface|@Getter|@Setter|@Service|@Repository|@Controller|@RestController|@Entity|@Table|@Column|@Id|System\.|\\/\\/|\\/\\*|\\* )/.test(trimmed) ||
                     // 순수 HTML 태그 (한국어 없음은 위에서 확인)
                     /^<[a-zA-Z!/?]/.test(trimmed) && />/.test(trimmed) && ind >= 1 ||
                     // 변수/메서드 선언 패턴 (한국어 없음 보장됨)
@@ -740,7 +705,7 @@
                     continue;
                 }
 
-                if (/^\d+[\.\)]/.test(trimmed) && indent <= 1 && trimmed.length < 80) {
+                if (/^\d+[\.)]/.test(trimmed) && indent <= 1 && trimmed.length < 80) {
                     html += `<h4>${escHtml(trimmed)}</h4>`;
                     continue;
                 }
