@@ -130,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (window.innerWidth > 1199) {
             document.documentElement.classList.add('full-page-active');
-            moveToIndex(currentIdx, isFooterVisible, true);
             window.scrollTo(0, 0);
+            moveToIndex(currentIdx, isFooterVisible, true);
         } else {
             document.documentElement.classList.remove('full-page-active');
             mainContent.style.transform = 'none';
@@ -156,19 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         controlToggleBtn();
 
-        // 외부 페이지에서 index.html#about 등으로 직접 접근 시 해당 섹션으로 이동
-        const hash = window.location.hash.replace('#', '');
-        const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
+        if (window.innerWidth > 1199) {
+            // 브라우저 hash 앵커 스크롤이 scrollY를 이동시켜 transform이 +1 섹션씩 밀리는 문제 방지
+            window.scrollTo(0, 0);
 
-        if (targetIdx > 0) {
-            if (window.innerWidth > 1199) {
+            const hash = window.location.hash.replace('#', '');
+            const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
+
+            if (targetIdx > 0) {
                 moveToIndex(targetIdx, false, true);
             } else {
+                updateActiveMenu();
+            }
+        } else {
+            const hash = window.location.hash.replace('#', '');
+            const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
+            if (targetIdx > 0) {
                 const targetSection = sections[targetIdx];
                 if (targetSection) window.scrollTo(0, targetSection.offsetTop);
             }
-        } else {
-            if (window.innerWidth > 1199) updateActiveMenu();
         }
     });
 
