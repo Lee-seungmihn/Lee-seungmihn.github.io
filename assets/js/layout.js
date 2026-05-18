@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetPos = lastSection.offsetTop + footerHeight;
             
             if (!immediate) mainContent.style.transition = 'transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-            else mainContent.style.transition = 'margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)'; // 가로 애니메이션은 유지
+            else mainContent.style.transition = 'margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
             
             mainContent.style.transform = `translateY(-${targetPos}px)`;
             isFooterVisible = true;
@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             toggleBtn.classList.remove('visible');
             select('body').classList.remove('mobile-nav-active');
+            // PC 크기로 바뀌면 아이콘을 bars 상태로 초기화
+            toggleBtn.classList.remove('fa-xmark');
+            toggleBtn.classList.add('fa-bars');
         }
     };
 
@@ -127,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (window.innerWidth > 1199) {
             document.documentElement.classList.add('full-page-active');
-            moveToIndex(currentIdx, isFooterVisible, true); // transform은 즉시, margin-left는 애니메이션
+            moveToIndex(currentIdx, isFooterVisible, true);
             window.scrollTo(0, 0);
         } else {
             document.documentElement.classList.remove('full-page-active');
@@ -152,7 +155,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('load', () => {
         controlToggleBtn();
-        if (window.innerWidth > 1199) updateActiveMenu();
+
+        // 외부 페이지에서 index.html#about 등으로 직접 접근 시 해당 섹션으로 이동
+        const hash = window.location.hash.replace('#', '');
+        const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
+
+        if (targetIdx > 0) {
+            if (window.innerWidth > 1199) {
+                moveToIndex(targetIdx, false, true);
+            } else {
+                const targetSection = sections[targetIdx];
+                if (targetSection) window.scrollTo(0, targetSection.offsetTop);
+            }
+        } else {
+            if (window.innerWidth > 1199) updateActiveMenu();
+        }
     });
 
     const mobileToggle = select('.mobile-nav-toggle');
