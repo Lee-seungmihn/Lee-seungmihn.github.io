@@ -1,5 +1,5 @@
 /**
- * Layout.js - Golden Dew Style FullPage Controller (Resize Animation Fixed)
+ * Layout.js - Golden Dew Style FullPage Controller
  */
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -15,11 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const footer = select('#footer');
     const navLinks = select('.nav-menu a', true);
     const indicator = select('.nav-indicator');
-    
+
     const backToTop = select('.back-to-top');
     let currentIdx = 0;
     let isScrolling = false;
     let isFooterVisible = false;
+
+    /**
+     * 섹션 index → translateY 값 계산
+     * offsetTop 대신 index * innerHeight를 사용해 브라우저의 hash 앵커 스크롤 영향을 차단
+     */
+    const sectionY = (index) => index * window.innerHeight;
 
     /**
      * 1. Core Scroll Logic
@@ -29,24 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isScrolling && !immediate) return;
 
         if (toFooter) {
-            const lastSection = sections[sections.length - 1];
-            const footerHeight = footer.offsetHeight;
-            const targetPos = lastSection.offsetTop + footerHeight;
-            
+            const targetPos = sectionY(sections.length - 1) + (footer ? footer.offsetHeight : 0);
+
             if (!immediate) mainContent.style.transition = 'transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
             else mainContent.style.transition = 'margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-            
+
             mainContent.style.transform = `translateY(-${targetPos}px)`;
             isFooterVisible = true;
         } else {
             if (index < 0 || index >= sections.length) return;
             currentIdx = index;
-            const targetSection = sections[currentIdx];
-            
+
             if (!immediate) mainContent.style.transition = 'transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
             else mainContent.style.transition = 'margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-            
-            mainContent.style.transform = `translateY(-${targetSection.offsetTop}px)`;
+
+            mainContent.style.transform = `translateY(-${sectionY(currentIdx)}px)`;
             isFooterVisible = false;
             updateActiveMenu();
         }
@@ -86,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const navMenu = select('.nav-menu');
         const linkRect = activeLink.getBoundingClientRect();
         const menuRect = navMenu.getBoundingClientRect();
-        
+
         indicator.style.display = 'block';
         indicator.style.top = (linkRect.top - menuRect.top) + "px";
         indicator.style.height = linkRect.height + "px";
@@ -95,12 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * 3. Event Listeners
      */
-    
     window.addEventListener('wheel', (e) => {
         if (!document.documentElement.classList.contains('full-page-active')) return;
         e.preventDefault();
         if (isScrolling) return;
-        
+
         if (e.deltaY > 0) {
             if (currentIdx === sections.length - 1 && !isFooterVisible) moveToIndex(currentIdx, true);
             else if (!isFooterVisible) moveToIndex(currentIdx + 1);
@@ -118,16 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             toggleBtn.classList.remove('visible');
             select('body').classList.remove('mobile-nav-active');
-            // PC 크기로 바뀌면 아이콘을 bars 상태로 초기화
+            // PC 크기로 바뀌면 아이콘 초기화
             toggleBtn.classList.remove('fa-xmark');
             toggleBtn.classList.add('fa-bars');
         }
     };
 
     window.addEventListener('resize', () => {
-        const currentSection = sections[currentIdx];
         controlToggleBtn();
-        
+
         if (window.innerWidth > 1199) {
             document.documentElement.classList.add('full-page-active');
             window.scrollTo(0, 0);
@@ -135,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             document.documentElement.classList.remove('full-page-active');
             mainContent.style.transform = 'none';
-            if (currentSection) window.scrollTo(0, currentSection.offsetTop);
+            window.scrollTo(0, sectionY(currentIdx));
         }
     });
 
@@ -145,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const targetId = link.hash.replace('#', '');
         const targetIdx = sections.findIndex(s => s.id === targetId);
-        
+
         if (targetIdx !== -1) {
             e.preventDefault();
             moveToIndex(targetIdx, false);
@@ -157,30 +158,35 @@ document.addEventListener('DOMContentLoaded', () => {
         controlToggleBtn();
 
         if (window.innerWidth > 1199) {
-            // 브라우저 hash 앵커 스크롤이 scrollY를 이동시켜 transform이 +1 섹션씩 밀리는 문제 방지
-            window.scrollTo(0, 0);
-
             const hash = window.location.hash.replace('#', '');
             const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
 
+            // 브라우저 hash 앵커 스크롤을 transform으로 직접 상쇄
+            // scrollTo 대신 scrollY만큼 보정한 transform을 적용
+            const scrollOffset = window.scrollY || document.documentElement.scrollTop || 0;
             if (targetIdx > 0) {
-                moveToIndex(targetIdx, false, true);
+                mainContent.style.transition = 'none';
+                mainContent.style.transform = `translateY(-${sectionY(targetIdx) - scrollOffset}px)`;
+                // 다음 프레임에서 scroll 리셋 + 최종 transform 확정
+                requestAnimationFrame(() => {
+                    window.scrollTo(0, 0);
+                    requestAnimationFrame(() => {
+                        moveToIndex(targetIdx, false, true);
+                    });
+                });
             } else {
                 updateActiveMenu();
             }
         } else {
             const hash = window.location.hash.replace('#', '');
             const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
-            if (targetIdx > 0) {
-                const targetSection = sections[targetIdx];
-                if (targetSection) window.scrollTo(0, targetSection.offsetTop);
-            }
+            if (targetIdx > 0) window.scrollTo(0, sectionY(targetIdx));
         }
     });
 
     const mobileToggle = select('.mobile-nav-toggle');
     if (mobileToggle) {
-        mobileToggle.addEventListener('click', function() {
+        mobileToggle.addEventListener('click', function () {
             select('body').classList.toggle('mobile-nav-active');
             const icon = this.querySelector('i') || this;
             icon.classList.toggle('fa-bars');
