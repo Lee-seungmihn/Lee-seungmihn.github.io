@@ -115,6 +115,346 @@ export const studies = {
 
 - 인라인처럼 내용만큼 영역을 가지지만 본인만의 영역을 정확히 가짐
 - \`width, height, margin, padding\` 모두 적용 가능`
+      },
+      {
+        slug: 'html-list',
+        title: '리스트 태그',
+        date: '2025-01-06',
+        content: `## 리스트 태그
+
+### 1. 순서 없는 리스트 — \`ul\`
+
+**ul**: unordered list / **li**: list item
+
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;내용1&lt;/li&gt;
+    &lt;li&gt;내용2&lt;/li&gt;
+    &lt;li&gt;내용3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+### 2. 순서 있는 리스트 — \`ol\`
+
+**ol**: ordered list
+
+<pre><code>&lt;ol type="" start=""&gt;
+    &lt;li value=""&gt;내용1&lt;/li&gt;
+    &lt;li&gt;내용2&lt;/li&gt;
+    &lt;li&gt;내용3&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+| \`type\` 값 | 표시 방식 |
+|------------|-------|
+| \`1\` | 숫자 (1, 2, 3, ...) |
+| \`A\` | 알파벳 대문자 순 |
+| \`a\` | 알파벳 소문자 순 |
+| \`I\` | 로마 숫자 대문자 (I, II, III, ...) |
+| \`i\` | 로마 숫자 소문자 (i, ii, iii, ...) |
+
+- \`start\`: 시작 번호 지정
+- \`value\`: 특정 항목에 번호를 직접 지정
+
+---
+
+## 실습 예시 — 중첩 리스트
+
+<pre><code>&lt;h3&gt;제9조(서비스 이용시간)&lt;/h3&gt;
+&lt;ul&gt;
+    &lt;li&gt;서비스 이용시간은 연중무휴, 1일 24시간을 원칙으로 합니다.&lt;/li&gt;
+    &lt;li&gt;정기점검 등의 필요로 인하여 예외로 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;
+        정부24 회원정보
+        &lt;ul&gt;
+            &lt;li&gt;수집근거 : 정보주체의 동의&lt;/li&gt;
+            &lt;li&gt;보유기간 : 탈퇴 후 5일까지&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li value="3"&gt;
+        전자민원 신청이력
+        &lt;ul&gt;
+            &lt;li&gt;수집근거 : 정보주체의 동의&lt;/li&gt;
+            &lt;li&gt;보유기간 : 3년&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+\`li\`의 \`value\` 속성으로 번호를 건너뛸 수 있다 (위 예시: 1번 다음 3번).
+
+## 실습 예시 — type·start·value 조합
+
+<pre><code>&lt;ol type="I" start="2"&gt;
+    &lt;li&gt;회원은 영리행위를 할 수 없습니다.&lt;/li&gt;
+    &lt;li value="4"&gt;
+        다음 행위를 하여서는 안됩니다.
+        &lt;ol type="a"&gt;
+            &lt;li&gt;다른 회원의 ID를 부정 사용하는 행위&lt;/li&gt;
+            &lt;li&gt;범죄행위와 관련된 행위&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+결과: II, IV(a, b) — 로마 숫자 대문자로 시작, 4번 항목은 소문자 알파벳 중첩 리스트`
+      },
+      {
+        slug: 'html-link',
+        title: '링크·앵커 태그',
+        date: '2025-01-07',
+        content: `## 링크 태그 — \`<a>\`
+
+현재 페이지에서 다른 페이지로 이동할 때 하이퍼링크를 사용한다.
+
+<pre><code>&lt;a href="" target=""&gt;링크 텍스트&lt;/a&gt;</code></pre>
+
+| 속성 | 설명 |
+|------|------|
+| \`href\` | 이동할 페이지 경로 또는 URL |
+| \`target\` | \`_blank\` (새 탭), \`_self\` (현재 탭, 기본값) |
+
+### 외부 링크
+
+<pre><code>&lt;a href="https://www.naver.com" target="_blank"&gt;네이버로 이동&lt;/a&gt;
+&lt;a href="https://www.google.com"&gt;구글로 이동&lt;/a&gt;</code></pre>
+
+### 내부 상대 경로 링크
+
+<pre><code>&lt;a href="./link.html"&gt;같은 폴더의 link.html로 이동&lt;/a&gt;
+&lt;a href="../b-list/list-task.html"&gt;상위 폴더 이동&lt;/a&gt;</code></pre>
+
+---
+
+## 앵커(책갈피) — 페이지 내 이동
+
+같은 페이지 안에서 특정 위치로 이동할 때 \`id\` 속성과 \`href="#id"\`를 조합한다.
+
+<pre><code>&lt;!-- 이동 목표 지점에 id 부여 --&gt;
+&lt;h1 id="top"&gt;페이지 상단&lt;/h1&gt;
+&lt;h2 id="book1"&gt;북마크 1&lt;/h2&gt;
+
+&lt;!-- 해당 위치로 이동하는 링크 --&gt;
+&lt;a href="#book1"&gt;북마크1로 이동&lt;/a&gt;
+&lt;a href="#top"&gt;맨 위로&lt;/a&gt;</code></pre>
+
+jQuery를 이용한 부드러운 스크롤:
+
+<pre><code>&lt;script src="https://code.jquery.com/jquery-3.7.1.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    $("#up").click((e) =&gt; {
+        e.preventDefault();
+        $("html, body").animate({scrollTop: 0}, 1000);
+    });
+&lt;/script&gt;</code></pre>`
+      },
+      {
+        slug: 'html-img',
+        title: '이미지 태그',
+        date: '2025-01-08',
+        content: `## 이미지 태그 — \`<img>\`
+
+이미지를 삽입하는 빈 태그(닫는 태그 없음).
+
+<pre><code>&lt;img src="경로" alt="대체 텍스트" width="200px"&gt;</code></pre>
+
+| 속성 | 설명 |
+|------|------|
+| \`src\` | 이미지 파일 경로 (상대/절대 경로, URL) |
+| \`alt\` | 이미지 로딩 실패 시 표시되는 대체 텍스트 |
+| \`width\` / \`height\` | 이미지 크기 지정 |
+
+---
+
+## 경로 종류
+
+### 절대 경로
+
+보안상 브라우저에서 로컬 절대 경로 접근을 막는 경우가 많다.
+
+<pre><code>&lt;!-- 보안상 브라우저에서 로컬 절대 경로 접근 불가 --&gt;
+&lt;img src="D:\images\icon1.png" alt="경로 문제"&gt;</code></pre>
+
+### 상대 경로
+
+현재 파일 위치를 기준으로 경로를 지정한다.
+
+<pre><code>&lt;!-- 현재 폴더 기준 하위 폴더 이동 --&gt;
+&lt;img src="./a/b/icon2.png" width="200px"&gt;
+&lt;img src="./a/icon3.png" width="150px"&gt;
+
+&lt;!-- 현재 폴더와 같은 위치 --&gt;
+&lt;img src="icon4.png" width="300px"&gt;
+
+&lt;!-- 이미지에 링크 걸기 --&gt;
+&lt;a href="https://www.google.com"&gt;
+    &lt;img src="c/icon5.png" width="220px"&gt;
+&lt;/a&gt;</code></pre>
+
+- \`./\` : 현재 폴더
+- \`../\` : 상위 폴더`
+      },
+      {
+        slug: 'html-table',
+        title: '테이블 태그',
+        date: '2025-01-09',
+        content: `## 테이블(table)
+
+행(row)과 열(column)로 데이터를 정리하는 표.
+
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;헤더1&lt;/th&gt;
+        &lt;th&gt;헤더2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;데이터1&lt;/td&gt;
+        &lt;td&gt;데이터2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+| 태그 | 역할 |
+|------|------|
+| \`<table>\` | 표 전체 컨테이너 |
+| \`<tr>\` | 행 (table row) |
+| \`<th>\` | 헤더 셀 — 굵게·가운데 정렬 |
+| \`<td>\` | 일반 데이터 셀 |
+
+기본 스타일 예시:
+
+<pre><code>&lt;style&gt;
+    table, tr, td, th {
+        text-align: center;
+        border: 1px solid black;
+        width: 450px;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+&lt;/style&gt;</code></pre>
+
+---
+
+## 셀 병합
+
+### colspan — 열 병합
+
+좌에서 우로 합쳐지며 현재 행에만 적용된다.
+
+<pre><code>&lt;td colspan="2"&gt;1&lt;/td&gt;</code></pre>
+
+### rowspan — 행 병합
+
+현재 행과 아래 행이 합쳐진다.
+
+<pre><code>&lt;td rowspan="2"&gt;6&lt;/td&gt;</code></pre>
+
+### 병합 실습
+
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;1&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;4&lt;/td&gt;
+        &lt;td&gt;5&lt;/td&gt;
+        &lt;td rowspan="2"&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;7&lt;/td&gt;
+        &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+복합 병합 실습:
+
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;1&lt;/td&gt;
+        &lt;td rowspan="2"&gt;3&lt;/td&gt;
+        &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;5&lt;/td&gt;
+        &lt;td&gt;6&lt;/td&gt;
+        &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;9&lt;/td&gt;
+        &lt;td colspan="3"&gt;10&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>`
+      },
+      {
+        slug: 'html-display',
+        title: '디스플레이 속성',
+        date: '2025-01-10',
+        content: `## block · inline · inline-block 비교
+
+| 속성 | 대표 태그 | 너비 | 높이 | margin/padding | 줄바꿈 |
+|------|----------|------|------|----------------|--------|
+| \`block\` | \`div, p, h1~h6\` | 부모 전체 | 자유 | 상하좌우 모두 | 있음 |
+| \`inline\` | \`span, strong, a\` | 콘텐츠 크기 | 콘텐츠 크기 | 좌우만, 상하 margin 무시 | 없음 |
+| \`inline-block\` | \`button, input, select\` | 자유 | 자유 | 상하좌우 모두 | 없음 |
+
+---
+
+## block 요소
+
+줄 전체를 차지하며 다음 요소는 아래로 내려간다.
+
+<pre><code>&lt;h1 style="background-color: yellow;"&gt;블록 요소&lt;/h1&gt;
+&lt;div style="background-color: orange; width: 50%; margin-top: 50px;"&gt;DIV1&lt;/div&gt;
+&lt;div style="background-color: pink; width: 100px; height: 100px; margin-top: 60px;"&gt;DIV2&lt;/div&gt;</code></pre>
+
+\`div\`에 \`width: 50%\`를 줘도 다음 요소는 여전히 아래로 내려간다.
+
+---
+
+## inline 요소
+
+콘텐츠 크기만큼만 영역을 차지하고 같은 줄에 이어진다.
+**\`width\`, \`height\` 임의 부여 불가 / \`margin-top\`, \`margin-bottom\` 적용 안 됨.**
+
+<pre><code>&lt;strong style="background-color: yellow; width: 500px; height: 500px;"&gt;인라인 요소&lt;/strong&gt;
+&lt;span style="margin-top: 500px;"&gt;SPAN1&lt;/span&gt;   &lt;!-- margin-top 무시됨 --&gt;
+&lt;span style="padding-top: 100px;"&gt;SPAN2&lt;/span&gt;</code></pre>
+
+---
+
+## inline-block 요소
+
+inline처럼 콘텐츠 옆에 이어지지만 \`width\`, \`height\`, \`margin\`, \`padding\`을 자유롭게 지정할 수 있다.
+
+<pre><code>&lt;button style="width: 150px;"&gt;BUTTON1&lt;/button&gt;
+&lt;button style="height: 150px;"&gt;BUTTON2&lt;/button&gt;
+&lt;button style="width: 350px; margin-top:50px; padding-bottom: 50px;"&gt;BUTTON3&lt;/button&gt;
+
+&lt;!-- inline 요소에 display: inline-block 명시 --&gt;
+&lt;strong style="display: inline-block; background-color: yellow; width: 500px; height: 500px;"&gt;
+    인라인 요소
+&lt;/strong&gt;</code></pre>
+
+\`display: inline-block\`을 명시하면 원래 inline 요소에도 \`width\`·\`height\`가 적용된다.
+
+---
+
+## div·span 레이아웃 구조
+
+<pre><code>&lt;!-- 상단 nav 영역 --&gt;
+&lt;div&gt;
+    &lt;span&gt;홈&lt;/span&gt;
+    &lt;span&gt;고객센터&lt;/span&gt;
+&lt;/div&gt;
+&lt;!-- 로고 영역 --&gt;
+&lt;div&gt;
+    &lt;img src="logo.png" alt="로고"&gt;
+&lt;/div&gt;
+&lt;!-- 콘텐츠 영역 --&gt;
+&lt;div&gt;
+    &lt;div&gt;개인회원&lt;/div&gt;
+    &lt;div&gt;기업회원&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+block 요소인 \`div\`로 레이아웃 구역을 구분하고, inline 요소인 \`span\`으로 줄 내 텍스트를 마크업하는 구조가 일반적이다.`
       }
     ]
   },
@@ -211,6 +551,14 @@ System.out.println("D");
         content: `## 변수
 
 변수는 저장공간이다.
+
+\`\`\`
+x  =  10
+↑     ↑
+저장공간의 이름 (대입 연산자로) 값(상수) 저장
+\`\`\`
+
+## 자료형(type)
 
 | 분류 | 자료형 | byte | 예시 |
 |------|--------|------|------|
@@ -509,6 +857,12 @@ arr[1][2]      // 1행 2열 값
 
 이름 뒤에 소괄호가 있는 형태. (단, 키워드 뒤 소괄호는 메소드가 아님)
 
+\`\`\`
+f(x) = 2x + 1
+↑  ↑      ↑
+메소드명 매개변수 리턴값
+\`\`\`
+
 ## 메소드 선언
 
 \`\`\`java
@@ -519,6 +873,8 @@ arr[1][2]      // 1행 2열 값
 \`\`\`
 
 ## 메소드 선언 순서
+
+덧셈 메소드 예시:
 
 \`\`\`java
 // 1. 이름 → 2. 매개변수 → 3. 실행할 문장 → 4. 리턴값 → 5. 리턴타입
@@ -560,6 +916,9 @@ double add(double a, double b) { ... }  // 오버로딩
 
 공통 요소를 한 번만 선언해 놓고 가져다 사용만 하도록 설계.
 
+1. **타입이다** — 클래스 안에 선언된 변수와 메소드를 사용하려면 해당 클래스 타입으로 변수를 선언
+2. **주어이다** — \`Monkey.eat("바나나")\` → "원숭이가 바나나를 먹는다"
+
 \`\`\`java
 class 클래스명 {
     필드 (변수, 메소드)
@@ -595,7 +954,7 @@ class 클래스명 {
 ## 변수의 종류
 
 | 종류 | 선언 위치 | 생명주기 |
-|------|-----------|----------|
+|------|-----------|--------|
 | 전역 변수 | 메소드 밖 (클래스 필드) | 객체가 살아있는 동안 |
 | 지역 변수 | 메소드 내부 또는 {} 내부 | 해당 영역이 종료될 때까지 |
 | 정적 변수(static) | static 키워드 사용 | 프로그램 실행부터 종료까지 |`
@@ -618,6 +977,9 @@ class B extends A {
     // A, B 필드 모두 사용 가능
 }
 \`\`\`
+
+- A: 부모 클래스, 상위 클래스, 슈퍼 클래스
+- B: 자식 클래스, 하위 클래스, 서브 클래스
 
 ## super()
 
@@ -995,6 +1357,8 @@ map.containsKey("apple");  // true
 
 ## 멀티 쓰레드 구현
 
+핵심: \`run()\` 메소드 재정의
+
 \`\`\`java
 // 방법 1: Thread 클래스 상속
 class MyThread extends Thread {
@@ -1062,7 +1426,7 @@ StringBuilder와 동일하지만 내부에 동기화 코드 포함.
 단일 쓰레드에서는 오히려 속도 저하 → **멀티 쓰레드 환경**에서 사용.
 
 | | String | StringBuilder | StringBuffer |
-|--|--------|---------------|--------------|
+|--|--------|---------------|______________|
 | 수정 가능 | ✕ (불변) | ✓ | ✓ |
 | 동기화 | - | ✕ | ✓ |
 | 권장 환경 | 변경 없는 경우 | 단일 쓰레드 | 멀티 쓰레드 |`
@@ -1152,6 +1516,93 @@ VO/DTO (결과 담기)
     ↓
 View (화면 출력)
 \`\`\``
+      },
+      {
+        slug: 'java-class-examples',
+        title: '클래스 실습 코드 예시',
+        date: '2025-01-29',
+        content: `## 전역 변수 vs 지역 변수 실습
+
+\`\`\`java
+class A {
+    // 전역 변수 — 프로그램 종료 시 메모리 해제, 자동 초기화
+    int data;
+
+    void printData() {
+        // 지역 변수 — 블록이 끝나면 메모리 해제, 직접 초기화 필요
+        int data = 10;
+
+        System.out.println(data);       // 지역 변수: 10
+        System.out.println(this.data);  // 전역 변수: 객체에 할당된 값
+        System.out.println(this);       // 객체 참조값(주소) 출력
+    }
+}
+
+public class ClassTest01 {
+    public static void main(String[] args) {
+        A a1 = new A();
+        A a2 = new A();
+
+        a1.data = 100;
+        a1.printData();  // 10, 100, 참조값
+
+        a2.data = 20;
+        a2.printData();  // 10, 20, 참조값
+    }
+}
+\`\`\`
+
+- \`this.data\`는 현재 객체의 전역 변수를 가리킨다.
+- \`this\`는 현재 객체 자신의 참조값(메모리 주소)이다.
+- \`a1\`과 \`a2\`는 서로 다른 객체이므로 \`data\` 값이 독립적이다.
+
+---
+
+## 생성자 오버로딩 실습
+
+\`\`\`java
+class Car {
+    String brand;
+    int price;
+    String color;
+
+    public Car() {}
+
+    public Car(String brand, int price, String color) {
+        this.brand = brand;
+        this.price = price;
+        this.color = color;
+    }
+
+    public Car(String brand, int price) {
+        this.brand = brand;
+        this.price = price;
+    }
+
+    public Car(String brand) {
+        this.brand = brand;
+    }
+
+    void printInfo() {
+        System.out.println(brand + ", " + price + ", " + color);
+    }
+}
+
+public class ClassTest02 {
+    public static void main(String[] args) {
+        Car mom   = new Car("Benz", 10000, "Black");
+        Car daddy = new Car("BMW");
+        Car myCar = new Car("Morning", 2000);
+
+        mom.printInfo();    // Benz, 10000, Black
+        daddy.printInfo();  // BMW, 0, null
+        myCar.printInfo();  // Morning, 2000, null
+    }
+}
+\`\`\`
+
+- 생성자를 여러 개 정의하면 매개변수 개수·타입에 따라 자동 선택된다.
+- 초기화하지 않은 전역 변수는 기본값(\`int → 0\`, \`String → null\`)이 자동 할당된다.`
       }
     ]
   },
@@ -1248,6 +1699,113 @@ a.jsp → web.xml → Front-Controller → Controller → DAO → DB
 - **DBCP**: 미리 Connection 객체를 만들어 두고 필요 시 꺼내 쓰는 커넥션 풀 기법. 요청마다 새 연결을 맺는 비용 절감.
 - **JNDI**: 디렉터리 서비스에서 외부 객체를 가져오기 위한 Java API
 - **MyBatis**: SQL문을 XML 파일에 분리하여 관리. 코드가 줄어들고 SQL 수정이 편해짐.`
+      },
+      {
+        slug: 'jsp-servlet-mvc-code',
+        title: 'JSP/서블릿 요청·응답 코드 예시',
+        date: '2025-02-11',
+        content: `## 기본 요청·응답 흐름 실습
+
+### 1. 입력 폼 (ex01.jsp)
+
+<pre><code>&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;form action="ex01" method="post"&gt;
+        &lt;input type="text" name="memberName"&gt;
+        &lt;button&gt;전송&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+### 2. 서블릿 (Ex01.java)
+
+\`\`\`java
+public class Ex01 extends HttpServlet {
+
+    // GET: 폼 페이지로 forward
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("/ex01.jsp").forward(req, resp);
+    }
+
+    // POST: 데이터 가공 후 redirect
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String memberName = req.getParameter("memberName");
+        memberName = memberName + "님";
+
+        resp.sendRedirect(req.getContextPath()
+            + "/ex01-result?memberName="
+            + URLEncoder.encode(memberName, "UTF-8"));
+    }
+}
+\`\`\`
+
+- **GET**: \`forward\`로 폼 JSP를 응답 → 경로 유지
+- **POST**: 데이터 가공 후 \`sendRedirect\` → 결과 페이지로 이동, 경로 변경
+
+### 3. 결과 페이지 (ex01-result.jsp)
+
+<pre><code>&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%&gt;
+&lt;body&gt;
+    &lt;h1&gt;&lt;%=request.getParameter("memberName")%&gt;&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+
+- \`<%= %>\`: JSP 표현식(Expression) — 값을 HTML에 출력할 때 사용
+
+---
+
+## Front Controller 패턴 코드 예시
+
+\`\`\`java
+public class MemberFrontController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String uri = req.getRequestURI();
+        String target = uri.substring(0, uri.lastIndexOf("."))
+                           .replace(req.getContextPath(), "");
+        Result result = null;
+
+        if (target.equals("/join")) {
+            result = new JoinController().execute(req, resp);
+        } else if (target.equals("/join-ok")) {
+            result = new JoinOkController().execute(req, resp);
+        } else if (target.equals("/login")) {
+            result = new LoginController().execute(req, resp);
+        } else if (target.equals("/login-ok")) {
+            result = new LoginOkController().execute(req, resp);
+        }
+
+        if (result != null) {
+            if (result.isRedirect()) {
+                resp.sendRedirect(result.getPath());
+            } else {
+                req.getRequestDispatcher(result.getPath()).forward(req, resp);
+            }
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        doGet(req, resp);
+    }
+}
+\`\`\`
+
+### 동작 원리
+
+1. \`web.xml\`의 URL 패턴(\`*.me\`)이 모든 요청을 \`MemberFrontController\`로 라우팅
+2. URI에서 확장자를 제거하고 \`target\` 문자열 추출
+3. \`target\`에 따라 기능별 \`Controller\`의 \`execute()\` 실행
+4. 반환된 \`Result\`의 \`isRedirect()\` 값에 따라 \`forward\` 또는 \`redirect\`로 응답
+5. \`doPost()\`는 \`doGet()\`을 재호출하여 GET/POST 동일 처리`
       }
     ]
   },
