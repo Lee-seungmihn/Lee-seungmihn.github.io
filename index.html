@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lee-seungmihn | Portfolio</title>
 
-    <!-- GitHub Pages SPA: restore redirect path -->
     <script>
         (function () {
             var p = sessionStorage.getItem('__spa_path');
@@ -13,23 +12,18 @@
         })();
     </script>
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/font.css">
     <link rel="stylesheet" href="assets/css/common.css">
     <link rel="stylesheet" href="assets/css/util.css">
     <link rel="stylesheet" href="assets/css/spa.css">
-
-    <!-- FontAwesome & Swiper -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
 
-    <!-- Mobile nav toggle -->
     <i class="fas fa-bars mobile-nav-toggle"></i>
 
-    <!-- Sidebar -->
     <header id="sidebar">
         <div class="d-flex flex-column">
             <div class="profile">
@@ -46,20 +40,16 @@
             <nav class="nav-menu">
                 <div class="nav-indicator"></div>
                 <ul>
-                    <li><a href="#hero" class="active"><i class="fas fa-home"></i> <span>Home</span></a></li>
-                    <li><a href="#about"><i class="fas fa-user"></i> <span>About</span></a></li>
-                    <li><a href="#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
-                    <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
-                    <li><a href="/learnmore" data-link><i class="fas fa-layer-group"></i> <span>Learn More</span></a></li>
+                    <li><a href="/" data-link><i class="fas fa-home"></i> <span>Home</span></a></li>
+                    <li><a href="/blog" data-link><i class="fas fa-pen-nib"></i> <span>Blog</span></a></li>
+                    <li><a href="/study" data-link><i class="fas fa-graduation-cap"></i> <span>Study</span></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Portfolio -->
     <main id="main">
 
-        <!-- Hero Section -->
         <section id="hero">
             <div class="hero-container">
                 <h1>Lee-seungmihn</h1>
@@ -71,7 +61,6 @@
             </a>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="about">
             <div class="container">
                 <div class="section-title">
@@ -91,7 +80,6 @@
             </a>
         </section>
 
-        <!-- Resume Section -->
         <section id="resume" class="resume section-bg">
             <div class="container">
                 <div class="section-title">
@@ -140,7 +128,6 @@
             </a>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="contact section-bg">
             <div class="container">
                 <div class="section-title">
@@ -176,7 +163,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer id="footer">
             <div class="container text-center">
                 <div class="copyright">
@@ -186,16 +172,11 @@
         </footer>
     </main>
 
-    <!-- SPA Root -->
     <div id="spa-root"></div>
-
     <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
-    <!-- Vendors -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
-
-    <!-- Scripts -->
     <script src="assets/js/layout.js"></script>
     <script src="assets/js/service.js"></script>
     <script src="assets/js/event.js"></script>

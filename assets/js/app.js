@@ -1,14 +1,11 @@
-import { mount }             from './vdom.js';
-import { router }             from './router.js';
-import { BlogList, BlogPost } from './pages/blog.js';
+import { mount }              from './vdom.js';
+import { router }              from './router.js';
+import { BlogList, BlogPost }  from './pages/blog.js';
 import { StudyHome, StudyCat } from './pages/study.js';
-import { LearnMore }          from './pages/learnmore.js';
 
 const spaRoot  = document.getElementById('spa-root');
 const main     = document.getElementById('main');
 const navLinks = [...document.querySelectorAll('.nav-menu a')];
-
-// ─── View switching ───────────────────────────────────────────────────────
 
 function showSPA(title) {
   main.style.display    = 'none';
@@ -28,23 +25,20 @@ function showPortfolio() {
 function _updateNav(path) {
   navLinks.forEach(a => {
     const href = a.getAttribute('href') || '';
-    const isSpa = href.startsWith('/') && !href.startsWith('/#');
-    const active = isSpa ? path.startsWith(href) : path === '/' && href === '#hero';
+    const isSpa = href.startsWith('/') && href !== '/';
+    const active = isSpa
+      ? path.startsWith(href)
+      : path === '/' && href === '/';
     a.classList.toggle('active', active);
   });
 }
 
-// ─── Routes ───────────────────────────────────────────────────────────────────
-
 router
-  .on('/',           ()         => showPortfolio())
-  .on('/learnmore',  ()         => { showSPA('Learn More'); mount(spaRoot, LearnMore()); })
-  .on('/blog',       ()         => { showSPA('Blog');       mount(spaRoot, BlogList()); })
-  .on('/blog/:slug', ({slug})   => { showSPA('Blog');       mount(spaRoot, BlogPost(slug)); })
-  .on('/study',      ()         => { showSPA('Study');      mount(spaRoot, StudyHome()); })
-  .on('/study/:cat', ({cat})    => { showSPA('Study');      mount(spaRoot, StudyCat(cat)); });
-
-// ─── Click interception ──────────────────────────────────────────────────
+  .on('/',           ()        => showPortfolio())
+  .on('/blog',       ()        => { showSPA('Blog');  mount(spaRoot, BlogList()); })
+  .on('/blog/:slug', ({slug})  => { showSPA('Blog');  mount(spaRoot, BlogPost(slug)); })
+  .on('/study',      ()        => { showSPA('Study'); mount(spaRoot, StudyHome()); })
+  .on('/study/:cat', ({cat})   => { showSPA('Study'); mount(spaRoot, StudyCat(cat)); });
 
 document.addEventListener('click', e => {
   const a = e.target.closest('a');
@@ -62,8 +56,6 @@ document.addEventListener('click', e => {
     router.push('/');
   }
 }, true);
-
-// ─── Back-to-top (SPA) ────────────────────────────────────────────────────
 
 window.addEventListener('scroll', () => {
   if (location.pathname === '/') return;
