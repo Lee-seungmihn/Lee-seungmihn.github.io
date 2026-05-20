@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script>
+    var p = location.pathname;
+    if (p && p !== '/') {
+      sessionStorage.setItem('__spa_path', p + location.search);
+      location.replace('/');
+    }
+  </script>
+</head>
+<body></body>
+</html>

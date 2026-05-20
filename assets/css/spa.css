@@ -1,0 +1,412 @@
+/* spa.css — Blog & Study page styles
+   Design tokens match common.css (--primary-bg, --accent-color, etc.)
+*/
+
+/* ─── SPA Root container ─────────────────────────────────────────────────── */
+
+#spa-root {
+  display: none;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  padding: 60px 60px 100px;
+}
+
+@media (max-width: 1199px) {
+  #spa-root { margin-left: 0; padding: 40px 30px 80px; }
+}
+@media (max-width: 768px) {
+  #spa-root { padding: 30px 20px 60px; }
+}
+
+/* ─── Page Layout ─────────────────────────────────────────────────────────── */
+
+.spa-page { max-width: 900px; margin: 0 auto; }
+
+.spa-page-header {
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 40px;
+}
+
+.spa-page-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.spa-page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+.spa-page-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 16px;
+}
+
+/* ─── Back Button ─────────────────────────────────────────────────────────── */
+
+.spa-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  transition: all 0.25s;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+.spa-back-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* ─── Filter Bar ──────────────────────────────────────────────────────────── */
+
+.spa-filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.spa-filter-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 7px 18px;
+  border-radius: 30px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.25s;
+  letter-spacing: 0.3px;
+}
+
+.spa-filter-btn:hover,
+.spa-filter-btn.active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: rgba(255, 239, 192, 0.08);
+}
+
+/* ─── Blog Post Grid ──────────────────────────────────────────────────────── */
+
+.spa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .spa-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Post Card ───────────────────────────────────────────────────────────── */
+
+.spa-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 28px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.spa-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.spa-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.spa-card:hover::before { border-color: var(--accent-color); }
+
+.spa-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.spa-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+.spa-card-excerpt {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Tag & Chip ──────────────────────────────────────────────────────────── */
+
+.spa-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(255, 239, 192, 0.12);
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+.spa-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.spa-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── Blog Post Detail ────────────────────────────────────────────────────── */
+
+.spa-post { max-width: 720px; }
+
+.spa-post-header {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.spa-post-header .spa-card-meta { margin-bottom: 18px; }
+
+.spa-post-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent-color);
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+/* ─── Markdown rendered content ───────────────────────────────────────────── */
+
+.spa-post-content {
+  line-height: 1.85;
+  color: var(--text-main);
+  font-size: 15.5px;
+}
+
+.spa-post-content h1,
+.spa-post-content h2,
+.spa-post-content h3,
+.spa-post-content h4 {
+  color: var(--accent-color);
+  margin: 2em 0 0.7em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.spa-post-content h1 { font-size: 24px; }
+.spa-post-content h2 { font-size: 20px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+.spa-post-content h3 { font-size: 17px; }
+
+.spa-post-content p    { margin-bottom: 1.2em; }
+.spa-post-content ul,
+.spa-post-content ol   { margin: 0.8em 0 1.2em 1.5em; }
+.spa-post-content li   { margin-bottom: 0.4em; }
+
+.spa-post-content a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.spa-post-content code {
+  background: rgba(255, 239, 192, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.88em;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #f0c040;
+}
+
+.spa-post-content pre {
+  background: #1a1a1a;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.spa-post-content pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #d4d4d4;
+  font-size: 0.9em;
+}
+
+.spa-post-content blockquote {
+  border-left: 3px solid var(--accent-color);
+  padding: 8px 20px;
+  margin: 1.5em 0;
+  background: rgba(255, 239, 192, 0.04);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.spa-post-content hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2.5em 0;
+}
+
+/* ─── Study Grid ──────────────────────────────────────────────────────────── */
+
+.spa-study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .spa-study-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.spa-study-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.spa-study-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.spa-study-icon {
+  font-size: 40px;
+  color: var(--accent-color);
+  margin-bottom: 14px;
+}
+
+.spa-study-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 6px;
+}
+
+.spa-study-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── Study category header ───────────────────────────────────────────────── */
+
+.spa-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.spa-cat-icon {
+  font-size: 44px;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+/* ─── Study entry list ────────────────────────────────────────────────────── */
+
+.spa-study-list { display: flex; flex-direction: column; gap: 40px; }
+
+.spa-study-entry {
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  background: var(--bg-light);
+}
+
+.spa-study-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.spa-study-entry-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.spa-study-entry-header time {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ─── Empty State ─────────────────────────────────────────────────────────── */
+
+.spa-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 16px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.spa-empty-state i  { font-size: 48px; opacity: 0.5; }
+.spa-empty-state p  { font-size: 15px; }
+.spa-empty-state small { font-size: 12px; opacity: 0.6; }
+
+/* ─── Nav: hide indicator on SPA pages ───────────────────────────────────── */
+
+html:not(.full-page-active) .nav-indicator { display: none !important; }
