@@ -22,7 +22,7 @@ class Router {
   on(pattern, fn) {
     const keys = [];
     const re = new RegExp(
-      '^' + pattern.replace(/:(\.+)/g, (_, k) => (keys.push(k), '([^/]+)')) + '/?$'
+      '^' + pattern.replace(/:([\w]+)/g, (_, k) => (keys.push(k), '([^/]+)')) + '/?$'
     );
     this._routes.push({ re, keys, fn });
     return this;
