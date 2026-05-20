@@ -47,6 +47,13 @@ export function StudyCat(catKey) {
     )
   );
 
+  const switchTab = (index) => {
+    document.querySelectorAll('.spa-study-tab-panel')
+      .forEach((p, i) => { p.style.display = i === index ? '' : 'none'; });
+    document.querySelectorAll('.spa-study-tab-btn')
+      .forEach((t, i) => { t.classList.toggle('active', i === index); });
+  };
+
   return h('div', { class: 'spa-page' },
     h('button', { class: 'spa-back-btn', '@click': back }, '← Study'),
 
@@ -63,14 +70,27 @@ export function StudyCat(catKey) {
     ),
 
     cat.entries.length > 0
-      ? h('div', { class: 'spa-study-list' },
-          ...cat.entries.map(entry =>
-            h('article', { class: 'spa-study-entry' },
-              h('div', { class: 'spa-study-entry-header' },
-                h('h3', { class: 'spa-study-entry-title' }, entry.title),
-                h('time', {}, entry.date)
-              ),
-              h('div', { class: 'spa-post-content', html: window.marked.parse(entry.content) })
+      ? h('div', {},
+          h('div', { class: 'spa-filter-bar' },
+            ...cat.entries.map((entry, i) =>
+              h('button', {
+                class: 'spa-study-tab-btn spa-filter-btn' + (i === 0 ? ' active' : ''),
+                '@click': () => switchTab(i)
+              }, entry.title)
+            )
+          ),
+          h('div', {},
+            ...cat.entries.map((entry, i) =>
+              h('article', {
+                class: 'spa-study-tab-panel spa-study-entry',
+                style: i === 0 ? {} : { display: 'none' }
+              },
+                h('div', { class: 'spa-study-entry-header' },
+                  h('h3', { class: 'spa-study-entry-title' }, entry.title),
+                  h('time', {}, entry.date)
+                ),
+                h('div', { class: 'spa-post-content', html: window.marked.parse(entry.content) })
+              )
             )
           )
         )
