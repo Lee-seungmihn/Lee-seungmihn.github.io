@@ -1,5 +1,5 @@
 /**
- * layout.js — Navigation & Mobile controls (full-page 제거)
+ * layout.js — Navigation & Mobile controls
  */
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -9,21 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return all ? [...document.querySelectorAll(el)] : document.querySelector(el);
     };
 
-    const sections  = select('main#main > section', true);
     const navLinks  = select('.nav-menu a', true);
     const backToTop = select('.back-to-top');
 
-    // ─── 스크롤 기반 활성 네비 ─────────────────────────────────────
+    // ─── 스크롤 시 Home 활성 유지 ──────────────────────────────────
+    // 홈 페이지의 모든 섹션(hero/about/resume/contact)은 Home 항목에 속함
     const updateActiveNav = () => {
         if (location.pathname !== '/') return;
-        const mid = window.scrollY + window.innerHeight * 0.4;
-        sections.forEach(sec => {
-            if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
-                navLinks.forEach(a => {
-                    const id = (a.getAttribute('href') || '').replace('#', '');
-                    a.classList.toggle('active', id === sec.id);
-                });
-            }
+        navLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '/');
         });
     };
 
@@ -32,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (backToTop) backToTop.classList.toggle('active', window.scrollY > 300);
     });
 
-    // ─── 앵커 클릭 → 스스 스크롤 ─────────────────────────────
+    // ─── 앵커 클릭 → 부드러운 스크롤 ────────────────────────────────
     document.addEventListener('click', e => {
         const link = e.target.closest('a');
         if (!link || !link.hash || link.dataset.link !== undefined) return;
@@ -46,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ─── 모바일 네비 토글 ───────────────────────────────────────
+    // ─── 모바일 네비 토글 ───────────────────────────────────────────
     const controlToggle = () => {
         const btn = select('.mobile-nav-toggle');
         if (!btn) return;
