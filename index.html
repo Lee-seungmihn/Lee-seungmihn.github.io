@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko" class="full-page-active">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lee-seungmihn | Full Page Portfolio</title>
+    <title>Lee-seungmihn | Portfolio</title>
 
-    <!-- GitHub Pages SPA: restore redirect path + disable full-page on non-root -->
+    <!-- GitHub Pages SPA: restore redirect path -->
     <script>
         (function () {
             var p = sessionStorage.getItem('__spa_path');
             if (p) { sessionStorage.removeItem('__spa_path'); history.replaceState(null, '', p); }
-            if (location.pathname !== '/' && location.pathname !== '/index.html') {
-                document.documentElement.classList.remove('full-page-active');
-            }
         })();
     </script>
 
@@ -52,16 +49,14 @@
                     <li><a href="#hero" class="active"><i class="fas fa-home"></i> <span>Home</span></a></li>
                     <li><a href="#about"><i class="fas fa-user"></i> <span>About</span></a></li>
                     <li><a href="#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
-                    <li><a href="#materials"><i class="fas fa-book"></i> <span>Materials</span></a></li>
                     <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
-                    <li><a href="/blog" data-link><i class="fas fa-pen-nib"></i> <span>Blog</span></a></li>
-                    <li><a href="/study" data-link><i class="fas fa-graduation-cap"></i> <span>Study</span></a></li>
+                    <li><a href="/learnmore" data-link><i class="fas fa-layer-group"></i> <span>Learn More</span></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Portfolio (shown only on /) -->
+    <!-- Portfolio -->
     <main id="main">
 
         <!-- Hero Section -->
@@ -139,86 +134,6 @@
                     </div>
                 </div>
             </div>
-            <a href="#materials" class="scroll-down">
-                <div class="mouse"></div>
-                <span>WORKS</span>
-            </a>
-        </section>
-
-        <!-- Materials Section -->
-        <section id="materials" class="materials">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Materials</h2>
-                </div>
-                <div class="swiper materials-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fab fa-html5"></i></div>
-                                <h4>HTML</h4>
-                                <p>마크업 구조 및 시맨틱 태그</p>
-                                <a href="/study/html" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fab fa-css3-alt"></i></div>
-                                <h4>CSS</h4>
-                                <p>선택자·캐스케이딩·레이아웃</p>
-                                <a href="/study/css" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fab fa-js"></i></div>
-                                <h4>JavaScript</h4>
-                                <p>DOM 조작 및 ES6+ 문법</p>
-                                <a href="/study/js" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fab fa-java"></i></div>
-                                <h4>Java</h4>
-                                <p>OOP 개념 및 컬렉션 프레임워크</p>
-                                <a href="/study/java" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fas fa-server"></i></div>
-                                <h4>JSP</h4>
-                                <p>서블릿·JSTL·MVC 패턴</p>
-                                <a href="/study/jsp" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fas fa-database"></i></div>
-                                <h4>MySQL</h4>
-                                <p>DB 설계 및 쿼리 최적화</p>
-                                <a href="/study/mysql" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="material-card">
-                                <div class="card-icon"><i class="fab fa-git-alt"></i></div>
-                                <h4>Git</h4>
-                                <p>버전 관리 및 브랜치 전략</p>
-                                <a href="/study/git" class="view-more" data-link>VIEW</a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="/study" class="material-card see-more-card" data-link>
-                                <div class="card-icon"><i class="fas fa-arrow-right"></i></div>
-                                <h4>전체 보기</h4>
-                                <p>모든 학습 자료 확인</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <a href="#contact" class="scroll-down">
                 <div class="mouse"></div>
                 <span>CONTACT</span>
@@ -271,7 +186,7 @@
         </footer>
     </main>
 
-    <!-- SPA Root (Blog / Study pages render here) -->
+    <!-- SPA Root -->
     <div id="spa-root"></div>
 
     <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
@@ -280,12 +195,10 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 
-    <!-- Portfolio scripts (existing) -->
+    <!-- Scripts -->
     <script src="assets/js/layout.js"></script>
     <script src="assets/js/service.js"></script>
     <script src="assets/js/event.js"></script>
-
-    <!-- SPA entry point (module — runs after above scripts) -->
     <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

@@ -1,196 +1,74 @@
 /**
- * Layout.js - Golden Dew Style FullPage Controller
+ * layout.js — Navigation & Mobile controls (full-page 제거)
  */
 document.addEventListener('DOMContentLoaded', () => {
-    "use strict";
+    'use strict';
 
     const select = (el, all = false) => {
         el = el.trim();
-        if (all) return [...document.querySelectorAll(el)];
-        return document.querySelector(el);
+        return all ? [...document.querySelectorAll(el)] : document.querySelector(el);
     };
 
-    const mainContent = select('#main');
-    const sections = select('main#main > section', true);
-    const footer = select('#footer');
-    const navLinks = select('.nav-menu a', true);
-    const indicator = select('.nav-indicator');
-
+    const sections  = select('main#main > section', true);
+    const navLinks  = select('.nav-menu a', true);
     const backToTop = select('.back-to-top');
-    let currentIdx = 0;
-    let isScrolling = false;
-    let isFooterVisible = false;
 
-    /**
-     * 섹션 index → translateY 값 계산
-     * offsetTop 대신 index * innerHeight를 사용해 브라우저의 hash 앵커 스크롤 영향을 차단
-     */
-    const sectionY = (index) => index * window.innerHeight;
-
-    /**
-     * 1. Core Scroll Logic
-     */
-    const moveToIndex = (index, toFooter = false, immediate = false) => {
-        if (!document.documentElement.classList.contains('full-page-active')) return;
-        if (isScrolling && !immediate) return;
-
-        if (toFooter) {
-            const targetPos = sectionY(sections.length - 1) + (footer ? footer.offsetHeight : 0);
-
-            if (!immediate) mainContent.style.transition = 'transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-            else mainContent.style.transition = 'margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-
-            mainContent.style.transform = `translateY(-${targetPos}px)`;
-            isFooterVisible = true;
-        } else {
-            if (index < 0 || index >= sections.length) return;
-            currentIdx = index;
-
-            if (!immediate) mainContent.style.transition = 'transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-            else mainContent.style.transition = 'margin-left 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)';
-
-            mainContent.style.transform = `translateY(-${sectionY(currentIdx)}px)`;
-            isFooterVisible = false;
-            updateActiveMenu();
-        }
-
-        if (backToTop) {
-            if (currentIdx > 0 || toFooter) backToTop.classList.add('active');
-            else backToTop.classList.remove('active');
-        }
-
-        if (!immediate) {
-            isScrolling = true;
-            setTimeout(() => { isScrolling = false; }, 1000);
-        }
-    };
-
-    /**
-     * 2. Active Menu & Indicator Update
-     */
-    const updateActiveMenu = () => {
-        const currentSection = sections[currentIdx];
-        if (!currentSection) return;
-        const currentId = currentSection.id;
-
-        navLinks.forEach(link => {
-            const linkId = link.hash.replace('#', '');
-            if (linkId === currentId) {
-                link.classList.add('active');
-                updateIndicator(link);
-            } else {
-                link.classList.remove('active');
+    // ─── 스크롤 기반 활성 네비 ─────────────────────────────────────
+    const updateActiveNav = () => {
+        if (location.pathname !== '/') return;
+        const mid = window.scrollY + window.innerHeight * 0.4;
+        sections.forEach(sec => {
+            if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
+                navLinks.forEach(a => {
+                    const id = (a.getAttribute('href') || '').replace('#', '');
+                    a.classList.toggle('active', id === sec.id);
+                });
             }
         });
     };
 
-    const updateIndicator = (activeLink) => {
-        if (!indicator || !activeLink) return;
-        const navMenu = select('.nav-menu');
-        const linkRect = activeLink.getBoundingClientRect();
-        const menuRect = navMenu.getBoundingClientRect();
-
-        indicator.style.display = 'block';
-        indicator.style.top = (linkRect.top - menuRect.top) + "px";
-        indicator.style.height = linkRect.height + "px";
-    };
-
-    /**
-     * 3. Event Listeners
-     */
-    window.addEventListener('wheel', (e) => {
-        if (!document.documentElement.classList.contains('full-page-active')) return;
-        e.preventDefault();
-        if (isScrolling) return;
-
-        if (e.deltaY > 0) {
-            if (currentIdx === sections.length - 1 && !isFooterVisible) moveToIndex(currentIdx, true);
-            else if (!isFooterVisible) moveToIndex(currentIdx + 1);
-        } else {
-            if (isFooterVisible) moveToIndex(sections.length - 1, false);
-            else moveToIndex(currentIdx - 1);
-        }
-    }, { passive: false });
-
-    const controlToggleBtn = () => {
-        const toggleBtn = select('.mobile-nav-toggle');
-        if (!toggleBtn) return;
-        if (window.innerWidth <= 1199) {
-            toggleBtn.classList.add('visible');
-        } else {
-            toggleBtn.classList.remove('visible');
-            select('body').classList.remove('mobile-nav-active');
-            // PC 크기로 바뀌면 아이콘 초기화
-            toggleBtn.classList.remove('fa-xmark');
-            toggleBtn.classList.add('fa-bars');
-        }
-    };
-
-    window.addEventListener('resize', () => {
-        controlToggleBtn();
-
-        if (window.innerWidth > 1199) {
-            document.documentElement.classList.add('full-page-active');
-            window.scrollTo(0, 0);
-            moveToIndex(currentIdx, isFooterVisible, true);
-        } else {
-            document.documentElement.classList.remove('full-page-active');
-            mainContent.style.transform = 'none';
-            window.scrollTo(0, sectionY(currentIdx));
-        }
+    window.addEventListener('scroll', () => {
+        updateActiveNav();
+        if (backToTop) backToTop.classList.toggle('active', window.scrollY > 300);
     });
 
-    document.addEventListener('click', (e) => {
+    // ─── 앵커 클릭 → 스스 스크롤 ─────────────────────────────
+    document.addEventListener('click', e => {
         const link = e.target.closest('a');
-        if (!link || !link.hash || link.getAttribute('href').includes('.html')) return;
-
-        const targetId = link.hash.replace('#', '');
-        const targetIdx = sections.findIndex(s => s.id === targetId);
-
-        if (targetIdx !== -1) {
+        if (!link || !link.hash || link.dataset.link !== undefined) return;
+        const href = link.getAttribute('href') || '';
+        if (!href.startsWith('#')) return;
+        const target = document.getElementById(href.replace('#', ''));
+        if (target && target.closest('#main')) {
             e.preventDefault();
-            moveToIndex(targetIdx, false);
+            target.scrollIntoView({ behavior: 'smooth' });
             if (window.innerWidth <= 1199) select('body').classList.remove('mobile-nav-active');
         }
     });
 
-    window.addEventListener('load', () => {
-        controlToggleBtn();
-
-        if (window.innerWidth > 1199) {
-            const hash = window.location.hash.replace('#', '');
-            const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
-
-            // 브라우저 hash 앵커 스크롤을 transform으로 직접 상쇄
-            // scrollTo 대신 scrollY만큼 보정한 transform을 적용
-            const scrollOffset = window.scrollY || document.documentElement.scrollTop || 0;
-            if (targetIdx > 0) {
-                mainContent.style.transition = 'none';
-                mainContent.style.transform = `translateY(-${sectionY(targetIdx) - scrollOffset}px)`;
-                // 다음 프레임에서 scroll 리셋 + 최종 transform 확정
-                requestAnimationFrame(() => {
-                    window.scrollTo(0, 0);
-                    requestAnimationFrame(() => {
-                        moveToIndex(targetIdx, false, true);
-                    });
-                });
-            } else {
-                updateActiveMenu();
-            }
+    // ─── 모바일 네비 토글 ───────────────────────────────────────
+    const controlToggle = () => {
+        const btn = select('.mobile-nav-toggle');
+        if (!btn) return;
+        if (window.innerWidth <= 1199) {
+            btn.classList.add('visible');
         } else {
-            const hash = window.location.hash.replace('#', '');
-            const targetIdx = hash ? sections.findIndex(s => s.id === hash) : -1;
-            if (targetIdx > 0) window.scrollTo(0, sectionY(targetIdx));
+            btn.classList.remove('visible');
+            select('body').classList.remove('mobile-nav-active');
+            btn.classList.remove('fa-xmark');
+            btn.classList.add('fa-bars');
         }
-    });
+    };
 
-    const mobileToggle = select('.mobile-nav-toggle');
-    if (mobileToggle) {
-        mobileToggle.addEventListener('click', function () {
+    window.addEventListener('resize', controlToggle);
+    window.addEventListener('load', () => { controlToggle(); updateActiveNav(); });
+
+    const toggle = select('.mobile-nav-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', function () {
             select('body').classList.toggle('mobile-nav-active');
-            const icon = this.querySelector('i') || this;
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-xmark');
+            this.classList.toggle('fa-bars');
+            this.classList.toggle('fa-xmark');
         });
     }
 });
