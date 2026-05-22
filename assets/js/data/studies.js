@@ -461,7 +461,392 @@ block 요소인 \`div\`로 레이아웃 구역을 구분하고, inline 요소인
   css: {
     title: 'CSS',
     icon: 'fab fa-css3-alt',
-    entries: []
+    entries: [
+      {
+        slug: 'css-color-font',
+        title: '색상 · 폰트',
+        date: '2025-01-06',
+        content: `## 색상 (Color)
+
+\`\`\`css
+color: red;               /* 키워드 */
+color: #ff0000;           /* HEX */
+color: rgb(255, 0, 0);    /* RGB */
+color: rgba(255, 0, 0, 0.5); /* RGBA — 투명도 */
+color: hsl(0, 100%, 50%); /* HSL */
+
+background-color: #ffefc0;
+background-color: transparent;
+\`\`\`
+
+## 폰트 (Font)
+
+\`\`\`css
+font-family: 'Pretendard', sans-serif;
+font-size: 16px;         /* 기본값 */
+font-size: 1rem;         /* root em — 기본 16px 기준 */
+font-size: 1.2em;        /* 부모 요소 기준 */
+font-weight: 400;        /* normal */
+font-weight: 700;        /* bold */
+font-style: italic;
+line-height: 1.6;        /* 줄 간격 (단위 없는 배수 권장) */
+letter-spacing: 0.05em;  /* 자간 */
+text-align: left | center | right | justify;
+text-decoration: none | underline | line-through;
+text-transform: uppercase | lowercase | capitalize;
+\`\`\`
+
+## 웹 폰트
+
+\`\`\`css
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* 로컬 폰트 */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+\`\`\`
+
+## 텍스트 관련
+
+\`\`\`css
+white-space: nowrap;       /* 줄바꿈 방지 */
+word-break: break-all;     /* 단어 중간에서도 줄바꿈 */
+overflow-wrap: break-word; /* 단어 단위로 줄바꿈 */
+\`\`\``
+      },
+      {
+        slug: 'css-background',
+        title: '배경 (Background)',
+        date: '2025-01-07',
+        content: `## background 속성
+
+\`\`\`css
+background-color: #fff;
+background-image: url('../img/bg.png');
+background-repeat: no-repeat | repeat | repeat-x | repeat-y;
+background-size: cover;    /* 비율 유지, 영역 채움 */
+background-size: contain;  /* 비율 유지, 영역 안에 맞춤 */
+background-position: center center;
+background-attachment: fixed; /* 스크롤해도 고정 — 패럴렉스 효과 */
+\`\`\`
+
+## 단축 속성 (shorthand)
+
+\`\`\`css
+/* color image repeat position / size */
+background: #fff url('../img/bg.png') no-repeat center / cover;
+\`\`\`
+
+## 그라디언트
+
+\`\`\`css
+/* 선형 */
+background: linear-gradient(to right, #ff6b6b, #ffefc0);
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+/* 원형 */
+background: radial-gradient(circle, #ffefc0, #ff6b6b);
+\`\`\``
+      },
+      {
+        slug: 'css-display',
+        title: 'Display · Flexbox · Grid',
+        date: '2025-01-08',
+        content: `## display 기본값
+
+| 값 | 설명 |
+|---|---|
+| \`block\` | 너비 100%, 줄바꿈 발생 (div, p, h1~h6) |
+| \`inline\` | 콘텐츠 크기, 줄바꿈 없음, width/height 무시 (span, a) |
+| \`inline-block\` | 줄바꿈 없음 + width/height 적용 가능 |
+| \`none\` | 화면에서 완전히 제거 (공간도 없앰) |
+| \`flex\` | 플렉스 컨테이너 |
+| \`grid\` | 그리드 컨테이너 |
+
+## Flexbox
+
+\`\`\`css
+.container {
+  display: flex;
+  flex-direction: row | column | row-reverse | column-reverse;
+  justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+  align-items: flex-start | flex-end | center | stretch | baseline;
+  flex-wrap: nowrap | wrap;
+  gap: 16px;
+  gap: 16px 8px; /* row-gap column-gap */
+}
+
+.item {
+  flex: 1;           /* flex-grow: 1 */
+  flex: 0 0 200px;   /* 고정 200px */
+  align-self: center; /* 개별 정렬 */
+  order: 1;          /* 순서 변경 */
+}
+\`\`\`
+
+## CSS Grid
+
+\`\`\`css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;    /* 3열: 1:2:1 비율 */
+  grid-template-columns: repeat(3, 1fr); /* 균등 3열 */
+  gap: 16px;
+}
+
+.item {
+  grid-column: 1 / 3; /* 1번~3번 라인 (2열 차지) */
+  grid-row: 1 / 2;
+}
+\`\`\``
+      },
+      {
+        slug: 'css-position',
+        title: 'Position (위치)',
+        date: '2025-01-09',
+        content: `## position 속성
+
+| 값 | 기준 | 설명 |
+|---|---|---|
+| \`static\` | 없음 | 기본값, top/left 무시 |
+| \`relative\` | 자기 자신의 원래 위치 | 주변 요소에 영향 없이 이동 |
+| \`absolute\` | 가장 가까운 position 부모 | 문서 흐름에서 벗어남 |
+| \`fixed\` | 뷰포트 (브라우저 창) | 스크롤해도 고정 |
+| \`sticky\` | 스크롤 기준 | 특정 지점까지 relative, 이후 fixed |
+
+## 예시
+
+\`\`\`css
+/* 부모 relative + 자식 absolute — 자주 쓰는 패턴 */
+.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* 화면 정중앙 배치 */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* sticky 헤더 */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+\`\`\`
+
+## z-index
+
+\`\`\`css
+/* position이 static이 아닌 요소에만 적용 */
+.overlay { z-index: 100; }
+.modal   { z-index: 200; }
+.tooltip { z-index: 300; }
+\`\`\``
+      },
+      {
+        slug: 'css-overflow-ellipsis',
+        title: 'Overflow · 말줄임 처리',
+        date: '2025-01-10',
+        content: `## overflow
+
+\`\`\`css
+overflow: visible; /* 기본값 — 넘쳐도 보임 */
+overflow: hidden;  /* 넘치는 내용 잘라냄 */
+overflow: scroll;  /* 항상 스크롤바 표시 */
+overflow: auto;    /* 넘칠 때만 스크롤바 표시 */
+
+overflow-x: hidden;
+overflow-y: auto;
+\`\`\`
+
+## 1줄 말줄임 (...)
+
+\`\`\`css
+.ellipsis {
+  white-space: nowrap;     /* 줄바꿈 방지 */
+  overflow: hidden;         /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;  /* ... 표시 */
+}
+\`\`\`
+
+## 2줄 말줄임 (-webkit-line-clamp)
+
+\`\`\`css
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;   /* 줄 수 지정 */
+  overflow: hidden;
+}
+\`\`\`
+
+> 모던 브라우저 모두 지원. \`-webkit-\` 접두사는 여전히 필요.
+
+## 스크롤바 커스터마이징
+
+\`\`\`css
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: #f1f1f1; }
+::-webkit-scrollbar-thumb  { background: #888; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+\`\`\``
+      },
+      {
+        slug: 'css-media',
+        title: '@media 미디어 쿼리',
+        date: '2025-01-11',
+        content: `## 미디어 쿼리 문법
+
+\`\`\`css
+@media (조건) {
+  /* 조건에 맞을 때 적용 */
+}
+\`\`\`
+
+## 주요 중단점 (breakpoints)
+
+\`\`\`css
+/* 모바일 우선 (mobile-first) */
+/* 기본: 모바일 스타일 */
+
+@media (min-width: 768px) {
+  /* 태블릿 이상 */
+}
+
+@media (min-width: 1024px) {
+  /* 데스크탑 이상 */
+}
+
+/* 데스크탑 우선 (desktop-first) */
+@media (max-width: 1023px) {
+  /* 태블릿 이하 */
+}
+
+@media (max-width: 767px) {
+  /* 모바일 이하 */
+}
+\`\`\`
+
+## 예시: 반응형 그리드
+
+\`\`\`css
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1023px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .grid { grid-template-columns: 1fr; gap: 16px; }
+}
+\`\`\`
+
+## 기타 미디어 타입
+
+\`\`\`css
+@media print {
+  .no-print { display: none; }
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: #121212; color: #fff; }
+}
+
+@media (orientation: landscape) { /* 가로 방향 */ }
+\`\`\``
+      },
+      {
+        slug: 'css-pseudo',
+        title: '가상 요소 · 가상 클래스 선택자',
+        date: '2025-01-12',
+        content: `## 가상 요소 (Pseudo-elements) — ::
+
+요소의 특정 부분을 선택해 스타일링.
+
+\`\`\`css
+/* ::before — 요소 앞에 내용 삽입 */
+.title::before {
+  content: '★ ';  /* content 필수 */
+  color: #ffefc0;
+}
+
+/* ::after — 요소 뒤에 내용 삽입 */
+.price::after {
+  content: '원';
+}
+
+/* 장식용 (빈 content) */
+.divider::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #ffefc0;
+  margin-top: 8px;
+}
+
+p::first-letter { font-size: 2em; }  /* 첫 글자 */
+p::first-line   { font-weight: bold; } /* 첫 줄 */
+
+::selection {
+  background: #ffefc0;
+  color: #000;
+}
+\`\`\`
+
+## 가상 클래스 (Pseudo-classes) — :
+
+요소의 상태나 위치에 따라 스타일링.
+
+\`\`\`css
+a:link    { color: blue; }
+a:visited { color: purple; }
+a:hover   { color: red; }
+a:active  { color: orange; }
+
+input:focus    { outline: 2px solid #ffefc0; }
+input:disabled { opacity: 0.5; }
+input:checked + label { color: green; }
+\`\`\`
+
+## 구조적 가상 클래스 (Structural)
+
+\`\`\`css
+li:first-child  { border-top: none; }
+li:last-child   { border-bottom: none; }
+
+li:nth-child(2)     { color: red; }     /* 2번째 */
+li:nth-child(odd)   { background: #f5f5f5; } /* 홀수 */
+li:nth-child(even)  { background: #fff; }    /* 짝수 */
+li:nth-child(3n)    { color: blue; }    /* 3의 배수 */
+li:nth-child(3n+1)  { font-weight: bold; } /* 1,4,7,... */
+
+p:nth-of-type(2)    { color: red; }    /* 같은 태그 타입 기준 2번째 */
+
+p:only-child        { text-align: center; } /* 유일한 자식 */
+div:empty           { display: none; }      /* 자식 없는 요소 */
+
+li:not(:last-child) { border-bottom: 1px solid #eee; } /* 부정 선택자 */
+\`\`\``
+      }
+    ]
   },
   js: {
     title: 'JavaScript',
@@ -2131,7 +2516,278 @@ delete from [테이블명] where [조건식];
   git: {
     title: 'Git',
     icon: 'fab fa-git-alt',
-    entries: []
+    entries: [
+      {
+        slug: 'git-install-init',
+        title: 'Git 설치 · 초기 설정',
+        date: '2025-07-01',
+        content: `## Git Bash 설치
+
+1. [git-scm.com](https://git-scm.com/downloads) 에서 다운로드
+2. 설치 옵션: **Git Bash Here** 체크 (탐색기 우클릭 메뉴에 추가됨)
+3. 줄바꿈 설정: \`Checkout Windows-style, commit Unix-style line endings\` 권장
+
+## 최초 사용자 설정
+
+\`\`\`bash
+git config --global user.name "이름"
+git config --global user.email "이메일@주소.com"
+
+# 설정 확인
+git config --list
+git config user.name
+\`\`\`
+
+## git init — 로컬 저장소 초기화
+
+\`\`\`bash
+# 현재 폴더를 git 저장소로 초기화
+git init
+
+# 폴더 생성 + 초기화
+git init my-project
+\`\`\`
+
+> \`.git\` 폴더가 생성되며, 이 폴더가 모든 버전 정보를 담는다.
+
+## .gitignore
+
+버전 관리에서 제외할 파일/폴더를 지정.
+
+\`\`\`
+# .gitignore 예시
+node_modules/
+.env
+*.log
+dist/
+.DS_Store
+\`\`\``
+      },
+      {
+        slug: 'git-remote-clone',
+        title: 'git remote · clone',
+        date: '2025-07-02',
+        content: `## git remote — 원격 저장소 연결
+
+\`\`\`bash
+# 원격 저장소 추가
+git remote add origin https://github.com/사용자명/저장소명.git
+
+# 연결된 원격 저장소 확인
+git remote -v
+
+# 원격 저장소 연결 제거
+git remote remove origin
+
+# 원격 저장소 URL 변경
+git remote set-url origin https://github.com/사용자명/새저장소.git
+\`\`\`
+
+## git clone — 원격 저장소 복사
+
+\`\`\`bash
+# 기본 클론
+git clone https://github.com/사용자명/저장소명.git
+
+# 폴더명 지정
+git clone https://github.com/사용자명/저장소명.git my-folder
+
+# 특정 브랜치만 클론
+git clone -b main --single-branch https://github.com/사용자명/저장소명.git
+
+# 얕은 복제 (최신 커밋 1개만)
+git clone --depth 1 https://github.com/사용자명/저장소명.git
+\`\`\`
+
+> \`clone\`하면 자동으로 \`origin\` 리모트가 설정된다.
+
+## SSH 방식 설정
+
+\`\`\`bash
+# SSH 키 생성
+ssh-keygen -t ed25519 -C "이메일@주소.com"
+
+# 공개키 확인 → GitHub Settings > SSH keys에 등록
+cat ~/.ssh/id_ed25519.pub
+
+# SSH로 클론
+git clone git@github.com:사용자명/저장소명.git
+\`\`\``
+      },
+      {
+        slug: 'git-add-commit',
+        title: 'git add · commit · log',
+        date: '2025-07-03',
+        content: `## git status — 현재 상태 확인
+
+\`\`\`bash
+git status       # 전체 상태
+git status -s    # 간략하게 (short)
+\`\`\`
+
+| 상태 | 의미 |
+|---|---|
+| Untracked | 한 번도 추적하지 않은 새 파일 |
+| Modified | 수정됨 (staged 아님) |
+| Staged | 커밋 대기 중 (add 완료) |
+
+## git add — 스테이징
+
+\`\`\`bash
+git add 파일명.txt   # 특정 파일
+git add src/        # 특정 폴더
+git add .           # 현재 디렉토리 전체
+git add -A          # 모든 변경사항 (삭제 포함)
+git add -p 파일명   # 대화형으로 일부만 스테이징
+\`\`\`
+
+## git commit — 커밋
+
+\`\`\`bash
+git commit -m "커밋 메시지"
+
+# add + commit 동시에 (새 파일 제외)
+git commit -am "커밋 메시지"
+
+# 마지막 커밋 수정 (push 전에만 사용)
+git commit --amend -m "수정된 메시지"
+\`\`\`
+
+## git log — 커밋 이력 확인
+
+\`\`\`bash
+git log                    # 전체 이력
+git log --oneline          # 한 줄 요약
+git log --oneline --graph  # 브랜치 그래프 포함
+git log -5                 # 최근 5개만
+git log --author="이름"    # 작성자 필터
+\`\`\`
+
+## git diff — 변경사항 비교
+
+\`\`\`bash
+git diff               # 스테이징 전 변경사항
+git diff --staged      # 스테이징된 변경사항
+git diff HEAD~1 HEAD   # 마지막 커밋과 이전 커밋 비교
+\`\`\``
+      },
+      {
+        slug: 'git-push-pull',
+        title: 'git push · pull · fetch',
+        date: '2025-07-04',
+        content: `## git push — 원격에 업로드
+
+\`\`\`bash
+# 처음 push (upstream 설정)
+git push -u origin main
+
+# 이후 push
+git push
+
+# 특정 브랜치 push
+git push origin feature/login
+
+# 원격 브랜치 삭제
+git push origin --delete feature/login
+\`\`\`
+
+## git pull — 원격에서 가져오기 + 병합
+
+\`\`\`bash
+git pull                   # origin의 현재 브랜치
+git pull origin main       # origin/main을 가져와서 병합
+git pull --rebase origin main  # rebase 방식으로 pull
+\`\`\`
+
+## git fetch — 원격 정보 갱신만 (병합 X)
+
+\`\`\`bash
+git fetch origin    # 원격 정보 갱신만
+git fetch --all     # 모든 원격 저장소
+
+# fetch 후 확인하고 직접 병합
+git fetch origin
+git diff origin/main
+git merge origin/main
+\`\`\`
+
+> \`pull = fetch + merge\`. 충돌 가능성이 있을 때는 fetch → 확인 → merge 순으로 하는 게 안전하다.
+
+## 충돌 해결 (Merge Conflict)
+
+\`\`\`bash
+# 충돌 발생 시 파일에 나타나는 마커
+<<<<<<< HEAD
+내 변경사항
+=======
+원격 변경사항
+>>>>>>> origin/main
+
+# 수동 편집 후
+git add 충돌파일.txt
+git commit -m "Resolve merge conflict"
+\`\`\``
+      },
+      {
+        slug: 'git-branch',
+        title: 'git branch · checkout · reset',
+        date: '2025-07-05',
+        content: `## git branch — 브랜치 관리
+
+\`\`\`bash
+git branch              # 로컬 브랜치 목록
+git branch -r           # 원격 브랜치 목록
+git branch -a           # 모든 브랜치 목록
+
+# 브랜치 생성
+git branch feature/login
+
+# 브랜치 삭제
+git branch -d feature/login  # 병합 완료된 브랜치
+git branch -D feature/login  # 강제 삭제
+
+# 브랜치 이름 변경
+git branch -m old-name new-name
+\`\`\`
+
+## git checkout / switch — 브랜치 이동
+
+\`\`\`bash
+git checkout feature/login   # 브랜치 전환
+git switch feature/login     # 최신 방식
+
+# 브랜치 생성 + 전환
+git checkout -b feature/login
+git switch -c feature/login  # 최신 방식
+\`\`\`
+
+## git merge — 브랜치 병합
+
+\`\`\`bash
+# main 브랜치에서 feature 브랜치를 병합
+git checkout main
+git merge feature/login
+
+# 병합 취소
+git merge --abort
+\`\`\`
+
+## git reset · restore — 되돌리기
+
+\`\`\`bash
+# 스테이징 취소 (파일 내용 유지)
+git restore --staged 파일명.txt
+
+# 파일 수정 취소 (마지막 커밋 상태로)
+git restore 파일명.txt
+
+# 커밋 되돌리기 (로컬, push 전)
+git reset --soft HEAD~1   # 커밋만 취소, staged 유지
+git reset --mixed HEAD~1  # 커밋 + 스테이징 취소 (기본)
+git reset --hard HEAD~1   # 커밋 + 파일 변경 모두 취소 ⚠️
+\`\`\``
+      }
+    ]
   },
   spring: {
     title: 'Spring Boot',
@@ -2656,16 +3312,603 @@ sudo /usr/bin/mysql -u root -p   # 비밀번호: 1234
   llm: {
     title: 'LLM',
     icon: 'fas fa-robot',
-    entries: []
+    entries: [
+      {
+        slug: 'llm-basics',
+        title: 'LLM 기초 · ChatOpenAI',
+        date: '2025-11-01',
+        content: `## LLM (Large Language Model)
+
+대규모 언어 모델. 방대한 텍스트로 학습한 AI 모델.
+
+- **GPT** (OpenAI), **Claude** (Anthropic), **Gemini** (Google), **LLaMA** (Meta)
+
+## LangChain + ChatOpenAI
+
+\`\`\`python
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model_name='gpt-4o-mini',
+    temperature=0,    # 0: 일관된 답변 / 1~2: 창의적 답변
+    max_tokens=500
+)
+response = llm.invoke("안녕하세요!")
+print(response.content)
+\`\`\`
+
+## temperature
+
+| 값 | 특성 |
+|---|---|
+| \`0\` | 결정론적, 항상 같은 답변 |
+| \`0.5\` | 적당한 다양성 |
+| \`1.0\` | 창의적, 다양한 답변 |
+| \`1.5~2\` | 매우 창의적, 예측 불가 |
+
+## LogProb (로그 확률)
+
+각 토큰이 선택될 확률을 로그 스케일로 반환. 모델 신뢰도 측정에 활용.
+
+\`\`\`python
+llm = ChatOpenAI(model='gpt-4o-mini', logprobs=True)
+response = llm.invoke("한국의 수도는?")
+# response.response_metadata['logprobs'] 에서 확인
+\`\`\`
+
+## 메시지 타입 (역할 구분)
+
+\`\`\`python
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+
+messages = [
+    SystemMessage(content="당신은 친절한 어시스턴트입니다."),
+    HumanMessage(content="파이썬이 뭐예요?"),
+    AIMessage(content="파이썬은 범용 프로그래밍 언어입니다."),  # Few-shot
+    HumanMessage(content="어디서 배울 수 있나요?")
+]
+response = llm.invoke(messages)
+\`\`\``
+      },
+      {
+        slug: 'llm-lcel',
+        title: 'LCEL · 프롬프트 · OutputParser',
+        date: '2025-11-02',
+        content: `## LCEL (LangChain Expression Language)
+
+\`|\` 파이프 연산자로 체인을 연결하는 LangChain의 표준 방식.
+
+\`\`\`python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "당신은 {role}입니다."),
+    ("human", "{question}")
+])
+llm    = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+parser = StrOutputParser()
+
+chain  = prompt | llm | parser
+result = chain.invoke({"role": "Python 전문가", "question": "리스트 컴프리헨션이 뭐야?"})
+\`\`\`
+
+## ChatPromptTemplate
+
+\`\`\`python
+# from_messages — 역할 지정 가능
+template = ChatPromptTemplate.from_messages([
+    ("system", "You are {role}."),
+    ("human", "{input}")
+])
+
+# from_template — 단순 문자열
+template = ChatPromptTemplate.from_template("Translate to English: {text}")
+\`\`\`
+
+## OutputParser 종류
+
+\`\`\`python
+from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
+from langchain_core.pydantic_v1 import BaseModel, Field
+
+# 문자열 파서
+parser = StrOutputParser()
+
+# JSON 파서
+parser = JsonOutputParser()
+
+# Pydantic 파서 (타입 안전)
+class Movie(BaseModel):
+    title: str = Field(description="영화 제목")
+    year: int  = Field(description="개봉 연도")
+
+parser = JsonOutputParser(pydantic_object=Movie)
+\`\`\`
+
+## Batch · Async · Parallel
+
+\`\`\`python
+# Batch — 여러 입력 동시 처리
+results = chain.batch([
+    {"role": "전문가", "question": "질문1"},
+    {"role": "전문가", "question": "질문2"},
+])
+
+# Async
+result = await chain.ainvoke({"role": "전문가", "question": "질문"})
+
+# Parallel + RunnablePassthrough
+from langchain_core.runnables import RunnableParallel, RunnablePassthrough
+
+parallel = RunnableParallel(
+    summary=chain1,
+    keywords=chain2
+)
+result = parallel.invoke({"text": "..."})
+
+# RunnablePassthrough — 입력값 그대로 통과
+chain = {"context": retriever, "question": RunnablePassthrough()} | prompt | llm
+\`\`\``
+      },
+      {
+        slug: 'llm-rag',
+        title: 'RAG (검색 증강 생성)',
+        date: '2025-11-03',
+        content: `## RAG (Retrieval-Augmented Generation)
+
+외부 문서를 검색해서 LLM 답변에 활용하는 패턴.
+학습 데이터에 없는 최신 정보나 사내 문서를 LLM에 연결할 때 사용.
+
+\`\`\`
+질문 → 문서 검색 (Retriever) → 관련 문서 + 질문 → LLM → 답변
+\`\`\`
+
+## 기본 구현 흐름
+
+\`\`\`python
+from langchain_community.document_loaders import TextLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import FAISS
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+
+# 1. 문서 로드
+loader = TextLoader("document.txt", encoding="utf-8")
+docs = loader.load()
+
+# 2. 텍스트 분할
+splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = splitter.split_documents(docs)
+
+# 3. 임베딩 + 벡터 스토어
+embeddings  = OpenAIEmbeddings()
+vectorstore = FAISS.from_documents(chunks, embeddings)
+retriever   = vectorstore.as_retriever()
+
+# 4. RAG 체인
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "다음 context를 참고해서 답변하세요:\\n\\n{context}"),
+    ("human", "{question}")
+])
+
+chain = (
+    {"context": retriever, "question": RunnablePassthrough()}
+    | prompt
+    | ChatOpenAI(model="gpt-4o-mini")
+    | StrOutputParser()
+)
+
+result = chain.invoke("문서의 핵심 내용은?")
+\`\`\`
+
+## 핵심 용어
+
+| 용어 | 설명 |
+|---|---|
+| Embedding | 텍스트를 벡터(숫자 배열)로 변환 |
+| Vector Store | 임베딩 벡터를 저장·검색하는 DB (FAISS, Chroma, Pinecone) |
+| Retriever | 질문과 유사한 문서 청크를 검색해서 반환 |
+| Chunk | 긴 문서를 작게 나눈 조각 |`
+      }
+    ]
   },
   ml: {
     title: 'Machine Learning',
     icon: 'fas fa-brain',
-    entries: []
+    entries: [
+      {
+        slug: 'ml-classifier',
+        title: '분류 · 결정 트리',
+        date: '2025-11-10',
+        content: `## 머신러닝 기본 개념
+
+\`\`\`
+데이터 → 모델 학습 (fit) → 예측 (predict) → 평가 (score)
+\`\`\`
+
+| 용어 | 설명 |
+|---|---|
+| Feature (특성) | 입력 변수 (X) |
+| Label / Target | 예측할 값 (y) |
+| Training set | 모델 학습에 사용하는 데이터 |
+| Test set | 성능 평가에 사용하는 데이터 |
+
+## train_test_split
+
+\`\`\`python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,    # 20%를 테스트용으로
+    random_state=42,  # 재현성을 위한 시드
+    stratify=y        # 클래스 비율 유지 (분류 문제)
+)
+\`\`\`
+
+## 결정 트리 (Decision Tree)
+
+\`\`\`python
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+model = DecisionTreeClassifier(
+    max_depth=5,           # 트리 최대 깊이
+    max_features=None,     # 분기시 사용할 feature 수
+    min_samples_split=2,   # 분기에 필요한 최소 샘플 수
+    min_samples_leaf=1,    # 리프 노드 최소 샘플 수
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print(accuracy_score(y_test, y_pred))
+\`\`\`
+
+## 트리 시각화 (Graphviz)
+
+\`\`\`python
+from sklearn.tree import export_graphviz
+import graphviz
+
+dot_data = export_graphviz(
+    model,
+    feature_names=X.columns,
+    class_names=['0', '1'],
+    filled=True
+)
+graphviz.Source(dot_data)
+\`\`\``
+      },
+      {
+        slug: 'ml-evaluation',
+        title: '교차 검증 · 평가 지표 · Naive Bayes',
+        date: '2025-11-11',
+        content: `## 교차 검증 (Cross Validation)
+
+데이터를 K개 폴드로 나눠 번갈아 검증. 과적합 방지 + 더 신뢰도 높은 평가.
+
+\`\`\`python
+from sklearn.model_selection import cross_val_score, KFold, StratifiedKFold
+
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=kf, scoring='accuracy')
+print(f"평균: {scores.mean():.3f}, 표준편차: {scores.std():.3f}")
+
+# 클래스 불균형 시 권장
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=skf)
+\`\`\`
+
+## 평가 지표 (Classification Metrics)
+
+| 지표 | 공식 | 설명 |
+|---|---|---|
+| Accuracy (정확도) | (TP+TN) / 전체 | 전체 중 맞춘 비율 |
+| Precision (정밀도) | TP / (TP+FP) | 양성 예측 중 실제 양성 비율 |
+| Recall (재현율) | TP / (TP+FN) | 실제 양성 중 찾아낸 비율 |
+| F1-Score | 2×P×R / (P+R) | Precision과 Recall의 조화평균 |
+
+\`\`\`python
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score,
+    f1_score, classification_report, confusion_matrix
+)
+
+print(classification_report(y_test, y_pred))
+
+cm = confusion_matrix(y_test, y_pred)
+#              예측 0  예측 1
+# 실제 0  [ TN    FP ]
+# 실제 1  [ FN    TP ]
+\`\`\`
+
+## Naive Bayes (나이브 베이즈)
+
+베이즈 정리 기반. 텍스트 분류에 자주 사용.
+
+\`\`\`python
+from sklearn.naive_bayes import GaussianNB, MultinomialNB
+
+# 연속형 데이터 (정규분포 가정)
+model = GaussianNB()
+
+# 텍스트 빈도수 기반
+model = MultinomialNB(alpha=1.0)  # alpha: 라플라스 스무딩
+
+model.fit(X_train, y_train)
+\`\`\``
+      },
+      {
+        slug: 'ml-regression',
+        title: '선형 회귀 · 추천 시스템',
+        date: '2025-11-12',
+        content: `## 선형 회귀 (Linear Regression)
+
+연속형 값을 예측. \`y = ax + b\` 형태의 직선을 찾는 것.
+
+\`\`\`python
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print(f"기울기(coef): {model.coef_}")
+print(f"절편(intercept): {model.intercept_}")
+print(f"R² 점수: {r2_score(y_test, y_pred):.3f}")
+print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.3f}")
+\`\`\`
+
+## 다중 선형 회귀 (Multivariate)
+
+\`\`\`python
+# X가 여러 열이면 자동으로 다중 회귀 적용
+X = df[['feature1', 'feature2', 'feature3']]
+y = df['target']
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+\`\`\`
+
+## 회귀 평가 지표
+
+| 지표 | 설명 |
+|---|---|
+| MAE | 오차 절대값의 평균 |
+| MSE | 오차 제곱의 평균 |
+| RMSE | MSE의 제곱근 (단위 같음) |
+| R² | 0~1, 1에 가까울수록 좋음 |
+
+## 추천 시스템 (협업 필터링)
+
+\`\`\`python
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+
+# 사용자-아이템 평점 행렬
+matrix = df.pivot_table(
+    index='user_id', columns='item_id', values='rating'
+).fillna(0)
+
+# 코사인 유사도 계산
+similarity = cosine_similarity(matrix)
+sim_df = pd.DataFrame(similarity, index=matrix.index, columns=matrix.index)
+
+# 가장 유사한 사용자 찾기
+def get_similar_users(user_id, n=5):
+    return sim_df[user_id].sort_values(ascending=False).iloc[1:n+1]
+\`\`\``
+      }
+    ]
   },
   dataanalysis: {
     title: 'Data Analysis',
     icon: 'fas fa-chart-bar',
-    entries: []
+    entries: [
+      {
+        slug: 'da-intro',
+        title: '데이터 분석 개요 · 기초 통계',
+        date: '2025-11-20',
+        content: `## 데이터 분석이란?
+
+수집된 데이터를 목적에 맞게 가공·분석하여 의사결정에 필요한 통찰(insight)을 도출하는 과정.
+
+## 기초 통계 용어
+
+| 용어 | 설명 |
+|---|---|
+| 변량 | 조사 대상의 특성을 나타내는 수치 |
+| 계급 | 자료를 일정 간격으로 나눈 구간 |
+| 계급의 크기 | 계급의 상한 - 계급의 하한 |
+| 도수 | 각 계급에 속하는 자료의 수 |
+| 도수분포표 | 계급과 도수를 정리한 표 |
+| 히스토그램 | 도수분포표를 시각화한 막대그래프 |
+
+## 대표값
+
+\`\`\`python
+import numpy as np
+import pandas as pd
+
+data = [4, 7, 13, 2, 1, 7, 3, 5]
+
+mean   = np.mean(data)                # 산술평균
+median = np.median(data)              # 중앙값
+mode   = pd.Series(data).mode()[0]    # 최빈값
+\`\`\`
+
+## 분산 · 표준편차
+
+\`\`\`python
+# 편차 = 각 값 - 평균
+deviations = [x - np.mean(data) for x in data]
+
+# 분산 = 편차 제곱의 평균
+variance = np.var(data)           # 모분산
+variance = np.var(data, ddof=1)   # 표본분산 (n-1)
+
+# 표준편차 = 분산의 제곱근
+std = np.std(data)
+std = np.std(data, ddof=1)        # 표본 표준편차
+\`\`\`
+
+## 확률변수 종류
+
+| 종류 | 설명 | 예시 |
+|---|---|---|
+| 범주형 (Categorical) | 순서 없는 분류 | 성별, 지역 |
+| 이산형 (Discrete) | 셀 수 있는 정수값 | 불량품 수, 사망자 수 |
+| 연속형 (Continuous) | 연속적인 실수값 | 키, 몸무게, 온도 |`
+      },
+      {
+        slug: 'da-numpy-pandas',
+        title: 'Numpy · Pandas',
+        date: '2025-11-21',
+        content: `## Numpy 기초
+
+\`\`\`python
+import numpy as np
+
+# 배열 생성
+arr    = np.array([1, 2, 3, 4, 5])
+arr2d  = np.array([[1, 2, 3], [4, 5, 6]])
+zeros  = np.zeros((3, 4))
+ones   = np.ones((2, 3))
+rng    = np.arange(0, 10, 2)       # [0, 2, 4, 6, 8]
+linsp  = np.linspace(0, 1, 5)      # [0, 0.25, 0.5, 0.75, 1]
+
+# 배열 정보
+arr.shape    # (5,)
+arr2d.shape  # (2, 3)
+arr.dtype    # int64
+
+# 연산 (브로드캐스팅)
+arr * 2                     # [2, 4, 6, 8, 10]
+np.sum(arr2d, axis=0)       # 열 합계
+np.sum(arr2d, axis=1)       # 행 합계
+
+# 인덱싱 · 슬라이싱
+arr[2]        # 3
+arr[1:4]      # [2, 3, 4]
+arr2d[0, 1]   # 2
+arr2d[:, 1]   # 2번째 열 전체
+\`\`\`
+
+## Pandas 기초
+
+\`\`\`python
+import pandas as pd
+
+df = pd.DataFrame({
+    'name': ['Alice', 'Bob', 'Charlie'],
+    'age':  [25, 30, 35],
+    'score':[88, 92, 79]
+})
+
+# 기본 확인
+df.head()      # 처음 5행
+df.info()      # 컬럼 정보
+df.describe()  # 기술통계
+df.shape       # (행수, 열수)
+
+# 컬럼 선택
+df['name']
+df[['name', 'age']]
+
+# 조건 필터링
+df[df['age'] > 28]
+df[(df['age'] > 25) & (df['score'] >= 90)]
+
+# 정렬
+df.sort_values('score', ascending=False)
+
+# 그룹화
+df.groupby('grade')['score'].mean()
+
+# 결측치 처리
+df.isnull().sum()
+df.fillna(0)
+df.dropna()
+
+# CSV 저장 / 불러오기
+df.to_csv('data.csv', index=False)
+df = pd.read_csv('data.csv')
+\`\`\``
+      },
+      {
+        slug: 'da-rfm',
+        title: '확률분포 · RFM 분석',
+        date: '2025-11-22',
+        content: `## 이산형 확률분포
+
+\`\`\`python
+from scipy import stats
+
+# 이항분포 B(n, p): n번 시행, 성공확률 p
+binom = stats.binom(n=10, p=0.3)
+print(binom.pmf(3))    # P(X=3)
+print(binom.cdf(3))    # P(X≤3)
+print(binom.mean())    # 기대값 = n*p
+
+# 포아송분포: 단위 시간당 평균 λ회 발생
+poisson = stats.poisson(mu=2.5)
+print(poisson.pmf(3))
+\`\`\`
+
+## 연속형 확률분포
+
+\`\`\`python
+# 정규분포 N(μ, σ²)
+norm = stats.norm(loc=170, scale=10)  # 평균 170, 표준편차 10
+print(norm.pdf(175))    # 확률밀도함수
+print(norm.cdf(175))    # P(X≤175)
+print(norm.ppf(0.95))   # 95 백분위수
+
+# 표준화 (Z-score)
+z = (x - mean) / std
+\`\`\`
+
+## RFM 분석
+
+고객 세분화 기법. 최근성·빈도·금액 기준으로 고객 가치를 평가.
+
+| 지표 | 설명 |
+|---|---|
+| R (Recency) | 최근에 얼마나 샀는가? (최근 구매일) |
+| F (Frequency) | 얼마나 자주 샀는가? (구매 횟수) |
+| M (Monetary) | 얼마나 많이 썼는가? (총 구매금액) |
+
+\`\`\`python
+import pandas as pd
+from datetime import datetime
+
+reference_date = datetime(2024, 12, 31)
+
+rfm = df.groupby('customer_id').agg(
+    Recency   = ('order_date', lambda x: (reference_date - x.max()).days),
+    Frequency = ('order_id', 'count'),
+    Monetary  = ('amount', 'sum')
+).reset_index()
+
+# 점수화 (1~5점)
+rfm['R_score'] = pd.qcut(rfm['Recency'],   q=5, labels=[5,4,3,2,1])
+rfm['F_score'] = pd.qcut(rfm['Frequency'], q=5, labels=[1,2,3,4,5])
+rfm['M_score'] = pd.qcut(rfm['Monetary'],  q=5, labels=[1,2,3,4,5])
+
+rfm['RFM_score'] = (
+    rfm['R_score'].astype(int) +
+    rfm['F_score'].astype(int) +
+    rfm['M_score'].astype(int)
+)
+\`\`\``
+      }
+    ]
   }
 };
