@@ -143,7 +143,7 @@ export const studies = {
 &lt;/ol&gt;</code></pre>
 
 | \`type\` 값 | 표시 방식 |
-|------------|-------|
+|------------|---------|
 | \`1\` | 숫자 (1, 2, 3, ...) |
 | \`A\` | 알파벳 대문자 순 |
 | \`a\` | 알파벳 소문자 순 |
@@ -466,7 +466,190 @@ block 요소인 \`div\`로 레이아웃 구역을 구분하고, inline 요소인
   js: {
     title: 'JavaScript',
     icon: 'fab fa-js',
-    entries: []
+    entries: [
+      {
+        slug: 'js-basics',
+        title: 'JavaScript 기초',
+        date: '2025-12-30',
+        content: `## 인터프리터와 JavaScript
+
+**인터프리터**: 사람의 언어를 컴퓨터 언어로 번역해주는 번역기. 번역 파일은 제공되지 않고 번역 즉시 실행한다.
+
+**인터프리터 언어(스크립트 언어)**: 한 줄씩 번역한다. 기존의 코드를 재실행할 필요 없을 경우 효과적이다.
+
+**JavaScript**: 컴파일 과정 없이 브라우저 내부의 자바스크립트 처리기(인터프리터)에 의해 바로 실행된다.
+
+## 웹 페이지에서 자바스크립트의 역할
+
+- **사용자의 입력 및 연산**: 키, 마우스 등의 입력과 연산은 오직 JS로만 처리 가능
+- **웹 페이지 동적 제어**: HTML 태그 속성, 콘텐츠, CSS 속성 값을 변경
+- **브라우저 제어**: 윈도우 크기/모양 변경, 새 탭 열기, 히스토리 제어
+- **웹 서버와의 통신**: 웹 서버와 데이터를 주고받을 때 활용
+- **웹 애플리케이션 작성**: 다양한 API를 활용해 웹 앱 개발 가능
+
+## 자바스크립트를 작성할 수 있는 위치
+
+1. **HTML 태그의 이벤트 리스너 속성**에 작성
+2. **\`<script>\` 태그 안** — head, body 어디든 가능, 여러 번 작성 가능
+3. **.js 파일**로 분리하여 \`<script src="경로">\`로 가져옴 (태그 안에 코드 작성 금지)
+4. **URL 부분** — \`<a href="javascript:코드">\` (반드시 javascript: 키워드 필요)
+
+## ES(ECMAScript)
+
+자바스크립트의 표준 스펙 이름.
+
+- **ES5(2009)**: 기본 JS 문법 사용 가능
+- **ES6(2015)**: 모던 자바스크립트 — 매년 업데이트 진행`
+      },
+      {
+        slug: 'js-variables',
+        title: '변수와 데이터 타입',
+        date: '2025-12-30',
+        content: `## 변수의 선언
+
+- **var**: 함수의 영역(중괄호)만 영역으로 판단
+- **let**: 모든 영역(중괄호)을 영역으로 판단
+- **const**: 항상 그대로인 상수 — 절대 변경 불가
+
+## 데이터 타입(자료형)
+
+JavaScript는 값에 따라 저장공간의 종류가 자동으로 바뀌는 **동적 바인딩** 방식이다.
+
+| 타입 | 예시 |
+|------|------|
+| 숫자(number) | 42, 3.14 |
+| 논리(boolean) | true, false |
+| 문자열(string) | "안녕", \`A\` |
+| 객체(object) | Object, Array, Math |
+| undefined | 타입이 정해지지 않은 것 |
+| null | 값이 정해지지 않은 것 |
+
+## 식별자(이름) 규칙
+
+- 첫 번째 문자: 알파벳, 언더바, \`$\`만 사용 가능
+- 대소문자 구분 (data ≠ dAta)
+- 키워드(예약어)는 사용 불가
+
+## 전역 변수와 지역 변수
+
+- **전역 변수**: 영역 밖에 선언된 변수 → \`globalThis\`에 선언 권장
+- **지역 변수**: 영역 안에 선언된 변수
+
+## 변수를 사용하는 이유
+
+1. 반복되는 값을 쉽게 관리하기 위해서
+2. 의미 없는 값을 하나의 정보로 만들기 위해서(자료구조)`
+      },
+      {
+        slug: 'js-control',
+        title: '연산자와 제어문',
+        date: '2025-12-30',
+        content: `## 연산자 우선순위
+
+최우선 연산자 → 단항 → 산술 → 쉬프트 → 관계 → 논리 → 삼항 → 대입
+
+**조건식에서 사용되는 연산자**
+
+- 관계: \`==\`, \`===\`, \`!=\`, \`!==\`, \`>\`, \`<\`, \`>=\`, \`<=\`
+- 논리: \`&&\` AND, \`||\` OR, \`!\` NOT
+- 삼항: \`조건식 ? 참 : 거짓\`
+
+## 조건문
+
+**if문** — 다양한 비교나 여러 조건식을 연결할 때 적합
+
+\`\`\`js
+if (조건식) {
+  실행할 문장;
+} else if (조건식) {
+  실행할 문장;
+} else {
+  실행할 문장;
+}
+\`\`\`
+
+**switch문** — 하나의 변수에 여러 값을 비교할 때 적합
+
+\`\`\`js
+switch (값) {
+  case 값1: 실행할 문장; break;
+  default:  실행할 문장; break;
+}
+\`\`\`
+
+## 반복문
+
+**for문**
+
+\`\`\`js
+for (초기식; 조건식; 증감식) {
+  실행할 문장;
+}
+\`\`\`
+
+**while / do~while**
+
+\`\`\`js
+while (조건식) { 실행할 문장; }
+
+do { 실행할 문장; } while (조건식);
+\`\`\`
+
+**증감 연산자**: 전위형(++data) — 해당 라인부터 즉시 적용, 후위형(data++) — 다음 라인부터 적용
+
+**기타 제어문**
+
+- \`break\`: 만나는 즉시 해당 중괄호 영역을 탈출
+- \`continue\`: 만나는 즉시 다음 반복으로 넘어감`
+      },
+      {
+        slug: 'js-functions',
+        title: '함수(Function)',
+        date: '2025-12-30',
+        content: `## 함수란?
+
+이름 뒤에 소괄호. 함수는 저장공간이다. 리턴값이 있으면 값으로 본다.
+
+## 함수 선언
+
+\`\`\`js
+function 함수명(매개변수1, 매개변수2, ...) {
+  실행할 문장;
+  return 리턴값;
+}
+\`\`\`
+
+1. **함수명**: 동사로 작성 (예: add, getName)
+2. **매개변수**: 외부에서 전달받을 값이 있다면 순서에 맞게 선언 (생략 가능)
+3. **실행할 문장**: 기능 구현 로직 (생략 가능)
+4. **return**: 리턴값이 있다면 작성 (생략 가능) — 리턴값이 있으면 사용한 부분 통째로 리턴값으로 본다
+
+## 함수 선언 순서 예시
+
+두 정수의 덧셈을 구해주는 함수:
+
+\`\`\`js
+function add(number1, number2) {
+  let result = number1 + number2;
+  return result;
+}
+\`\`\`
+
+## 함수를 사용하는 이유
+
+1. **재사용의 목적** — 단, 특정성을 부여해서는 안 된다
+2. **소스코드 간결화의 목적**
+
+## 함수의 선언 vs 사용
+
+중괄호가 있으면 선언, 중괄호가 없으면 사용.
+
+\`\`\`js
+add(3, 5);          // 매개변수 있을 때
+printHello();       // 매개변수 없을 때
+\`\`\``
+      }
+    ]
   },
   java: {
     title: 'Java',
@@ -954,7 +1137,7 @@ class 클래스명 {
 ## 변수의 종류
 
 | 종류 | 선언 위치 | 생명주기 |
-|------|-----------|--------|
+|------|-----------|---------|
 | 전역 변수 | 메소드 밖 (클래스 필드) | 객체가 살아있는 동안 |
 | 지역 변수 | 메소드 내부 또는 {} 내부 | 해당 영역이 종료될 때까지 |
 | 정적 변수(static) | static 키워드 사용 | 프로그램 실행부터 종료까지 |`
@@ -1426,7 +1609,7 @@ StringBuilder와 동일하지만 내부에 동기화 코드 포함.
 단일 쓰레드에서는 오히려 속도 저하 → **멀티 쓰레드 환경**에서 사용.
 
 | | String | StringBuilder | StringBuffer |
-|--|--------|---------------|______________|
+|--|--------|---------------|--------------|
 | 수정 가능 | ✕ (불변) | ✓ | ✓ |
 | 동기화 | - | ✕ | ✓ |
 | 권장 환경 | 변경 없는 경우 | 단일 쓰레드 | 멀티 쓰레드 |`
@@ -1812,11 +1995,677 @@ public class MemberFrontController extends HttpServlet {
   mysql: {
     title: 'MySQL',
     icon: 'fas fa-database',
-    entries: []
+    entries: [
+      {
+        slug: 'mysql-basics',
+        title: 'MySQL 기초와 RDBMS',
+        date: '2026-01-06',
+        content: `## MySQL
+
+웹 사이트와 다양한 애플리케이션에서 사용되고, 간결성, 빠른 속도, 쉬운 관리가 핵심인 DBMS이다.
+
+| 규모 | 선택 |
+|------|------|
+| 웹(소규모~중규모) | MySQL |
+| 웹(중규모~대규모) + AI | PostgreSQL |
+| 웹(초대규모, 고가) | Oracle |
+
+## RDBMS(관계형 데이터베이스 시스템)
+
+데이터를 행(Row)과 열(Column)로 구성된 **Table** 구조로 관리한다.
+
+- **Column(열, 속성, 필드)**: 공통된 값들의 주제
+- **Row(행, 튜플, 레코드)**: 하나의 정보
+
+**제약 조건**
+
+| 제약 조건 | 설명 |
+|-----------|------|
+| Primary Key (PK) | 고유한 값, 중복 없음, NULL 불허 |
+| Foreign Key (FK) | 다른 테이블의 PK, 중복·NULL 가능 |
+| Unique Key (UK) | NULL 허용, 중복 불허 |
+
+## SQL 자료형
+
+| 종류 | 타입 |
+|------|------|
+| 정수 | tinyint, smallint, int, bigint |
+| 실수 | decimal(m, d) |
+| 날짜 | date, time, datetime |
+| 문자 | char(m) 고정, varchar(m) 가변 |
+
+## DDL(Data Definition Language) — 데이터 정의어
+
+\`\`\`sql
+-- 테이블 생성
+create table [테이블명]([컬럼명] [자료형] [제약조건], ...);
+
+-- 테이블 삭제
+drop table [테이블명];
+
+-- 컬럼 추가/삭제/수정
+alter table [테이블명] add [컬럼명] [자료형] [제약조건];
+alter table [테이블명] drop [컬럼명];
+alter table [테이블명] modify [컬럼명] [변경할타입];
+
+-- 행 전체 삭제
+truncate table [테이블명];
+\`\`\`
+
+## 무결성
+
+데이터의 정확성, 일관성, 유효성이 유지되는 것.
+
+1. **개체 무결성**: 모든 테이블은 PK를 가져야 한다
+2. **참조 무결성**: 두 테이블의 데이터가 항상 일관된 값을 유지
+3. **도메인 무결성**: 컬럼의 타입, NULL 허용 여부 등 올바른 데이터 검증
+
+## 모델링
+
+추상적인 주제를 RDB에 맞게 설계하는 작업.
+
+1. 요구사항 분석
+2. 개념적 설계(개념 모델링)
+3. 논리적 설계(논리 모델링) — PK, FK, UK, NOT NULL 정의
+4. 물리적 설계(물리 모델링) — 실제 자료형과 제약 조건 작성
+5. 구현`
+      },
+      {
+        slug: 'mysql-dml',
+        title: '정규화, DML, Join, TCL',
+        date: '2026-01-08',
+        content: `## 정규화
+
+삽입/수정/삭제 이상 현상을 제거하기 위한 작업. 데이터 중복 최소화가 목적.
+
+**이상현상의 종류**
+
+- **삽입 이상**: 불필요한 데이터를 함께 삽입해야 하는 문제
+- **갱신 이상**: 일부만 변경하여 데이터가 불일치하는 문제
+- **삭제 이상**: 행 삭제 시 꼭 필요한 데이터까지 함께 삭제되는 문제
+
+**1차 정규화**: 같은 내용의 컬럼이 연속적으로 나타날 경우 → 행으로 분리
+
+**2차 정규화**: 조합키의 일부에만 종속되는 속성 제거(부분 종속 제거)
+
+**3차 정규화**: PK가 아닌 컬럼이 다른 컬럼을 결정하는 경우 제거(이행 종속 제거)
+
+## DML(Data Manipulation Language) — 데이터 조작어
+
+\`\`\`sql
+-- 조회
+select [컬럼명1], [컬럼명2] from [테이블명] where [조건식];
+
+-- 추가
+insert into [테이블명] ([컬럼명1], ...) values ([값1], ...);
+
+-- 수정
+update [테이블명] set [컬럼명1] = [값1] where [조건식];
+
+-- 삭제
+delete from [테이블명] where [조건식];
+\`\`\`
+
+**조건식 연산자**: \`>\`, \`<\`, \`>=\`, \`<=\`, \`=\`, \`<>\`, \`and\`, \`or\`
+
+## Join
+
+여러 테이블에서 필요한 정보만 가져와 가상의 테이블로 만드는 문법.
+
+\`\`\`sql
+-- 내부 조인 (등가 조인)
+[선행 테이블] inner join [후행 테이블] on [조건식]
+
+-- 외부 조인 (선행 테이블 전체 조회)
+[선행 테이블] left outer join [후행 테이블] on [조건식]
+\`\`\`
+
+## TCL(Transaction Control Language) — 트랜잭션 제어어
+
+**트랜잭션**: 하나의 서비스를 위한 DML의 묶음 또는 작업 단위.
+
+예) "상품 구매 시 포인트 적립" 서비스 → INSERT(구매) + UPDATE(포인트) 2개의 DML이 하나의 트랜잭션. INSERT는 성공해도 UPDATE에서 문제 발생 시 INSERT를 복구해야 한다.`
+      }
+    ]
   },
   git: {
     title: 'Git',
     icon: 'fab fa-git-alt',
+    entries: []
+  },
+  spring: {
+    title: 'Spring Boot',
+    icon: 'fas fa-leaf',
+    entries: [
+      {
+        slug: 'spring-framework-di',
+        title: 'Spring Framework와 DI',
+        date: '2026-01-13',
+        content: `## Framework
+
+라이브러리 → API → 프레임워크 순서로 규모가 커진다.
+
+**Framework 장점**: 개발에 필요한 구조가 이미 코드로 만들어져 있어, 반쯤 완성된 상태에서 조립하는 형태로 개발 가능.
+
+## Spring Framework의 특징
+
+- POJO 기반의 구성 (일반적인 자바 객체 방식 그대로 사용 가능)
+- AOP 지원 (관점 지향 프로그래밍 — 횡단 관심사를 분리해 핵심 로직에 집중)
+- Transaction 관리 (어노테이션으로 트랜잭션 영역 구성)
+- 편리한 MVC 구조
+- WAS에 종속적이지 않은 개발 환경
+- **DI를 통한 객체간의 관계 구성**
+
+## DI(Dependency Injection) — 의존성 주입
+
+**의존성**: A 객체가 B 객체 없이 동작 불가능한 상황 = "A가 B에 의존적이다"
+
+A 필드에 B 객체를 직접 생성하면 결합성이 단단해져 유연성이 떨어진다. 대신 외부에서 B 객체를 주입받으면 유연성이 높아진다.
+
+Spring에서는 \`ApplicationContext\`가 Bean을 생성하고 주입하는 역할을 한다. ApplicationContext가 관리하는 객체를 **Bean** 이라 하며, Spring Container에 저장된다.
+
+## Spring Boot
+
+Spring Framework의 복잡한 초기 설정과 라이브러리 버전 관리를 자동화해주는 도구.
+
+**프로젝트 기본 경로**
+
+| 경로 | 역할 |
+|------|------|
+| src/main/java | 서버단 JAVA 파일 |
+| src/main/resources | 설정 파일 및 뷰단 |
+| src/main/resources/static | css, js, image 등 정적 파일 |
+| src/main/resources/templates | html 파일 |
+| build.gradle | 라이브러리 관리 |
+| application.yml | Spring의 모든 설정 |
+
+## Spring MVC (Front-Controller Pattern)
+
+\`\`\`
+REQUEST ↔ DispatcherServlet ↔ HandlerAdapter ↔ Controller
+          ↕                  ↕
+         View          ViewResolver
+\`\`\`
+
+**특징**
+- HttpServletRequest/Response 직접 사용 지양
+- 다양한 타입의 파라미터, 리턴 타입 사용 가능
+- GET/POST 등 전송 방식을 어노테이션으로 처리
+- 상속/인터페이스 대신 어노테이션으로만 설정 가능`
+      },
+      {
+        slug: 'spring-rest-3tier',
+        title: 'Qualifier, REST, 3-tier',
+        date: '2026-02-03',
+        content: `## Qualifier
+
+\`@Autowired\`로 객체 주입 시 같은 타입의 객체가 여러 개 있을 때 \`@Qualifier\`로 식별자를 설정해 원하는 객체를 주입받는다.
+
+## REST (Representational State Transfer)
+
+URI만으로도 데이터 또는 행위(CRUD) 상태를 이해할 수 있도록 설계하는 규칙.
+
+1. 소문자로 작성
+2. 언더바 대신 하이픈 사용
+3. URI 마지막에 슬래시 작성 금지
+4. 계층 관계 표현 시 슬래시로 구분
+5. 파일 확장자 포함 금지 (Header의 Content-Type 사용)
+6. 행위(동사)는 URI가 아닌 HTTP Method로 표현
+7. URI의 영어 단어는 복수형 사용 (데이터의 집합)
+
+## HTTP Method
+
+| Method | 역할 |
+|--------|------|
+| GET | 조회 (Read) |
+| POST | 생성 (Create) |
+| PUT | 전체 수정 (Update) |
+| PATCH | 일부 수정 (Update) |
+| DELETE | 삭제 (Delete) |
+
+## 3-tier 아키텍처
+
+스프링 프로젝트는 3-tier 방식으로 설계된다.
+
+| Tier | 역할 | 클래스 |
+|------|------|--------|
+| Presentation | 화면 계층 | Controller |
+| Business | 비지니스 로직 | Service |
+| Persistence | 데이터 보관/사용 | Repository / Mapper |
+
+**목적**: 각 영역을 독립적으로 설계해 특정 기술이 변하더라도 부품처럼 쉽게 교환할 수 있게 한다.
+
+\`\`\`
+Presentation ↔ Business ↔ Persistence ↔ DBMS
+Controller     Service    Repository    Mapper
+\`\`\``
+      },
+      {
+        slug: 'spring-crud-design',
+        title: '프로젝트 CRUD 설계',
+        date: '2026-02-17',
+        content: `## 비동기와 동기
+
+- **비동기**: 이벤트 발생 시 보이는 데이터 (사용자 액션 이후)
+- **동기**: 페이지 도착 시 바로 보여야 하는 데이터
+
+## CRUD 설계 패턴
+
+### 작성 (INSERT)
+
+- VO 기본 사용
+- INSERT된 행의 정보(id)가 필요할 때에는 DTO 사용
+
+### 조회 (SELECT)
+
+- \`Optional\` 객체로 래핑
+- \`orElseThrow(Object::new)\`로 예외 처리
+- \`ExceptionHandler\` 활용
+
+### 목록 (SELECT)
+
+**페이징 처리** — Criteria 활용
+
+\`\`\`
+page, rowCount, pageCount, startPage, endPage, offset
+\`\`\`
+
+**검색**: type, keyword (통합 검색 시 keyword만 사용)
+
+**필터 (동적쿼리)**
+
+- 일부 포함: \`<foreach>\` 태그로 배열 처리
+- 전부 포함: \`group by\` + \`having count = 전달받은 개수\`
+
+### 수정 (UPDATE)
+
+1:N 관계에서 N을 수정하는 경우: **삭제 목록 + 추가 목록** 으로 처리
+
+파일인 경우 반드시 실제 경로도 삭제 (삭제 전 경로 조회 필수)
+
+### 삭제
+
+- **Soft Delete**: UPDATE (deleted_at 등 플래그)
+- **Hard Delete**: DELETE (반드시 자식 테이블부터 삭제)`
+      },
+      {
+        slug: 'spring-security-jwt',
+        title: 'Spring Security, JWT, PostgreSQL, Redis',
+        date: '2026-03-10',
+        content: `## Spring Security
+
+Spring 기반 애플리케이션의 인증(Authentication)과 인가(Authorization)를 처리하는 프레임워크.
+
+**구성 요소**
+
+| 클래스 | 역할 |
+|--------|------|
+| Provider | JWT 생성, 서명, 검증 구현 |
+| Filter | 인증 성공 시 JWT 생성 후 클라이언트 전달 |
+| UserDetailService | 사용자 정보 조회 및 인증 처리 |
+| SecurityConfig | 보안 설정 (필터 체인, 접근 제한, 권한 설정) |
+
+## JWT (JSON Web Token)
+
+JSON 형태의 토큰으로 서버-클라이언트 간 인증 정보를 안전하게 주고받는다.
+
+**특징**
+1. 자체적으로 인증 정보를 포함 (stateless)
+2. 서명(Signature)으로 위변조를 방지
+
+**구조**: Header + Payload + Signature
+
+- **Signature**: Header + Payload를 시크릿키로 암호화 — 서버는 동일한 방식으로 서명을 재생성하여 일치 여부로 위변조 판단
+
+**인증 흐름**
+
+1. 사용자가 ID/PW로 로그인 요청
+2. 인증 성공 시 JWT 생성 후 클라이언트 전달
+3. 클라이언트는 이후 요청 헤더에 JWT 포함
+4. 서버가 JWT 유효성 검증 후 인증 처리
+5. 권한 확인 후 접근 허용
+
+## PostgreSQL
+
+MySQL과 달리 복잡한 쿼리 처리와 확장 기능에 강한 DBMS. pgVector로 벡터 임베딩 저장이 가능해 AI 연동에 적합하다.
+
+**MySQL vs PostgreSQL**
+
+| | MySQL | PostgreSQL |
+|---|---|---|
+| 특징 | 속도 중심, 단순 구조 | 기능 중심, 복잡한 연산 |
+| 확장 | 표준 자료형 충실 | 사용자 정의 타입 가능 |
+| 적합 | 블로그, 게시판 | AI, 대용량 데이터 |
+
+## Redis (Remote Dictionary Server)
+
+빠른 속도의 메모리 기반 키-값 저장소. 캐시, 세션 저장, 토큰 관리에 활용.
+
+**특징**
+- 매우 빠른 읽기/쓰기 (메모리 기반)
+- 데이터 만료 기능(TTL) 지원
+- 여러 데이터 타입 지원 (문자열, 리스트, 해시, 집합 등)
+
+**주요 활용**
+1. 분산 시스템 환경에서의 세션 공유
+2. 로그아웃 시 토큰 무효화
+3. 캐싱 — DB 조회 결과, 외부 API 호출 결과 등`
+      }
+    ]
+  },
+  python: {
+    title: 'Python',
+    icon: 'fab fa-python',
+    entries: [
+      {
+        slug: 'python-intro',
+        title: 'Python 기초와 아나콘다',
+        date: '2026-03-17',
+        content: `## Python
+
+GUI 개발, 웹 개발, 데이터 분석, AI 등에 사용하는 인기 있는 언어.
+
+**일반 프로그램**: 프로그램 → OS → 하드웨어 (이식성이 좋지 않다)
+
+**Python 프로그램**: 프로그램 → PVM(Python Virtual Machine) → OS → 하드웨어 (이식성이 좋다)
+
+## 아나콘다(Anaconda)
+
+데이터 사이언스, 머신러닝, AI 분야에서 가장 인기 있는 파이썬 통합 배포판.
+
+- 개발에 필요한 수많은 도구(라이브러리)와 환경 관리 시스템을 하나로 묶어놓음
+- **가상환경** 지원 — 프로젝트마다 독립된 환경으로 패키지 간 충돌 방지
+
+## 변수와 자료형
+
+변수는 값을 담는 저장공간. **동적 바인딩** — 값에 따라 자료형이 자동으로 결정된다.
+
+| 자료형 | 예시 |
+|--------|------|
+| 정수(int) | 0, 10, -187 |
+| 실수(float) | 0.0, 10.58 |
+| 문자열(str) | 'Python', "안녕" |
+| 리스트(list) | [1, 2, 3] |
+| 튜플(tuple) | (1, 2), 1, 2, 3 |
+| 딕셔너리(dict) | {key: value} |
+| 집합(set) | {1, 2, 3} |
+| 불린(bool) | True, False |
+
+## 표기법
+
+| 표기법 | 용도 | 예시 |
+|--------|------|------|
+| 파스칼(PascalCase) | 클래스명, 오류명 | MyClass |
+| 스네이크(snake_case) | 변수, 함수 | my_variable |
+| 카멜(camelCase) | Java 등 | myVariable |
+| 케밥(kebab-case) | HTML, CSS | my-element |`
+      },
+      {
+        slug: 'python-control',
+        title: '연산자, 제어문, 컬렉션',
+        date: '2026-03-18',
+        content: `## 연산자
+
+| 종류 | 예시 |
+|------|------|
+| 산술 | +, -, *, /, **, //(몫), %(나머지) |
+| 대입 | =, +=, -=, *=, /=, **=, //= |
+| 비교 | ==, !=, >, <, >=, <= |
+| 논리 | and, or, not |
+| 멤버 | \`in\`, \`not in\` (좌항이 우항에 포함 여부) |
+| 식별 | \`is\`, \`is not\` (같은 주소 여부) |
+
+## 제어문
+
+**조건문 (if)**
+
+\`\`\`python
+if 조건식:
+    실행할 문장
+elif 조건식:
+    실행할 문장
+else:
+    실행할 문장
+\`\`\`
+
+**반복문**
+
+\`\`\`python
+# for문
+for 변수명 in range(start, end, step):
+    실행할 문장
+
+# while문
+while 조건식:
+    실행할 문장
+\`\`\`
+
+## list (리스트)
+
+여러 개의 저장공간이 나열되어 있는 것.
+
+\`\`\`python
+data_list = [1, 2, 3]
+len(data_list)             # 길이
+
+data_list.append(4)        # 추가
+data_list.insert(1, 1.5)   # 삽입 (인덱스, 값)
+data_list.remove(2)        # 값으로 삭제
+del data_list[0]           # 인덱스로 삭제
+data_list.clear()          # 전체 삭제
+data_list.index(3)         # 값의 인덱스 반환
+data_list[0] = 99          # 값 수정
+\`\`\`
+
+## dict (딕셔너리)
+
+키-값(key: value) 쌍으로 저장. 키는 중복 불가, 값은 중복 가능.
+
+\`\`\`python
+data_dict = {'name': '홍길동', 'age': 25}
+
+data_dict['email'] = 'test@test.com'  # 추가
+data_dict.update({'age': 30})          # 수정 (없으면 추가)
+del data_dict['age']                   # 삭제
+'name' in data_dict                    # 키 존재 확인 (True)
+\`\`\``
+      },
+      {
+        slug: 'python-class-module',
+        title: '함수, 클래스, 모듈',
+        date: '2026-03-19',
+        content: `## 함수(Function)
+
+\`\`\`python
+def 함수명(매개변수, ...):
+    실행할 문장
+    return 리턴값
+\`\`\`
+
+함수를 사용하는 목적:
+1. 재사용 (단, 특정성 부여 금지)
+2. 소스코드 간결화
+
+## 클래스(Class)
+
+공통 요소를 한 번만 선언하는 방식. 클래스는 **타입**이자 **주어**이다.
+
+\`\`\`python
+class Animal:
+    def __init__(self, name):   # 생성자
+        self.name = name        # self: 접근한 객체의 주소
+
+    def speak(self):
+        return f"{self.name} speaks"
+
+cat = Animal("Cat")   # 객체화(인스턴스)
+cat.speak()
+\`\`\`
+
+**매직 메소드** (클래스에 정의하는 스페셜 메소드)
+
+| 메소드 | 용도 |
+|--------|------|
+| \`__init__\` | 생성자 |
+| \`__str__\` | 문자열 표현 |
+| \`__len__\` | len() 연산 |
+| \`__add__\` | + 연산자 |
+| \`__eq__\` | == 연산자 |
+
+## 모듈(Module)
+
+변수와 함수, 클래스 등을 모아놓은 파이썬 파일.
+
+\`\`\`python
+import 모듈명                  # 모듈 전체 import
+import 모듈명 as 별칭           # 별칭 지정
+from 모듈명 import 함수명       # 특정 함수만 import
+from 모듈명 import *           # 모든 함수 import
+\`\`\`
+
+**패키지**: 폴더를 생성하여 .py 파일을 관리. Python 3.3부터는 \`__init__.py\` 없이도 자동 패키지 인식.`
+      }
+    ]
+  },
+  fastapi: {
+    title: 'FastAPI',
+    icon: 'fas fa-bolt',
+    entries: [
+      {
+        slug: 'fastapi-basics',
+        title: 'FastAPI 기초',
+        date: '2026-04-07',
+        content: `## FastAPI
+
+파이썬 기반 웹 애플리케이션 서버 프레임워크.
+
+- \`/docs\`로 요청하면 Swagger UI(API 명세서)가 자동 생성됨
+- 비동기 프로그래밍 지원 — 동시에 많은 요청도 효율적으로 처리
+- 단순한 웹 서비스나 AI 컨텐츠 API 제작에 적합
+- Java Spring에 비해 코드 양이 적어 생산성이 높음
+
+## Uvicorn (ASGI)
+
+FastAPI 소스코드를 웹에서 동작하게 만드는 실행 엔진.
+
+**ASGI** (Asynchronous Server Gateway Interface): 비동기 방식 통신 약속.
+
+\`\`\`bash
+uvicorn main:app --reload   # --reload: 코드 수정 시 자동 재시작
+\`\`\`
+
+동기 코드는 파이썬 인터프리터가 즉시 실행, 비동기 코드는 uvloop(이벤트 루프)에 등록되어 대기 작업으로 별도 관리 후 완료되면 다시 실행.
+
+## 소프트웨어 디자인 패턴
+
+MVC와 유사한 패턴을 직접 구현하여 사용.
+
+| 폴더/파일 | 역할 |
+|-----------|------|
+| domain | 실제 DB 테이블과 연결되는 클래스 |
+| schema | 화면에서 사용할 필드 모음(DTO) |
+| repository | DB 직접 접근, CRUD 처리 |
+| router | URL 정의, service 연결 |
+| service | 비지니스 로직 작성 |
+| sql | 데이터베이스 스크립트 파일 |
+| .env | 보안 정보, 환경 설정값 |
+| requirements.txt | 필요한 라이브러리 목록 |
+
+\`\`\`
+클라이언트 ↔ router ↔ service ↔ repository ↔ domain
+\`\`\``
+      }
+    ]
+  },
+  aws: {
+    title: 'AWS',
+    icon: 'fab fa-aws',
+    entries: [
+      {
+        slug: 'aws-server-setup',
+        title: 'Ubuntu 서버 설정 및 Spring 배포',
+        date: '2026-02-27',
+        content: `## Ubuntu 초기 설정
+
+\`\`\`bash
+sudo passwd        # 비밀번호 설정 (1234)
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y tzdata
+sudo dpkg-reconfigure tzdata    # 시간대: Asia/Seoul
+\`\`\`
+
+## Java 설치
+
+\`\`\`bash
+sudo apt-get install openjdk-17-jdk
+
+# ~/.bashrc 최하단에 추가
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+export PATH=$PATH:$JAVA_HOME/bin
+
+source ~/.bashrc
+echo $JAVA_HOME
+\`\`\`
+
+## Swap 메모리 설정
+
+\`\`\`bash
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+free -h
+\`\`\`
+
+## Spring 프로젝트 배포
+
+\`\`\`bash
+git clone [repo-url]
+chmod +x ./gradlew
+./gradlew build
+java -jar build/libs/app.jar
+\`\`\`
+
+## 포트 포워딩 (80 → 10000)
+
+\`\`\`bash
+sudo apt install iptables-persistent
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 10000
+sudo chmod 777 /etc/iptables/rules.v4
+sudo iptables-save > /etc/iptables/rules.v4
+\`\`\`
+
+## MySQL on AWS
+
+\`\`\`bash
+sudo apt install mysql-server
+sudo ufw allow mysql
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+# mysqld.cnf 에서 bind-address = 127.0.0.1 주석 처리 또는 삭제
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo /etc/init.d/mysql restart
+
+sudo /usr/bin/mysql -u root -p   # 비밀번호: 1234
+\`\`\``
+      }
+    ]
+  },
+  llm: {
+    title: 'LLM',
+    icon: 'fas fa-robot',
+    entries: []
+  },
+  ml: {
+    title: 'Machine Learning',
+    icon: 'fas fa-brain',
+    entries: []
+  },
+  dataanalysis: {
+    title: 'Data Analysis',
+    icon: 'fas fa-chart-bar',
     entries: []
   }
 };
