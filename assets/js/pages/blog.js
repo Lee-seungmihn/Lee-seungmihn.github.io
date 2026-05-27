@@ -2,7 +2,7 @@ import { h, mount } from '../vdom.js';
 import { router } from '../router.js';
 import { posts } from '../data/posts.js';
 
-const CATS = ['전체', '회귀록', '학습', '일상'];
+const CATS = ['전체', '회고록', '학습', '일상'];
 let _filter = '전체';
 
 // ─── Post Card ────────────────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ export function BlogList() {
   return h('div', { class: 'spa-page' },
 
     h('header', { class: 'spa-page-header' },
-      h('h1', { class: 'spa-page-title' }, '회귀록'),
+      h('h1', { class: 'spa-page-title' }, '회고록'),
       h('p', { class: 'spa-page-subtitle' }, '배움과 성장의 기록')
     ),
 
