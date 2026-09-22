@@ -2,6 +2,7 @@ import { mount }                   from './vdom.js';
 import { router }                   from './router.js';
 import { BlogList, BlogPost }       from './pages/blog.js';
 import { StudyHome, StudyCat }      from './pages/study.js';
+import { PortfolioList, PortfolioDetail } from './pages/portfolio.js';
 
 const spaRoot  = document.getElementById('spa-root');
 const main     = document.getElementById('main');
@@ -10,18 +11,24 @@ const navLinks = [...document.querySelectorAll('.nav-menu a')];
 
 // ─── View switching ──────────────────────────────────────────────────────────────────────────────
 
+function setDisplay(el, mode) {
+  el.removeAttribute('none');
+  el.removeAttribute('block');
+  if (mode) el.setAttribute(mode, '');
+}
+
 function showSPA(title) {
   htmlEl.classList.remove('full-page-active');
-  main.style.display    = 'none';
-  spaRoot.style.display = 'block';
+  setDisplay(main, 'none');
+  setDisplay(spaRoot, 'block');
   document.title        = `${title} | Lee-seungmihn`;
   _updateNav(location.pathname);
   window.scrollTo(0, 0);
 }
 
 function showPortfolio() {
-  main.style.display    = '';
-  spaRoot.style.display = 'none';
+  setDisplay(main, 'block');
+  setDisplay(spaRoot, 'none');
   document.title        = 'Lee-seungmihn | Portfolio';
   _updateNav('/');
 }
@@ -39,6 +46,8 @@ function _updateNav(path) {
 
 router
   .on('/',           ()          => showPortfolio())
+  .on('/portfolio',  ()          => { showSPA('Portfolio'); mount(spaRoot, PortfolioList()); })
+  .on('/portfolio/:slug', ({ slug }) => { showSPA('Portfolio'); mount(spaRoot, PortfolioDetail(slug)); })
   .on('/blog',       ()          => { showSPA('Blog');  mount(spaRoot, BlogList()); })
   .on('/blog/:slug', ({ slug })  => { showSPA('Blog');  mount(spaRoot, BlogPost(slug)); })
   .on('/study',      ()          => { showSPA('Study'); mount(spaRoot, StudyHome()); })

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lee-seungmihn | Portfolio</title>
 
-    <!-- GitHub Pages SPA: restore redirect path -->
+    <!-- GitHub Pages SPA Redirect Restore -->
     <script>
         (function () {
             var p = sessionStorage.getItem('__spa_path');
@@ -13,52 +13,73 @@
         })();
     </script>
 
-    <!-- Stylesheets -->
+    <!-- Common Styles -->
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/font.css">
     <link rel="stylesheet" href="/assets/css/common.css">
     <link rel="stylesheet" href="/assets/css/util.css">
+
+    <!-- SPA Styles -->
     <link rel="stylesheet" href="/assets/css/spa.css">
 
-    <!-- FontAwesome -->
+    <!-- Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Mobile nav toggle -->
+    <!-- Mobile Navigation Toggle -->
     <i class="fas fa-bars mobile-nav-toggle"></i>
 
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <header id="sidebar">
         <div class="d-flex flex-column">
+
+            <!-- Profile Area -->
             <div class="profile">
-                <img src="/assets/images/vertical-shot-light-brown-meerkat-daytime.jpg" alt="" class="img-fluid rounded-circle" style="width: 180px; height: 180px; object-fit: cover; object-position: top;">
+                <img
+                    src="/assets/images/vertical-shot-light-brown-meerkat-daytime.jpg"
+                    alt=""
+                    class="profile-image img-fluid rounded-circle"
+                >
                 <h1 class="text-light"><a href="/" data-link>Lee-seungmihn</a></h1>
+
+                <!-- Profile Links -->
                 <div class="social-links mt-3 text-center">
                     <a href="https://github.com/Lee-seungmihn" target="_blank" class="github"><i class="fab fa-github"></i></a>
                     <a href="https://whispering-uncle-c7d.notion.site/363d35a51172804e8011e3f1e46bb2bb" target="_blank" class="notion"><i class="fas fa-book-open"></i></a>
                 </div>
             </div>
 
+            <!-- Main Menu -->
             <nav class="nav-menu">
                 <div class="nav-indicator"></div>
                 <ul>
                     <li><a href="/" data-link class="active"><i class="fas fa-home"></i> <span>Home</span></a></li>
-                    <li><a href="/blog" data-link><i class="fas fa-pen-nib"></i> <span>Blog</span></a></li>
-                    <li><a href="/study" data-link><i class="fas fa-graduation-cap"></i> <span>Study</span></a></li>
+                    <li><a href="/portfolio" data-link><i class="fas fa-briefcase"></i> <span>Portfolio</span></a></li>
+                    <li class="nav-more">
+                        <button type="button" class="nav-more-toggle" aria-expanded="false">
+                            <i class="fas fa-circle-plus"></i>
+                            <span>Learn more</span>
+                            <i class="fas fa-chevron-down nav-more-arrow"></i>
+                        </button>
+                        <ul class="nav-more-list">
+                            <li><a href="/blog" data-link><i class="fas fa-pen-nib"></i> <span>Blog</span></a></li>
+                            <li><a href="/study" data-link><i class="fas fa-graduation-cap"></i> <span>Study</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Portfolio (shown only on /) -->
-    <main id="main">
+    <!-- Portfolio Main Content: visible only on "/" -->
+    <main id="main" block>
 
-        <!-- Hero Section -->
+        <!-- Hero Section: first viewport intro -->
         <section id="hero">
             <div class="hero-container">
                 <h1>Lee-seungmihn</h1>
-                <p>I'm <span class="typed" data-typed-items="Publisher, Java/Spring Learner, Full Stack Developer in Progress"></span><span class="typed-cursor"></span></p>
+                <p>I'm <span class="typed" data-typed-items="UX/UI Publisher, Developer leveraging AI, learning Java &amp; Spring"></span><span class="typed-cursor"></span></p>
             </div>
             <a href="#about" class="scroll-down">
                 <div class="mouse"></div>
@@ -66,7 +87,7 @@
             </a>
         </section>
 
-        <!-- About Section -->
+        <!-- About Section: profile summary -->
         <section id="about" class="about">
             <div class="container">
                 <div class="section-title">
@@ -75,7 +96,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 pt-4 pt-lg-0 content">
-                        <h3>UI/UX Publisher &amp; Backend Developer in Progress.</h3>
+                        <h3>UX/UI Publisher &amp; Backend Developer in Progress.</h3>
                         <p class="font-italic">사용자에게 보이는 화면과 서버 흐름을 함께 이해하는 개발자가 되고자 합니다.</p>
                     </div>
                 </div>
@@ -86,7 +107,7 @@
             </a>
         </section>
 
-        <!-- Resume Section -->
+        <!-- Resume Section: experience and education -->
         <section id="resume" class="resume section-bg">
             <div class="container">
                 <div class="section-title">
@@ -96,13 +117,12 @@
                     <div class="resume-col">
                         <h3 class="resume-title">Experience</h3>
                         <div class="resume-item">
-                            <h4>UI/UX Publisher</h4>
+                            <h4>UX/UI Publisher</h4>
                             <h5>2020 - 2023</h5>
                             <p><em>웹 퍼블리셔 (3년 경력)</em></p>
                             <ul>
                                 <li>반응형 웹 UI 마크업 및 크로스브라우징</li>
                                 <li>HTML5 · CSS3 · SCSS · JavaScript · jQuery 기반 퍼블리싱</li>
-                                <li>React · Vue.js · Node.js 활용 프로젝트 참여</li>
                             </ul>
                         </div>
                     </div>
@@ -111,7 +131,7 @@
                         <div class="resume-item">
                             <h4>Java / Spring Boot 국비과정</h4>
                             <h5>2025 - Present</h5>
-                            <p><em>백엔드 개발 과정 수료 중</em></p>
+                            <p><em>백엔드 개발 과정 수료.</em></p>
                             <ul>
                                 <li>GG# — 차량 관리 커뮤니티 플랫폼 (1차 팀 프로젝트)</li>
                                 <li>BIDEO — 동영상 스트리밍 서비스 (2차 팀 프로젝트)</li>
@@ -129,13 +149,36 @@
                     </div>
                 </div>
             </div>
+            <a href="#portfolio-preview" class="scroll-down">
+                <div class="mouse"></div>
+                <span>PORTFOLIO</span>
+            </a>
+        </section>
+
+        <!-- Portfolio Preview: one selected work on the home page -->
+        <section id="portfolio-preview" class="portfolio-preview">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Portfolio</h2>
+                    <p>실무에서 담당한 퍼블리싱 작업입니다.</p>
+                </div>
+                <a href="/portfolio" data-link class="portfolio-preview-card" aria-label="포트폴리오 전체 보기">
+                    <img src="/assets/images/portfolio/work-torahware-front.png" alt="토라웨어 2023 웹사이트 화면">
+                    <span class="portfolio-preview-shade" aria-hidden="true"></span>
+                    <span class="portfolio-preview-copy">
+                        <small>Representative project</small>
+                        <strong>TorahWare 2023</strong>
+                        <span>View more <i class="fas fa-arrow-right"></i></span>
+                    </span>
+                </a>
+            </div>
             <a href="#contact" class="scroll-down">
                 <div class="mouse"></div>
                 <span>CONTACT</span>
             </a>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact Section: message form -->
         <section id="contact" class="contact section-bg">
             <div class="container">
                 <div class="section-title">
@@ -145,7 +188,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="#" method="post" class="contact-form">
-                            <div class="form-row d-grid gap-3 mb-3" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                            <!-- Contact Form Grid -->
+                            <div class="contact-form-grid form-row d-grid gap-3 mb-3">
                                 <div class="input-group">
                                     <label>NAME</label>
                                     <input type="text" name="name" class="custom-input" placeholder="Your Name" required>
@@ -171,7 +215,7 @@
             </div>
         </section>
 
-        <!-- Footer -->
+        <!-- Footer Area -->
         <footer id="footer">
             <div class="container text-center">
                 <div class="copyright">
@@ -181,20 +225,21 @@
         </footer>
     </main>
 
-    <!-- SPA Root (Blog / Study pages render here) -->
-    <div id="spa-root"></div>
+    <!-- SPA Root: Blog and Study pages are rendered here -->
+    <div id="spa-root" none></div>
 
+    <!-- Floating Back-to-top Button -->
     <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
-    <!-- Vendors -->
+    <!-- Vendor Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 
-    <!-- Portfolio scripts (existing) -->
+    <!-- Portfolio Scripts -->
     <script src="/assets/js/layout.js"></script>
     <script src="/assets/js/service.js"></script>
     <script src="/assets/js/event.js"></script>
 
-    <!-- SPA entry point (module — runs after above scripts) -->
+    <!-- SPA Entry Point -->
     <script type="module" src="/assets/js/app.js"></script>
 </body>
 </html>

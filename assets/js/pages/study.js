@@ -49,10 +49,16 @@ export function StudyCat(catKey) {
 
   const switchTab = (index) => {
     document.querySelectorAll('.spa-study-tab-panel')
-      .forEach((p, i) => { p.style.display = i === index ? '' : 'none'; });
+      .forEach((p, i) => setDisplay(p, i === index ? 'block' : 'none'));
     document.querySelectorAll('.spa-study-tab-btn')
       .forEach((t, i) => { t.classList.toggle('active', i === index); });
   };
+
+  function setDisplay(el, mode) {
+    el.removeAttribute('none');
+    el.removeAttribute('block');
+    el.setAttribute(mode, '');
+  }
 
   return h('div', { class: 'spa-page' },
     h('button', { class: 'spa-back-btn', '@click': back }, '← Study'),
@@ -83,7 +89,7 @@ export function StudyCat(catKey) {
             ...cat.entries.map((entry, i) =>
               h('article', {
                 class: 'spa-study-tab-panel spa-study-entry',
-                style: i === 0 ? {} : { display: 'none' }
+                [i === 0 ? 'block' : 'none']: ''
               },
                 h('div', { class: 'spa-study-entry-header' },
                   h('h3', { class: 'spa-study-entry-title' }, entry.title),

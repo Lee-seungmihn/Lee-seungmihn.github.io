@@ -1,43 +1,55 @@
-/* style.css - Page-specific styles */
+/* ==========================================================================
+   style.css
+   Legacy static study page styles
+   ========================================================================== */
 
-/* Study Content Page Styles */
+/* ==========================================================================
+   Study Page Container
+   ========================================================================== */
+
 .study-content {
     min-height: 100vh;
     padding: 60px 0;
     color: var(--text-main);
 }
 
+/* ==========================================================================
+   Study Article Card
+   - Framed content container for static study pages
+   ========================================================================== */
+
 .study-article {
-    background: #2d2d2d;
     padding: 40px;
-    border-radius: 15px;
+    background: #2d2d2d;
     border: 1px solid var(--border-color);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .study-article h3 {
-    color: var(--accent-color);
     margin-top: 40px;
     margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: var(--accent-color);
     font-size: 1.5rem;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
 }
+
 .study-article h3:first-of-type {
     margin-top: 0;
 }
 
 .study-article h4 {
-    color: var(--white);
     margin-top: 25px;
     margin-bottom: 15px;
+    color: var(--white);
     font-size: 1.2rem;
 }
 
 .study-article p {
     margin-bottom: 15px;
-    line-height: 1.8;
     color: var(--text-muted);
+    line-height: 1.8;
 }
 
 .study-article strong {
@@ -50,7 +62,8 @@
     font-style: normal;
 }
 
-.study-article ul, .study-article ol {
+.study-article ul,
+.study-article ol {
     margin-bottom: 20px;
     padding-left: 20px;
     color: var(--text-muted);
@@ -61,23 +74,30 @@
     line-height: 1.6;
 }
 
-/* Code Block Styling */
+/* ==========================================================================
+   Code Blocks
+   ========================================================================== */
+
 .code-block {
-    background: #1e1e1e;
-    border-radius: 8px;
-    padding: 20px;
     margin: 20px 0;
+    padding: 20px;
     overflow-x: auto;
+    background: #1e1e1e;
     border: 1px solid #333;
+    border-radius: 8px;
 }
 
 .code-block pre {
     margin: 0;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.95rem;
     color: #d4d4d4;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.95rem;
     line-height: 1.5;
 }
+
+/* ==========================================================================
+   Nested Content Blocks
+   ========================================================================== */
 
 .sub-section {
     margin-bottom: 25px;
@@ -90,28 +110,36 @@
     transition: border-left-color 0.3s ease;
 }
 
-/* Buttons */
+/* ==========================================================================
+   Link Buttons
+   ========================================================================== */
+
 .btn-back {
     display: inline-block;
+    margin-top: 40px;
     padding: 12px 30px;
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: none;
     background: transparent;
     border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: bold;
     border-radius: 30px;
     transition: all 0.3s ease;
-    margin-top: 40px;
 }
 
 .btn-back:hover {
-    background: var(--accent-color);
     color: var(--primary-bg);
+    background: var(--accent-color);
 }
+
+/* ==========================================================================
+   Legacy Helpers
+   ========================================================================== */
 
 .text-center {
     text-align: center;
 }
+
 .mt-5 {
     margin-top: 3rem;
 }

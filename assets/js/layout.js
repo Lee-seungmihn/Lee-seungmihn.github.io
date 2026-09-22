@@ -11,6 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const navLinks  = select('.nav-menu a', true);
     const backToTop = select('.back-to-top');
+    const moreMenu  = select('.nav-more');
+    const moreToggle = select('.nav-more-toggle');
+
+    // ─── Learn more 하위 메뉴 ─────────────────────────────────────
+    const setMoreMenu = (open) => {
+        if (!moreMenu || !moreToggle) return;
+        moreMenu.classList.toggle('is-open', open);
+        moreToggle.setAttribute('aria-expanded', String(open));
+    };
+
+    if (moreToggle) {
+        moreToggle.addEventListener('click', () => {
+            setMoreMenu(!moreMenu.classList.contains('is-open'));
+        });
+    }
+
+    // Blog/Study 페이지에서는 현재 위치를 알 수 있도록 메뉴를 펼친다.
+    if (location.pathname.startsWith('/blog') || location.pathname.startsWith('/study')) {
+        setMoreMenu(true);
+    }
 
     // ─── 스크롤 시 Home 활성 유지 ──────────────────────────────────
     // 홈 페이지의 모든 섹션(hero/about/resume/contact)은 Home 항목에 속함

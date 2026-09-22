@@ -10,57 +10,133 @@
     <link rel="stylesheet" href="../assets/css/util.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { overflow-y: auto; height: auto; background-color: #1a1a1a; }
+        /* Page Base */
+        body {
+            height: auto;
+            overflow-y: auto;
+            background-color: #1a1a1a;
+        }
 
+        /* Top Navigation */
         .sub-topbar {
             position: sticky;
             top: 0;
             z-index: 100;
             display: flex;
-            align-items: center;
             gap: 16px;
+            align-items: center;
             padding: 14px 40px;
             background: #1e1e1e;
             border-bottom: 1px solid var(--border-color);
         }
+
         .sub-topbar a.back-btn {
             display: inline-flex;
-            align-items: center;
             gap: 8px;
+            align-items: center;
             color: var(--text-muted);
-            text-decoration: none;
             font-size: 14px;
+            text-decoration: none;
             transition: color 0.2s;
         }
-        .sub-topbar a.back-btn:hover { color: var(--accent-color); }
-        .sub-topbar .topbar-title {
-            font-size: 16px;
-            font-weight: 600;
+
+        .sub-topbar a.back-btn:hover {
             color: var(--accent-color);
         }
 
+        .sub-topbar .topbar-title {
+            color: var(--accent-color);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Page Container */
         .page-wrap {
             max-width: 1100px;
             margin: 0 auto;
             padding: 60px 40px;
         }
 
+        .materials-page-title {
+            margin-bottom: 40px;
+        }
+
+        .materials-intro {
+            color: var(--text-muted);
+        }
+
+        /* Materials Card Grid */
         .materials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
 
+        /* Materials Card */
+        .materials-card {
+            padding: 20px;
+            background: #2d2d2d;
+            border: 1px solid #3d3d3d;
+            border-radius: 8px;
+        }
+
+        .materials-card-icon {
+            margin-bottom: 12px;
+            font-size: 2rem;
+        }
+
+        .materials-card-title {
+            margin: 0 0 10px;
+            color: var(--accent-color);
+            font-size: 1.25rem;
+        }
+
+        .materials-card-desc {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Materials Link Button */
+        .materials-link {
+            display: inline-block;
+            padding: 8px 16px;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        /* Icon Colors */
+        .icon-html { color: #e34f26; }
+        .icon-css { color: #1572b6; }
+        .icon-js { color: #f7df1e; }
+        .icon-java { color: #f89820; }
+        .icon-jsp { color: #ff6c37; }
+        .icon-mysql { color: #4479a1; }
+        .icon-spring { color: var(--accent-color); }
+        .icon-git { color: #f05032; }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .sub-topbar { padding: 12px 20px; }
-            .page-wrap { padding: 40px 20px; }
-            .materials-grid { grid-template-columns: 1fr; }
+            .sub-topbar {
+                padding: 12px 20px;
+            }
+
+            .page-wrap {
+                padding: 40px 20px;
+            }
+
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top navigation bar -->
+    <!-- Top Navigation -->
     <nav class="sub-topbar">
         <a href="../index.html" class="back-btn">
             <i class="fas fa-chevron-left"></i> Back
@@ -68,60 +144,71 @@
         <span class="topbar-title">Class Materials</span>
     </nav>
 
+    <!-- Materials Page Content -->
     <div class="page-wrap">
-        <div class="section-title" style="margin-bottom: 40px;">
+
+        <!-- Page Header -->
+        <div class="section-title materials-page-title">
             <h2>Class Materials</h2>
-            <p style="color: var(--text-muted);">학습한 내용과 수업 자료들을 정리하는 공간입니다.</p>
+            <p class="materials-intro">학습한 내용과 수업 자료들을 정리하는 공간입니다.</p>
         </div>
 
+        <!-- Materials Card List -->
         <div class="materials-grid">
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #e34f26; margin-bottom: 12px;"><i class="fab fa-html5"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">HTML</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">마크업 구조, 시맨틱 태그, 폼 요소 학습.</p>
-                <a href="study.html?cat=html" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+            <div class="materials-card">
+                <div class="materials-card-icon icon-html"><i class="fab fa-html5"></i></div>
+                <h4 class="materials-card-title">HTML</h4>
+                <p class="materials-card-desc">마크업 구조, 시맨틱 태그, 폼 요소 학습.</p>
+                <a href="study.html?cat=html" class="materials-link">바로가기</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #1572b6; margin-bottom: 12px;"><i class="fab fa-css3-alt"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">CSS</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">선택자·캐스케이딩·레이아웃·애니메이션.</p>
-                <a href="study.html?cat=css" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-css"><i class="fab fa-css3-alt"></i></div>
+                <h4 class="materials-card-title">CSS</h4>
+                <p class="materials-card-desc">선택자·캐스케이딩·레이아웃·애니메이션.</p>
+                <a href="study.html?cat=css" class="materials-link">바로가기</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #f7df1e; margin-bottom: 12px;"><i class="fab fa-js"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">JavaScript</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">DOM 조작, 비동기 처리, ES6+ 문법 정리.</p>
-                <a href="study.html?cat=js" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-js"><i class="fab fa-js"></i></div>
+                <h4 class="materials-card-title">JavaScript</h4>
+                <p class="materials-card-desc">DOM 조작, 비동기 처리, ES6+ 문법 정리.</p>
+                <a href="study.html?cat=js" class="materials-link">바로가기</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #f89820; margin-bottom: 12px;"><i class="fab fa-java"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">Java</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">OOP 개념, 컬렉션, 람다·스트림 API.</p>
-                <a href="study.html?cat=java" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-java"><i class="fab fa-java"></i></div>
+                <h4 class="materials-card-title">Java</h4>
+                <p class="materials-card-desc">OOP 개념, 컬렉션, 람다·스트림 API.</p>
+                <a href="study.html?cat=java" class="materials-link">바로가기</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #ff6c37; margin-bottom: 12px;"><i class="fas fa-server"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">JSP</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">서블릿·JSTL·MVC 패턴 및 EL 표현식.</p>
-                <a href="study.html?cat=jsp" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-jsp"><i class="fas fa-server"></i></div>
+                <h4 class="materials-card-title">JSP</h4>
+                <p class="materials-card-desc">서블릿·JSTL·MVC 패턴 및 EL 표현식.</p>
+                <a href="study.html?cat=jsp" class="materials-link">바로가기</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #4479a1; margin-bottom: 12px;"><i class="fas fa-database"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">MySQL</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">DB 설계, DDL·DML·DCL, JOIN·서브쿼리.</p>
-                <a href="study.html?cat=mysql" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-mysql"><i class="fas fa-database"></i></div>
+                <h4 class="materials-card-title">MySQL</h4>
+                <p class="materials-card-desc">DB 설계, DDL·DML·DCL, JOIN·서브쿼리.</p>
+                <a href="study.html?cat=mysql" class="materials-link">바로가기</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 12px;"><i class="fas fa-leaf"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">Spring / Controller</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Spring MVC 구조, 어노테이션, RESTful API.</p>
-                <a href="#" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">준비중</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-spring"><i class="fas fa-leaf"></i></div>
+                <h4 class="materials-card-title">Spring / Controller</h4>
+                <p class="materials-card-desc">Spring MVC 구조, 어노테이션, RESTful API.</p>
+                <a href="#" class="materials-link">준비중</a>
             </div>
-            <div class="card" style="padding: 20px; background: #2d2d2d; border: 1px solid #3d3d3d; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #f05032; margin-bottom: 12px;"><i class="fab fa-git-alt"></i></div>
-                <h4 style="margin: 0 0 10px; font-size: 1.25rem; color: var(--accent-color);">Git</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">버전 관리, 브랜치 전략, 협업 워크플로우.</p>
-                <a href="study.html?cat=git" class="btn btn-outline" style="border: 2px solid var(--accent-color); color: var(--accent-color); padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">바로가기</a>
+
+            <div class="materials-card">
+                <div class="materials-card-icon icon-git"><i class="fab fa-git-alt"></i></div>
+                <h4 class="materials-card-title">Git</h4>
+                <p class="materials-card-desc">버전 관리, 브랜치 전략, 협업 워크플로우.</p>
+                <a href="study.html?cat=git" class="materials-link">바로가기</a>
             </div>
         </div>
     </div>

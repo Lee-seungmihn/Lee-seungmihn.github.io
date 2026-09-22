@@ -43,14 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Swiper.js Initialization (Wheel, Grab, Left-aligned)
      */
-    const swiper = new Swiper('.materials-swiper', {
-        loop: false,
-        centeredSlides: false,
-        slidesPerView: 'auto',
-        spaceBetween: 20,
-        grabCursor: true,
-        freeMode: true,
-    });
+    if (typeof Swiper !== 'undefined' && document.querySelector('.materials-swiper')) {
+        new Swiper('.materials-swiper', {
+            loop: false,
+            centeredSlides: false,
+            slidesPerView: 'auto',
+            spaceBetween: 20,
+            grabCursor: true,
+            freeMode: true,
+        });
+    }
 
     /**
      * Contact Form
@@ -77,19 +79,22 @@ document.addEventListener('DOMContentLoaded', () => {
      * Materials Search Filter
      */
     const searchInput = document.querySelector('.input-text');
-    const materialCards = document.querySelectorAll('.materials-grid .card');
+    const materialCards = document.querySelectorAll('.materials-grid .materials-card, .materials-grid .card');
 
     if (searchInput && materialCards.length > 0) {
+        const setDisplay = (el, mode) => {
+            el.removeAttribute('none');
+            el.removeAttribute('block');
+            el.setAttribute(mode, '');
+        };
+
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
             materialCards.forEach(card => {
                 const title = card.querySelector('h4').textContent.toLowerCase();
                 const desc = card.querySelector('p').textContent.toLowerCase();
-                if (title.includes(term) || desc.includes(term)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                const matched = title.includes(term) || desc.includes(term);
+                setDisplay(card, matched ? 'block' : 'none');
             });
         });
     }
