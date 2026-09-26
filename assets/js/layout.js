@@ -32,6 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         setMoreMenu(true);
     }
 
+    const closeMobileNav = () => {
+        const body = select('body');
+        const btn = select('.mobile-nav-toggle');
+        body.classList.remove('mobile-nav-active');
+        if (btn) {
+            btn.classList.remove('fa-xmark');
+            btn.classList.add('fa-bars');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', '메뉴 열기');
+        }
+    };
+
     // ─── 스크롤 시 Home 활성 유지 ──────────────────────────────────
     // 홈 페이지의 모든 섹션(hero/about/resume/contact)은 Home 항목에 속함
     const updateActiveNav = () => {
@@ -56,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target && target.closest('#main')) {
             e.preventDefault();
             target.scrollIntoView({ behavior: 'smooth' });
-            if (window.innerWidth <= 1199) select('body').classList.remove('mobile-nav-active');
+            closeMobileNav();
         }
     });
 
@@ -68,9 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('visible');
         } else {
             btn.classList.remove('visible');
-            select('body').classList.remove('mobile-nav-active');
-            btn.classList.remove('fa-xmark');
-            btn.classList.add('fa-bars');
+            closeMobileNav();
         }
     };
 
@@ -79,10 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const toggle = select('.mobile-nav-toggle');
     if (toggle) {
+        toggle.setAttribute('role', 'button');
+        toggle.setAttribute('aria-label', '메뉴 열기');
+        toggle.setAttribute('aria-expanded', 'false');
         toggle.addEventListener('click', function () {
-            select('body').classList.toggle('mobile-nav-active');
+            const isOpen = select('body').classList.toggle('mobile-nav-active');
             this.classList.toggle('fa-bars');
             this.classList.toggle('fa-xmark');
+            this.setAttribute('aria-expanded', String(isOpen));
+            this.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
         });
     }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMobileNav);
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMobileNav();
+    });
 });
